@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using IwSK_RS232.PlainCommunication;
 using IwSK_RS232.Properties;
 using IwSK_RS232.Tools;
 
