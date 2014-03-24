@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Runtime.Remoting.Messaging;
 
 namespace IwSK_RS232.PlainCommunication
 {
@@ -24,7 +25,11 @@ namespace IwSK_RS232.PlainCommunication
         private Pins pins;
 
         public Action<string> MessageOccured;
-        public Action RingIndicatorChanged;
+        //just a convienient hack to avoid multiple checking of action presence
+        public Action RingIndicatorChanged = () => { };
+        public Action<bool> CDCLineChanged = obj => { };
+        public Action<bool> CTSLineChanged = obj => { };
+        public Action<bool> DSRLineChanged = obj => { };
 
         public Communicator(string which)
         {
@@ -61,18 +66,16 @@ namespace IwSK_RS232.PlainCommunication
                     //dunno what to do
                     break;
                 case SerialPinChange.CDChanged:
-                    setFlagAccordingToState(Pins.DCD, port.CDHolding);
+                    CDCLineChanged(port.CDHolding);
                     break;
                 case SerialPinChange.CtsChanged:
-                    setFlagAccordingToState(Pins.CTS, port.CtsHolding);
+                    CTSLineChanged(port.CtsHolding);
                     break;
                 case SerialPinChange.DsrChanged:
-                    setFlagAccordingToState(Pins.DSR, port.DsrHolding);
+                    DSRLineChanged(port.DsrHolding);
                     break;
                 case SerialPinChange.Ring:
-                    if (RingIndicatorChanged != null)
-                        RingIndicatorChanged();
-                    setFlagAccordingToState(Pins.RI, !pins.HasFlag(Pins.RI)); // will be meaningless, but lets stay coherent here
+                    RingIndicatorChanged();
                     break;
             }
             
