@@ -52,6 +52,18 @@
             this.CTSRadio = new System.Windows.Forms.RadioButton();
             this.RTSRadio = new System.Windows.Forms.RadioButton();
             this.DTRRadio = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // comPortsCombo
@@ -214,7 +226,7 @@
             // DCDRadio
             // 
             this.DCDRadio.AutoSize = true;
-            this.DCDRadio.Location = new System.Drawing.Point(12, 207);
+            this.DCDRadio.Location = new System.Drawing.Point(10, 4);
             this.DCDRadio.Name = "DCDRadio";
             this.DCDRadio.Size = new System.Drawing.Size(48, 17);
             this.DCDRadio.TabIndex = 18;
@@ -226,7 +238,7 @@
             // 
             this.RIRadio.AutoSize = true;
             this.RIRadio.CheckAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.RIRadio.Location = new System.Drawing.Point(66, 207);
+            this.RIRadio.Location = new System.Drawing.Point(6, 2);
             this.RIRadio.Name = "RIRadio";
             this.RIRadio.Size = new System.Drawing.Size(36, 17);
             this.RIRadio.TabIndex = 19;
@@ -238,7 +250,7 @@
             // 
             this.DSRRadio.AutoSize = true;
             this.DSRRadio.Cursor = System.Windows.Forms.Cursors.Default;
-            this.DSRRadio.Location = new System.Drawing.Point(109, 207);
+            this.DSRRadio.Location = new System.Drawing.Point(3, 3);
             this.DSRRadio.Name = "DSRRadio";
             this.DSRRadio.Size = new System.Drawing.Size(48, 17);
             this.DSRRadio.TabIndex = 20;
@@ -249,7 +261,7 @@
             // CTSRadio
             // 
             this.CTSRadio.AutoSize = true;
-            this.CTSRadio.Location = new System.Drawing.Point(164, 207);
+            this.CTSRadio.Location = new System.Drawing.Point(9, 4);
             this.CTSRadio.Name = "CTSRadio";
             this.CTSRadio.Size = new System.Drawing.Size(46, 17);
             this.CTSRadio.TabIndex = 21;
@@ -260,7 +272,7 @@
             // RTSRadio
             // 
             this.RTSRadio.AutoSize = true;
-            this.RTSRadio.Location = new System.Drawing.Point(12, 231);
+            this.RTSRadio.Location = new System.Drawing.Point(0, 0);
             this.RTSRadio.Name = "RTSRadio";
             this.RTSRadio.Size = new System.Drawing.Size(47, 17);
             this.RTSRadio.TabIndex = 22;
@@ -271,7 +283,7 @@
             // DTRRadio
             // 
             this.DTRRadio.AutoSize = true;
-            this.DTRRadio.Location = new System.Drawing.Point(66, 233);
+            this.DTRRadio.Location = new System.Drawing.Point(8, 3);
             this.DTRRadio.Name = "DTRRadio";
             this.DTRRadio.Size = new System.Drawing.Size(48, 17);
             this.DTRRadio.TabIndex = 23;
@@ -279,17 +291,62 @@
             this.DTRRadio.Text = "DTR";
             this.DTRRadio.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.DCDRadio);
+            this.panel1.Location = new System.Drawing.Point(2, 203);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(64, 28);
+            this.panel1.TabIndex = 24;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.RIRadio);
+            this.panel2.Location = new System.Drawing.Point(66, 204);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(56, 26);
+            this.panel2.TabIndex = 25;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.DSRRadio);
+            this.panel3.Location = new System.Drawing.Point(128, 203);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(47, 28);
+            this.panel3.TabIndex = 26;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.CTSRadio);
+            this.panel4.Location = new System.Drawing.Point(181, 203);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(58, 29);
+            this.panel4.TabIndex = 27;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.RTSRadio);
+            this.panel5.Location = new System.Drawing.Point(9, 230);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(54, 25);
+            this.panel5.TabIndex = 28;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.DTRRadio);
+            this.panel6.Location = new System.Drawing.Point(58, 230);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(57, 28);
+            this.panel6.TabIndex = 29;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(477, 262);
-            this.Controls.Add(this.DTRRadio);
-            this.Controls.Add(this.RTSRadio);
-            this.Controls.Add(this.CTSRadio);
-            this.Controls.Add(this.DSRRadio);
-            this.Controls.Add(this.RIRadio);
-            this.Controls.Add(this.DCDRadio);
+            this.Controls.Add(this.panel6);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.newLineCombo);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.handShakeCombo);
@@ -308,9 +365,24 @@
             this.Controls.Add(this.selectPortButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comPortsCombo);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel4);
             this.Name = "MainForm";
             this.Text = "IwSK - RS232";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,6 +414,12 @@
         private System.Windows.Forms.RadioButton CTSRadio;
         private System.Windows.Forms.RadioButton RTSRadio;
         private System.Windows.Forms.RadioButton DTRRadio;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel6;
     }
 }
 

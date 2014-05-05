@@ -20,9 +20,12 @@ namespace IwSK_RS232.PlainCommunication
             DTR =   0x20
         }
 
+        private bool RTSState;
+        private bool DTRState;
+
         private SerialPort port;
         private readonly Parser parser = new Parser();
-        private Pins pins;
+     
 
         public Action<string> MessageOccured;
         //just a convienient hack to avoid multiple checking of action presence
@@ -30,6 +33,8 @@ namespace IwSK_RS232.PlainCommunication
         public Action<bool> CDCLineChanged = obj => { };
         public Action<bool> CTSLineChanged = obj => { };
         public Action<bool> DSRLineChanged = obj => { };
+        public Action<bool> RTSLineChanged = obj => { };
+        public Action<bool> DTRLineChanged = obj => { };
 
         public Communicator(string which,int baudRate,Parity parity, int dataBits, StopBits stopBits,Handshake hand,string newline )
         {
@@ -41,15 +46,7 @@ namespace IwSK_RS232.PlainCommunication
             parser.CommandRecognized += CommandRecognized;
         }
 
-        private void setFlagAccordingToState(Pins which, bool state)
-        {
-            if (state)
-            {
-                pins |= which;
-                return;
-            }
-            pins &= which;
-        }
+
 
         void port_PinChanged(object sender, SerialPinChangedEventArgs e)
         {
@@ -71,9 +68,18 @@ namespace IwSK_RS232.PlainCommunication
                     RingIndicatorChanged();
                     break;
             }
-            
-            setFlagAccordingToState(Pins.RTS, port.RtsEnable);
-            setFlagAccordingToState(Pins.DTR, port.DtrEnable);
+
+            if (RTSState != port.RtsEnable)
+            {
+                RTSLineChanged(port.RtsEnable);
+                RTSState = port.RtsEnable;
+            }
+
+            if (DTRState != port.DtrEnable)
+            {
+                DTRLineChanged(port.DtrEnable);
+                DTRState = port.DtrEnable;
+            }
         }
 
         public void SendString(string msg)

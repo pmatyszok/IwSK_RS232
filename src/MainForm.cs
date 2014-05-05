@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using IwSK_RS232.PlainCommunication;
 using IwSK_RS232.Properties;
@@ -35,6 +36,16 @@ namespace IwSK_RS232
             newLineCombo.DataSource = Enum.GetNames(typeof(NewLine));
             baudRateCombo.DataSource = BaundRate;
             dataBitsCombo.DataSource = DataBit;
+            foreach (var panel in this.Controls.OfType<Panel>())
+            {
+                foreach (var item in panel.Controls.OfType<RadioButton>())
+                {
+                    item.Enabled = false;
+                }    
+            }
+            
+            
+            
         }
 
         private void refreshComListBtn_Click(object sender, EventArgs e)
@@ -83,6 +94,13 @@ namespace IwSK_RS232
                     stopbit,
                     hand, 
                     newLine[(int)line]);
+
+                com.RingIndicatorChanged += () => RIRadio.Checked = !RIRadio.Checked;
+                com.DSRLineChanged += b => DSRRadio.Checked = b;
+                com.CTSLineChanged += b => CTSRadio.Checked = b;
+                com.CDCLineChanged += b => DCDRadio.Checked = b;
+                com.DTRLineChanged += b => DTRRadio.Checked = b;
+                com.RTSLineChanged += b => RTSRadio.Checked = b;
             }
             catch (Exception ex)
             {
@@ -103,6 +121,7 @@ namespace IwSK_RS232
         /// </summary>
         private void ChangeControlsEnable(bool state)
         {
+            
             userConsole.Enabled = state;
             ATBtn.Enabled = state;
         }
