@@ -46,6 +46,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.newLineCombo = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.DCDRadio = new System.Windows.Forms.RadioButton();
+            this.RIRadio = new System.Windows.Forms.RadioButton();
+            this.DSRRadio = new System.Windows.Forms.RadioButton();
+            this.CTSRadio = new System.Windows.Forms.RadioButton();
+            this.RTSRadio = new System.Windows.Forms.RadioButton();
+            this.DTRRadio = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // comPortsCombo
@@ -205,11 +211,85 @@
             this.label7.TabIndex = 16;
             this.label7.Text = "NewLine";
             // 
+            // DCDRadio
+            // 
+            this.DCDRadio.AutoSize = true;
+            this.DCDRadio.Location = new System.Drawing.Point(12, 207);
+            this.DCDRadio.Name = "DCDRadio";
+            this.DCDRadio.Size = new System.Drawing.Size(48, 17);
+            this.DCDRadio.TabIndex = 18;
+            this.DCDRadio.TabStop = true;
+            this.DCDRadio.Text = "DCD";
+            this.DCDRadio.UseVisualStyleBackColor = true;
+            // 
+            // RIRadio
+            // 
+            this.RIRadio.AutoSize = true;
+            this.RIRadio.CheckAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.RIRadio.Location = new System.Drawing.Point(66, 207);
+            this.RIRadio.Name = "RIRadio";
+            this.RIRadio.Size = new System.Drawing.Size(36, 17);
+            this.RIRadio.TabIndex = 19;
+            this.RIRadio.TabStop = true;
+            this.RIRadio.Text = "RI";
+            this.RIRadio.UseVisualStyleBackColor = true;
+            // 
+            // DSRRadio
+            // 
+            this.DSRRadio.AutoSize = true;
+            this.DSRRadio.Cursor = System.Windows.Forms.Cursors.Default;
+            this.DSRRadio.Location = new System.Drawing.Point(109, 207);
+            this.DSRRadio.Name = "DSRRadio";
+            this.DSRRadio.Size = new System.Drawing.Size(48, 17);
+            this.DSRRadio.TabIndex = 20;
+            this.DSRRadio.TabStop = true;
+            this.DSRRadio.Text = "DSR";
+            this.DSRRadio.UseVisualStyleBackColor = true;
+            // 
+            // CTSRadio
+            // 
+            this.CTSRadio.AutoSize = true;
+            this.CTSRadio.Location = new System.Drawing.Point(164, 207);
+            this.CTSRadio.Name = "CTSRadio";
+            this.CTSRadio.Size = new System.Drawing.Size(46, 17);
+            this.CTSRadio.TabIndex = 21;
+            this.CTSRadio.TabStop = true;
+            this.CTSRadio.Text = "CTS";
+            this.CTSRadio.UseVisualStyleBackColor = true;
+            // 
+            // RTSRadio
+            // 
+            this.RTSRadio.AutoSize = true;
+            this.RTSRadio.Location = new System.Drawing.Point(12, 231);
+            this.RTSRadio.Name = "RTSRadio";
+            this.RTSRadio.Size = new System.Drawing.Size(47, 17);
+            this.RTSRadio.TabIndex = 22;
+            this.RTSRadio.TabStop = true;
+            this.RTSRadio.Text = "RTS";
+            this.RTSRadio.UseVisualStyleBackColor = true;
+            // 
+            // DTRRadio
+            // 
+            this.DTRRadio.AutoSize = true;
+            this.DTRRadio.Location = new System.Drawing.Point(66, 233);
+            this.DTRRadio.Name = "DTRRadio";
+            this.DTRRadio.Size = new System.Drawing.Size(48, 17);
+            this.DTRRadio.TabIndex = 23;
+            this.DTRRadio.TabStop = true;
+            this.DTRRadio.Text = "DTR";
+            this.DTRRadio.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(477, 262);
+            this.Controls.Add(this.DTRRadio);
+            this.Controls.Add(this.RTSRadio);
+            this.Controls.Add(this.CTSRadio);
+            this.Controls.Add(this.DSRRadio);
+            this.Controls.Add(this.RIRadio);
+            this.Controls.Add(this.DCDRadio);
             this.Controls.Add(this.newLineCombo);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.handShakeCombo);
@@ -256,6 +336,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox newLineCombo;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.RadioButton DCDRadio;
+        private System.Windows.Forms.RadioButton RIRadio;
+        private System.Windows.Forms.RadioButton DSRRadio;
+        private System.Windows.Forms.RadioButton CTSRadio;
+        private System.Windows.Forms.RadioButton RTSRadio;
+        private System.Windows.Forms.RadioButton DTRRadio;
     }
 }
 
