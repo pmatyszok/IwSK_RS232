@@ -33,18 +33,7 @@ namespace IwSK_RS232.PlainCommunication
 
         public Communicator(string which,int baudRate,Parity parity, int dataBits, StopBits stopBits,Handshake hand,string newline )
         {
-            port = new SerialPort(which, baudRate, parity, dataBits, stopBits)
-            {
-                Handshake = hand,
-                NewLine = newline
-            };
-            //{
-            //    BaudRate = 9600,
-            //    DataBits = 8,
-            //    StopBits = StopBits.Two,
-            //    Parity = Parity.None,
-            //    NewLine = "\r\n"
-            //};
+            port = new SerialPort(which, baudRate, parity, dataBits, stopBits) {Handshake = hand, NewLine = newline};
             port.Open();
             port.DataReceived += port_DataReceived;
             port.PinChanged += port_PinChanged;
@@ -102,7 +91,6 @@ namespace IwSK_RS232.PlainCommunication
                 {
                     if (MessageOccured != null)
                         MessageOccured(cmd);
-                    cmd = string.Empty;
                 }
             }
         }

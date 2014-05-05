@@ -28,13 +28,13 @@ namespace IwSK_RS232
             ChangeControlsEnable(false);
             Log.Console = userConsole;
 
-            comboBox1.DataSource = Enum.GetNames(typeof(Parity));
-            comboBox3.DataSource = Enum.GetNames(typeof(StopBits));
-            comboBox3.SelectedIndex=1;
-            comboBox5.DataSource = Enum.GetNames(typeof(Handshake));
-            comboBox6.DataSource = Enum.GetNames(typeof(NewLine));
-            comboBox2.DataSource = BaundRate;
-            comboBox4.DataSource = DataBit;
+            parityCombo.DataSource = Enum.GetNames(typeof(Parity));
+            stopSignCombo.DataSource = Enum.GetNames(typeof(StopBits));
+            stopSignCombo.SelectedIndex=1;
+            handShakeCombo.DataSource = Enum.GetNames(typeof(Handshake));
+            newLineCombo.DataSource = Enum.GetNames(typeof(NewLine));
+            baudRateCombo.DataSource = BaundRate;
+            dataBitsCombo.DataSource = DataBit;
         }
 
         private void refreshComListBtn_Click(object sender, EventArgs e)
@@ -56,10 +56,6 @@ namespace IwSK_RS232
                 return;
 
             string name = (string)comPortsCombo.SelectedItem;
-            Parity parity;
-            StopBits stopbit;
-            Handshake hand;
-            NewLine line;
             if (com != null)
             {
                 com.Dispose();
@@ -68,14 +64,22 @@ namespace IwSK_RS232
 
             try
             {
-                Enum.TryParse<Parity>(comboBox1.SelectedValue.ToString(), out parity);
-                Enum.TryParse<StopBits>(comboBox3.SelectedValue.ToString(), out stopbit);
-                Enum.TryParse<Handshake>(comboBox5.SelectedValue.ToString(), out hand);
-                Enum.TryParse<NewLine>(comboBox6.SelectedValue.ToString(),out line);
+                Parity parity;
+                Enum.TryParse<Parity>(parityCombo.SelectedValue.ToString(), out parity);
+                
+                StopBits stopbit;
+                Enum.TryParse<StopBits>(stopSignCombo.SelectedValue.ToString(), out stopbit);
+                
+                Handshake hand;
+                Enum.TryParse<Handshake>(handShakeCombo.SelectedValue.ToString(), out hand);
+                
+                NewLine line;
+                Enum.TryParse<NewLine>(newLineCombo.SelectedValue.ToString(),out line);
+                
                 com = new Communicator(name, 
-                    (int)comboBox2.SelectedValue, 
+                    (int)baudRateCombo.SelectedValue, 
                     parity,
-                    (int)comboBox4.SelectedValue, 
+                    (int)dataBitsCombo.SelectedValue, 
                     stopbit,
                     hand, 
                     newLine[(int)line]);
@@ -109,21 +113,6 @@ namespace IwSK_RS232
         {
             if (com != null)
                 com.Dispose();
-        }
-
-        private void userConsole_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comPortsCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
         }
     }
 }

@@ -35,16 +35,16 @@
             this.userConsole = new System.Windows.Forms.RichTextBox();
             this.ATBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.parityCombo = new System.Windows.Forms.ComboBox();
+            this.baudRateCombo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.stopSignCombo = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.dataBitsCombo = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.handShakeCombo = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.newLineCombo = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -55,7 +55,6 @@
             this.comPortsCombo.Name = "comPortsCombo";
             this.comPortsCombo.Size = new System.Drawing.Size(121, 21);
             this.comPortsCombo.TabIndex = 0;
-            this.comPortsCombo.SelectedIndexChanged += new System.EventHandler(this.comPortsCombo_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -93,7 +92,6 @@
             this.userConsole.Size = new System.Drawing.Size(257, 96);
             this.userConsole.TabIndex = 4;
             this.userConsole.Text = "";
-            this.userConsole.TextChanged += new System.EventHandler(this.userConsole_TextChanged);
             // 
             // ATBtn
             // 
@@ -114,22 +112,21 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Parity";
             // 
-            // comboBox1
+            // parityCombo
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(338, 88);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 7;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.parityCombo.FormattingEnabled = true;
+            this.parityCombo.Location = new System.Drawing.Point(338, 88);
+            this.parityCombo.Name = "parityCombo";
+            this.parityCombo.Size = new System.Drawing.Size(121, 21);
+            this.parityCombo.TabIndex = 7;
             // 
-            // comboBox2
+            // baudRateCombo
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(338, 34);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 9;
+            this.baudRateCombo.FormattingEnabled = true;
+            this.baudRateCombo.Location = new System.Drawing.Point(338, 34);
+            this.baudRateCombo.Name = "baudRateCombo";
+            this.baudRateCombo.Size = new System.Drawing.Size(121, 21);
+            this.baudRateCombo.TabIndex = 9;
             // 
             // label3
             // 
@@ -138,15 +135,15 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Baun rate ";
+            this.label3.Text = "Baud rate ";
             // 
-            // comboBox3
+            // stopSignCombo
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(338, 115);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 11;
+            this.stopSignCombo.FormattingEnabled = true;
+            this.stopSignCombo.Location = new System.Drawing.Point(338, 115);
+            this.stopSignCombo.Name = "stopSignCombo";
+            this.stopSignCombo.Size = new System.Drawing.Size(121, 21);
+            this.stopSignCombo.TabIndex = 11;
             // 
             // label4
             // 
@@ -157,13 +154,13 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Stop";
             // 
-            // comboBox4
+            // dataBitsCombo
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(338, 61);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(121, 21);
-            this.comboBox4.TabIndex = 13;
+            this.dataBitsCombo.FormattingEnabled = true;
+            this.dataBitsCombo.Location = new System.Drawing.Point(338, 61);
+            this.dataBitsCombo.Name = "dataBitsCombo";
+            this.dataBitsCombo.Size = new System.Drawing.Size(121, 21);
+            this.dataBitsCombo.TabIndex = 13;
             // 
             // label5
             // 
@@ -174,13 +171,13 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "Data";
             // 
-            // comboBox5
+            // handShakeCombo
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(338, 142);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(121, 21);
-            this.comboBox5.TabIndex = 15;
+            this.handShakeCombo.FormattingEnabled = true;
+            this.handShakeCombo.Location = new System.Drawing.Point(338, 142);
+            this.handShakeCombo.Name = "handShakeCombo";
+            this.handShakeCombo.Size = new System.Drawing.Size(121, 21);
+            this.handShakeCombo.TabIndex = 15;
             // 
             // label6
             // 
@@ -191,13 +188,13 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "Hand";
             // 
-            // comboBox6
+            // newLineCombo
             // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(338, 169);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(121, 21);
-            this.comboBox6.TabIndex = 17;
+            this.newLineCombo.FormattingEnabled = true;
+            this.newLineCombo.Location = new System.Drawing.Point(338, 169);
+            this.newLineCombo.Name = "newLineCombo";
+            this.newLineCombo.Size = new System.Drawing.Size(121, 21);
+            this.newLineCombo.TabIndex = 17;
             // 
             // label7
             // 
@@ -213,17 +210,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(477, 262);
-            this.Controls.Add(this.comboBox6);
+            this.Controls.Add(this.newLineCombo);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.comboBox5);
+            this.Controls.Add(this.handShakeCombo);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.comboBox4);
+            this.Controls.Add(this.dataBitsCombo);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.stopSignCombo);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.baudRateCombo);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.parityCombo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ATBtn);
             this.Controls.Add(this.userConsole);
@@ -248,16 +245,16 @@
         private System.Windows.Forms.RichTextBox userConsole;
         private System.Windows.Forms.Button ATBtn;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox parityCombo;
+        private System.Windows.Forms.ComboBox baudRateCombo;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox stopSignCombo;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox dataBitsCombo;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox handShakeCombo;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.ComboBox newLineCombo;
         private System.Windows.Forms.Label label7;
     }
 }
