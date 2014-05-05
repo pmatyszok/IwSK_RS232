@@ -344,10 +344,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(477, 262);
+            this.Controls.Add(this.newLineCombo);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.newLineCombo);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.handShakeCombo);
             this.Controls.Add(this.label6);

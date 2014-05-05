@@ -17,8 +17,8 @@ namespace IwSK_RS232
         private Communicator com = null;
         private int[] BaundRate = { 75, 110, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200 };
         private int[] DataBit = { 5, 6, 7, 8, 9 };
-        enum NewLine {CR=0,CRLF=1};
-        private string[] newLine = { "\n", "\r\n" };
+        enum NewLine {CR=0,CRLF=1,LF=2};
+        private string[] newLine = { "\r", "\r\n", "\n" };
         #endregion //fields
 
         #region methods

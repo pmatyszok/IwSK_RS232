@@ -9,6 +9,14 @@ namespace IwSK_RS232.PlainCommunication
         public List<char> buffer = new List<char>();
         private ConcurrentQueue<string> cmds = new ConcurrentQueue<string>();
         private object locker = new object();
+        private string lineEnd;
+        private int length;
+
+        public Parser(string lineEnd)
+        {
+            this.lineEnd = lineEnd;
+            this.length = lineEnd.Length;
+        }
 
         public void Append(char c)
         {
@@ -51,11 +59,18 @@ namespace IwSK_RS232.PlainCommunication
             {    
                 for (int i = 0; i < buffer.Count; i++)
                 {
-                    if (buffer[i] == '\r' && i != buffer.Count - 1 && i != 0 && buffer[i + 1] == '\n')
+                    if (this.length == 2 && buffer[i] == this.lineEnd[0] && i != buffer.Count - 1 && i != 0 && buffer[i + 1] == this.lineEnd[1])
                     {
                         end = i + 1;
                         cmds.Enqueue(new string(buffer.GetRange(beg, end - beg + 1).ToArray()));
                         beg = end + 1;
+                        ret = true;
+                    }
+                    else if (this.length == 1 && buffer[i] == this.lineEnd[0])
+                    {
+                        end = i;
+                        cmds.Enqueue(new string(buffer.GetRange(beg, end - beg).ToArray()));
+                        beg = end;
                         ret = true;
                     }
                 }

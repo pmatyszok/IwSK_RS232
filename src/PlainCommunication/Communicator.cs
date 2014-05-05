@@ -24,7 +24,7 @@ namespace IwSK_RS232.PlainCommunication
         private bool DTRState;
 
         private SerialPort port;
-        private readonly Parser parser = new Parser();
+        private readonly Parser parser;
      
 
         public Action<string> MessageOccured;
@@ -42,6 +42,8 @@ namespace IwSK_RS232.PlainCommunication
             port.Open();
             port.DataReceived += port_DataReceived;
             port.PinChanged += port_PinChanged;
+
+            parser = new Parser(newline);
 
             parser.CommandRecognized += CommandRecognized;
         }
