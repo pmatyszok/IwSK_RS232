@@ -175,6 +175,7 @@ namespace IwSK_RS232
             
             userConsole.Enabled = state;
             ATBtn.Enabled = state;
+            PINGBtn.Enabled = state;
             sendtext.Enabled = state;
             sendbutton.Enabled = state;
         }
@@ -238,6 +239,11 @@ namespace IwSK_RS232
                 parityCombo.Enabled = true;
                 stopSignCombo.Enabled = true;
             }
+        }
+
+        private void PINGBtn_Click(object sender, EventArgs e)
+        {
+            com.SendPing();
         }
     }
 }

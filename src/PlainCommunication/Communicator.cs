@@ -25,6 +25,7 @@ namespace IwSK_RS232.PlainCommunication
 
         private SerialPort port;
         private readonly Parser parser;
+        private long pingMilliseconds;
      
 
         public Action<string> MessageOccured;
@@ -89,6 +90,20 @@ namespace IwSK_RS232.PlainCommunication
             port.WriteLine(msg);
         }
 
+        public void SendPing()
+        {
+            string ping = "ping";
+            pingMilliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+            port.WriteLine(ping);
+        }
+
+        public void SendPong()
+        {
+            string pong = "pong";
+            MessageOccured(pong);
+            port.WriteLine(pong);
+        }
+
         private void CommandRecognized()
         {
             while (parser.HasNextCommand())
@@ -98,7 +113,19 @@ namespace IwSK_RS232.PlainCommunication
                 if (!string.IsNullOrEmpty(cmd))
                 {
                     if (MessageOccured != null)
-                        MessageOccured(cmd);
+                    {
+                        if (cmd.Equals("ping"))
+                        {
+                            SendPong();
+                        }
+                        else if (cmd.Equals("pong"))
+                        {
+                            pingMilliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond - pingMilliseconds;
+                            MessageOccured("Ping OK time = " + pingMilliseconds + "ms");
+                        }
+                        else
+                            MessageOccured(cmd);
+                    }
                 }
             }
         }

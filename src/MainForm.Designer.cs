@@ -63,6 +63,7 @@
             this.sendtext = new System.Windows.Forms.TextBox();
             this.customnewline = new System.Windows.Forms.CheckBox();
             this.customlinetext = new System.Windows.Forms.TextBox();
+            this.PINGBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -390,11 +391,22 @@
             this.customlinetext.Size = new System.Drawing.Size(121, 20);
             this.customlinetext.TabIndex = 33;
             // 
+            // PINGBtn
+            // 
+            this.PINGBtn.Location = new System.Drawing.Point(145, 10);
+            this.PINGBtn.Name = "PINGBtn";
+            this.PINGBtn.Size = new System.Drawing.Size(60, 23);
+            this.PINGBtn.TabIndex = 34;
+            this.PINGBtn.Text = "PING";
+            this.PINGBtn.UseVisualStyleBackColor = true;
+            this.PINGBtn.Click += new System.EventHandler(this.PINGBtn_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 301);
+            this.Controls.Add(this.PINGBtn);
             this.Controls.Add(this.modBusCheckBox);
             this.Controls.Add(this.customlinetext);
             this.Controls.Add(this.customnewline);
@@ -485,6 +497,7 @@
         private System.Windows.Forms.TextBox sendtext;
         private System.Windows.Forms.CheckBox customnewline;
         private System.Windows.Forms.TextBox customlinetext;
+        private System.Windows.Forms.Button PINGBtn;
 
     }
 }
