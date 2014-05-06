@@ -95,14 +95,8 @@ namespace IwSK_RS232
                 
                 Handshake hand;
                 Enum.TryParse<Handshake>(handShakeCombo.SelectedValue.ToString(), out hand);
-<<<<<<< HEAD
-                
-                NewLine line;
-                Enum.TryParse<NewLine>(newLineCombo.SelectedValue.ToString(),out line);
-                if(!modBusCheckBox.Checked)
-                    {
-                    com = new Communicator(name, 
-=======
+
+              
 
                 string terminator;
                 if (!customLine)
@@ -115,14 +109,14 @@ namespace IwSK_RS232
                 {
                     terminator = customlinetext.Text;
                 }
-                
-                com = new Communicator(name, 
->>>>>>> 2c05dfaf284c24ffefd6670853e8e965f4017661
-                    (int)baudRateCombo.SelectedValue, 
+                if (!modBusCheckBox.Checked)
+                {
+                    com = new Communicator(name,
+                    (int)baudRateCombo.SelectedValue,
                     parity,
-                    (int)dataBitsCombo.SelectedValue, 
+                    (int)dataBitsCombo.SelectedValue,
                     stopbit,
-                    hand, 
+                    hand,
                     terminator);
 
                     com.RingIndicatorChanged += () => RIRadio.Checked = !RIRadio.Checked;
@@ -131,7 +125,8 @@ namespace IwSK_RS232
                     com.CDCLineChanged += b => DCDRadio.Checked = b;
                     com.DTRLineChanged += b => DTRRadio.Checked = b;
                     com.RTSLineChanged += b => RTSRadio.Checked = b;
-                    }
+                }
+                    
             }
             catch (Exception ex)
             {
