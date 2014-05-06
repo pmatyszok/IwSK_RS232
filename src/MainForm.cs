@@ -44,15 +44,25 @@ namespace IwSK_RS232
                     item.Enabled = false;
                 }    
             }
-            
-            
-            
+
+            this.refreshPorts();
+        }
+
+        private void refreshPorts()
+        {
+            comPortsCombo.Items.Clear();
+            comPortsCombo.SelectedIndex = -1;
+            comPortsCombo.Items.AddRange(Communicator.GetPorts().ToArray());
+
+            if (comPortsCombo.Items.Count == 1)
+            {
+                comPortsCombo.SelectedIndex = comPortsCombo.FindString("COM"); // automatically selects the first item which contains "COM"
+            }
         }
 
         private void refreshComListBtn_Click(object sender, EventArgs e)
         {
-            comPortsCombo.Items.Clear();
-            comPortsCombo.Items.AddRange(Communicator.GetPorts().ToArray());
+            this.refreshPorts();
         }
 
         private void ATBtn_Click(object sender, EventArgs e)
