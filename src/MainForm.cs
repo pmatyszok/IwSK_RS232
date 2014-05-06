@@ -8,8 +8,6 @@ using System.IO.Ports;
 
 namespace IwSK_RS232
 {
-   
-
     public partial class MainForm : Form
     {
         #region fields

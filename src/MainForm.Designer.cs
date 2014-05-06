@@ -73,7 +73,7 @@
             // comPortsCombo
             // 
             this.comPortsCombo.FormattingEnabled = true;
-            this.comPortsCombo.Location = new System.Drawing.Point(338, 7);
+            this.comPortsCombo.Location = new System.Drawing.Point(347, 12);
             this.comPortsCombo.Name = "comPortsCombo";
             this.comPortsCombo.Size = new System.Drawing.Size(121, 21);
             this.comPortsCombo.TabIndex = 0;
@@ -81,7 +81,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(306, 10);
+            this.label1.Location = new System.Drawing.Point(315, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 1;
@@ -89,7 +89,7 @@
             // 
             // selectPortButton
             // 
-            this.selectPortButton.Location = new System.Drawing.Point(384, 235);
+            this.selectPortButton.Location = new System.Drawing.Point(393, 233);
             this.selectPortButton.Name = "selectPortButton";
             this.selectPortButton.Size = new System.Drawing.Size(75, 23);
             this.selectPortButton.TabIndex = 2;
@@ -99,27 +99,28 @@
             // 
             // refreshComListBtn
             // 
-            this.refreshComListBtn.Location = new System.Drawing.Point(197, 5);
+            this.refreshComListBtn.Location = new System.Drawing.Point(311, 233);
             this.refreshComListBtn.Name = "refreshComListBtn";
             this.refreshComListBtn.Size = new System.Drawing.Size(75, 23);
             this.refreshComListBtn.TabIndex = 3;
-            this.refreshComListBtn.Text = "Odśwież";
+            this.refreshComListBtn.Text = "Refresh";
             this.refreshComListBtn.UseVisualStyleBackColor = true;
             this.refreshComListBtn.Click += new System.EventHandler(this.refreshComListBtn_Click);
             // 
             // userConsole
             // 
-            this.userConsole.Location = new System.Drawing.Point(12, 105);
+            this.userConsole.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.userConsole.Location = new System.Drawing.Point(12, 39);
             this.userConsole.Name = "userConsole";
-            this.userConsole.Size = new System.Drawing.Size(257, 96);
+            this.userConsole.Size = new System.Drawing.Size(257, 162);
             this.userConsole.TabIndex = 4;
             this.userConsole.Text = "";
             // 
             // ATBtn
             // 
-            this.ATBtn.Location = new System.Drawing.Point(197, 76);
+            this.ATBtn.Location = new System.Drawing.Point(211, 10);
             this.ATBtn.Name = "ATBtn";
-            this.ATBtn.Size = new System.Drawing.Size(75, 23);
+            this.ATBtn.Size = new System.Drawing.Size(60, 23);
             this.ATBtn.TabIndex = 5;
             this.ATBtn.Text = "AT";
             this.ATBtn.UseVisualStyleBackColor = true;
@@ -128,7 +129,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(299, 91);
+            this.label2.Location = new System.Drawing.Point(308, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(33, 13);
             this.label2.TabIndex = 6;
@@ -137,7 +138,7 @@
             // parityCombo
             // 
             this.parityCombo.FormattingEnabled = true;
-            this.parityCombo.Location = new System.Drawing.Point(338, 88);
+            this.parityCombo.Location = new System.Drawing.Point(347, 93);
             this.parityCombo.Name = "parityCombo";
             this.parityCombo.Size = new System.Drawing.Size(121, 21);
             this.parityCombo.TabIndex = 7;
@@ -145,7 +146,7 @@
             // baudRateCombo
             // 
             this.baudRateCombo.FormattingEnabled = true;
-            this.baudRateCombo.Location = new System.Drawing.Point(338, 34);
+            this.baudRateCombo.Location = new System.Drawing.Point(347, 39);
             this.baudRateCombo.Name = "baudRateCombo";
             this.baudRateCombo.Size = new System.Drawing.Size(121, 21);
             this.baudRateCombo.TabIndex = 9;
@@ -153,7 +154,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(276, 37);
+            this.label3.Location = new System.Drawing.Point(285, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 8;
@@ -162,7 +163,7 @@
             // stopSignCombo
             // 
             this.stopSignCombo.FormattingEnabled = true;
-            this.stopSignCombo.Location = new System.Drawing.Point(338, 115);
+            this.stopSignCombo.Location = new System.Drawing.Point(347, 120);
             this.stopSignCombo.Name = "stopSignCombo";
             this.stopSignCombo.Size = new System.Drawing.Size(121, 21);
             this.stopSignCombo.TabIndex = 11;
@@ -170,7 +171,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(299, 118);
+            this.label4.Location = new System.Drawing.Point(308, 123);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 10;
@@ -179,7 +180,7 @@
             // dataBitsCombo
             // 
             this.dataBitsCombo.FormattingEnabled = true;
-            this.dataBitsCombo.Location = new System.Drawing.Point(338, 61);
+            this.dataBitsCombo.Location = new System.Drawing.Point(347, 66);
             this.dataBitsCombo.Name = "dataBitsCombo";
             this.dataBitsCombo.Size = new System.Drawing.Size(121, 21);
             this.dataBitsCombo.TabIndex = 13;
@@ -187,7 +188,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(299, 64);
+            this.label5.Location = new System.Drawing.Point(308, 69);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 13);
             this.label5.TabIndex = 12;
@@ -196,7 +197,7 @@
             // handShakeCombo
             // 
             this.handShakeCombo.FormattingEnabled = true;
-            this.handShakeCombo.Location = new System.Drawing.Point(338, 142);
+            this.handShakeCombo.Location = new System.Drawing.Point(347, 147);
             this.handShakeCombo.Name = "handShakeCombo";
             this.handShakeCombo.Size = new System.Drawing.Size(121, 21);
             this.handShakeCombo.TabIndex = 15;
@@ -204,7 +205,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(299, 145);
+            this.label6.Location = new System.Drawing.Point(308, 150);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(33, 13);
             this.label6.TabIndex = 14;
@@ -213,7 +214,7 @@
             // newLineCombo
             // 
             this.newLineCombo.FormattingEnabled = true;
-            this.newLineCombo.Location = new System.Drawing.Point(338, 169);
+            this.newLineCombo.Location = new System.Drawing.Point(347, 174);
             this.newLineCombo.Name = "newLineCombo";
             this.newLineCombo.Size = new System.Drawing.Size(121, 21);
             this.newLineCombo.TabIndex = 17;
@@ -221,7 +222,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(283, 172);
+            this.label7.Location = new System.Drawing.Point(292, 177);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 13);
             this.label7.TabIndex = 16;
@@ -242,7 +243,7 @@
             // 
             this.RIRadio.AutoSize = true;
             this.RIRadio.CheckAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.RIRadio.Location = new System.Drawing.Point(6, 2);
+            this.RIRadio.Location = new System.Drawing.Point(3, 3);
             this.RIRadio.Name = "RIRadio";
             this.RIRadio.Size = new System.Drawing.Size(36, 17);
             this.RIRadio.TabIndex = 19;
@@ -254,7 +255,7 @@
             // 
             this.DSRRadio.AutoSize = true;
             this.DSRRadio.Cursor = System.Windows.Forms.Cursors.Default;
-            this.DSRRadio.Location = new System.Drawing.Point(3, 3);
+            this.DSRRadio.Location = new System.Drawing.Point(3, 4);
             this.DSRRadio.Name = "DSRRadio";
             this.DSRRadio.Size = new System.Drawing.Size(48, 17);
             this.DSRRadio.TabIndex = 20;
@@ -276,7 +277,7 @@
             // RTSRadio
             // 
             this.RTSRadio.AutoSize = true;
-            this.RTSRadio.Location = new System.Drawing.Point(0, 0);
+            this.RTSRadio.Location = new System.Drawing.Point(10, 3);
             this.RTSRadio.Name = "RTSRadio";
             this.RTSRadio.Size = new System.Drawing.Size(47, 17);
             this.RTSRadio.TabIndex = 22;
@@ -287,7 +288,7 @@
             // DTRRadio
             // 
             this.DTRRadio.AutoSize = true;
-            this.DTRRadio.Location = new System.Drawing.Point(8, 3);
+            this.DTRRadio.Location = new System.Drawing.Point(3, 3);
             this.DTRRadio.Name = "DTRRadio";
             this.DTRRadio.Size = new System.Drawing.Size(48, 17);
             this.DTRRadio.TabIndex = 23;
@@ -298,17 +299,17 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.DCDRadio);
-            this.panel1.Location = new System.Drawing.Point(2, 203);
+            this.panel1.Location = new System.Drawing.Point(9, 203);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(64, 28);
+            this.panel1.Size = new System.Drawing.Size(61, 28);
             this.panel1.TabIndex = 24;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.RIRadio);
-            this.panel2.Location = new System.Drawing.Point(66, 204);
+            this.panel2.Location = new System.Drawing.Point(73, 204);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(56, 26);
+            this.panel2.Size = new System.Drawing.Size(52, 26);
             this.panel2.TabIndex = 25;
             // 
             // panel3
@@ -316,15 +317,15 @@
             this.panel3.Controls.Add(this.DSRRadio);
             this.panel3.Location = new System.Drawing.Point(128, 203);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(47, 28);
+            this.panel3.Size = new System.Drawing.Size(56, 28);
             this.panel3.TabIndex = 26;
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.CTSRadio);
-            this.panel4.Location = new System.Drawing.Point(181, 203);
+            this.panel4.Location = new System.Drawing.Point(185, 203);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(58, 29);
+            this.panel4.Size = new System.Drawing.Size(58, 28);
             this.panel4.TabIndex = 27;
             // 
             // panel5
@@ -332,38 +333,38 @@
             this.panel5.Controls.Add(this.RTSRadio);
             this.panel5.Location = new System.Drawing.Point(9, 230);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(54, 25);
+            this.panel5.Size = new System.Drawing.Size(61, 25);
             this.panel5.TabIndex = 28;
             // 
             // panel6
             // 
             this.panel6.Controls.Add(this.DTRRadio);
-            this.panel6.Location = new System.Drawing.Point(58, 230);
+            this.panel6.Location = new System.Drawing.Point(73, 230);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(57, 28);
+            this.panel6.Size = new System.Drawing.Size(52, 25);
             this.panel6.TabIndex = 29;
             // 
             // sendbutton
             // 
-            this.sendbutton.Location = new System.Drawing.Point(286, 281);
+            this.sendbutton.Location = new System.Drawing.Point(196, 267);
             this.sendbutton.Name = "sendbutton";
             this.sendbutton.Size = new System.Drawing.Size(75, 23);
             this.sendbutton.TabIndex = 30;
-            this.sendbutton.Text = "Wyślij";
+            this.sendbutton.Text = "Send";
             this.sendbutton.UseVisualStyleBackColor = true;
             this.sendbutton.Click += new System.EventHandler(this.sendbutton_Click_1);
             // 
             // sendtext
             // 
-            this.sendtext.Location = new System.Drawing.Point(12, 284);
+            this.sendtext.Location = new System.Drawing.Point(9, 270);
             this.sendtext.Name = "sendtext";
-            this.sendtext.Size = new System.Drawing.Size(259, 20);
+            this.sendtext.Size = new System.Drawing.Size(175, 20);
             this.sendtext.TabIndex = 31;
             // 
             // customnewline
             // 
             this.customnewline.AutoSize = true;
-            this.customnewline.Location = new System.Drawing.Point(317, 203);
+            this.customnewline.Location = new System.Drawing.Point(326, 208);
             this.customnewline.Name = "customnewline";
             this.customnewline.Size = new System.Drawing.Size(15, 14);
             this.customnewline.TabIndex = 32;
@@ -372,7 +373,7 @@
             // 
             // customlinetext
             // 
-            this.customlinetext.Location = new System.Drawing.Point(338, 196);
+            this.customlinetext.Location = new System.Drawing.Point(347, 201);
             this.customlinetext.Name = "customlinetext";
             this.customlinetext.Size = new System.Drawing.Size(121, 20);
             this.customlinetext.TabIndex = 33;
@@ -381,7 +382,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(477, 339);
+            this.ClientSize = new System.Drawing.Size(483, 301);
             this.Controls.Add(this.customlinetext);
             this.Controls.Add(this.customnewline);
             this.Controls.Add(this.sendtext);
@@ -410,6 +411,8 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "IwSK - RS232";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
