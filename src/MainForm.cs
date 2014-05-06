@@ -15,10 +15,11 @@ namespace IwSK_RS232
         #region fields
 
         private Communicator com = null;
-        private int[] BaundRate = { 75, 110, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200 };
+        private int[] BaundRate = { 75, 150, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200 };
         private int[] DataBit = { 5, 6, 7, 8, 9 };
-        enum NewLine {CR=0,CRLF=1,LF=2};
-        private string[] newLine = { "\r", "\r\n", "\n" };
+        enum NewLine { CR = 0, CRLF = 1, LF = 2, None = 3 };
+        private string[] newLine = { "\n", "\r\n", "\r", "" };
+        private bool customLine;
         #endregion //fields
 
         #region methods
@@ -36,6 +37,8 @@ namespace IwSK_RS232
             newLineCombo.DataSource = Enum.GetNames(typeof(NewLine));
             baudRateCombo.DataSource = BaundRate;
             dataBitsCombo.DataSource = DataBit;
+            customlinetext.MaxLength = 2;
+            customlinetext.Enabled = false;
             foreach (var panel in this.Controls.OfType<Panel>())
             {
                 foreach (var item in panel.Controls.OfType<RadioButton>())
@@ -83,9 +86,18 @@ namespace IwSK_RS232
                 
                 Handshake hand;
                 Enum.TryParse<Handshake>(handShakeCombo.SelectedValue.ToString(), out hand);
-                
-                NewLine line;
-                Enum.TryParse<NewLine>(newLineCombo.SelectedValue.ToString(),out line);
+
+                string terminator;
+                if (!customLine)
+                {
+                    NewLine line;
+                    Enum.TryParse<NewLine>(newLineCombo.SelectedValue.ToString(), out line);
+                    terminator = newLine[(int)line];
+                }
+                else
+                {
+                    terminator = customlinetext.Text;
+                }
                 
                 com = new Communicator(name, 
                     (int)baudRateCombo.SelectedValue, 
@@ -93,7 +105,7 @@ namespace IwSK_RS232
                     (int)dataBitsCombo.SelectedValue, 
                     stopbit,
                     hand, 
-                    newLine[(int)line]);
+                    terminator);
 
                 com.RingIndicatorChanged += () => RIRadio.Checked = !RIRadio.Checked;
                 com.DSRLineChanged += b => DSRRadio.Checked = b;
@@ -124,6 +136,8 @@ namespace IwSK_RS232
             
             userConsole.Enabled = state;
             ATBtn.Enabled = state;
+            sendtext.Enabled = state;
+            sendbutton.Enabled = state;
         }
 
         #endregion //methods
@@ -132,6 +146,29 @@ namespace IwSK_RS232
         {
             if (com != null)
                 com.Dispose();
+        }       
+        
+        private void customnewline_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (!customLine)
+            {
+                newLineCombo.Enabled = false;
+                customlinetext.Enabled = true;
+            }
+            else
+            {
+                newLineCombo.Enabled = true;
+                customlinetext.Enabled = false;
+            }
+            customLine = !customLine;
+        }
+
+        private void sendbutton_Click_1(object sender, EventArgs e)
+        {
+            string toSend = sendtext.Text;
+            Log.Append(toSend);
+            com.SendString(toSend);
+            sendtext.Clear();
         }
     }
 }
