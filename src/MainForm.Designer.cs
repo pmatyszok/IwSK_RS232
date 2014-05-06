@@ -58,6 +58,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.modBusCheckBox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -85,7 +86,7 @@
             // 
             // selectPortButton
             // 
-            this.selectPortButton.Location = new System.Drawing.Point(384, 196);
+            this.selectPortButton.Location = new System.Drawing.Point(338, 224);
             this.selectPortButton.Name = "selectPortButton";
             this.selectPortButton.Size = new System.Drawing.Size(75, 23);
             this.selectPortButton.TabIndex = 2;
@@ -339,11 +340,23 @@
             this.panel6.Size = new System.Drawing.Size(57, 28);
             this.panel6.TabIndex = 29;
             // 
+            // modBusCheckBox
+            // 
+            this.modBusCheckBox.AutoSize = true;
+            this.modBusCheckBox.Location = new System.Drawing.Point(338, 196);
+            this.modBusCheckBox.Name = "modBusCheckBox";
+            this.modBusCheckBox.Size = new System.Drawing.Size(64, 17);
+            this.modBusCheckBox.TabIndex = 30;
+            this.modBusCheckBox.Text = "Modbus";
+            this.modBusCheckBox.UseVisualStyleBackColor = true;
+            this.modBusCheckBox.CheckedChanged += new System.EventHandler(this.modBusCheckBox_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(477, 262);
+            this.Controls.Add(this.modBusCheckBox);
             this.Controls.Add(this.newLineCombo);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
@@ -420,6 +433,7 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.CheckBox modBusCheckBox;
     }
 }
 

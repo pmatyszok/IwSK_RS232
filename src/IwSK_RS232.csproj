@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modbus\ModbusForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modbus\ModbusForm.Designer.cs">
+      <DependentUpon>ModbusForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlainCommunication\Communicator.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -59,6 +65,9 @@
     <Compile Include="Tools\Log.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modbus\ModbusForm.resx">
+      <DependentUpon>ModbusForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -80,9 +89,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modbus\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

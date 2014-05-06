@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using IwSK_RS232.PlainCommunication;
 using IwSK_RS232.Properties;
 using IwSK_RS232.Tools;
+using IwSK_RS232.Modbus;
 using System.IO.Ports;
 
 namespace IwSK_RS232
@@ -86,8 +87,9 @@ namespace IwSK_RS232
                 
                 NewLine line;
                 Enum.TryParse<NewLine>(newLineCombo.SelectedValue.ToString(),out line);
-                
-                com = new Communicator(name, 
+                if(!modBusCheckBox.Checked)
+                    {
+                    com = new Communicator(name, 
                     (int)baudRateCombo.SelectedValue, 
                     parity,
                     (int)dataBitsCombo.SelectedValue, 
@@ -95,12 +97,13 @@ namespace IwSK_RS232
                     hand, 
                     newLine[(int)line]);
 
-                com.RingIndicatorChanged += () => RIRadio.Checked = !RIRadio.Checked;
-                com.DSRLineChanged += b => DSRRadio.Checked = b;
-                com.CTSLineChanged += b => CTSRadio.Checked = b;
-                com.CDCLineChanged += b => DCDRadio.Checked = b;
-                com.DTRLineChanged += b => DTRRadio.Checked = b;
-                com.RTSLineChanged += b => RTSRadio.Checked = b;
+                    com.RingIndicatorChanged += () => RIRadio.Checked = !RIRadio.Checked;
+                    com.DSRLineChanged += b => DSRRadio.Checked = b;
+                    com.CTSLineChanged += b => CTSRadio.Checked = b;
+                    com.CDCLineChanged += b => DCDRadio.Checked = b;
+                    com.DTRLineChanged += b => DTRRadio.Checked = b;
+                    com.RTSLineChanged += b => RTSRadio.Checked = b;
+                    }
             }
             catch (Exception ex)
             {
@@ -109,10 +112,35 @@ namespace IwSK_RS232
                 MessageBox.Show(Resources.errorDuringSerialPortCreation__ + Environment.NewLine + ex.Message);
             }
 
-            if (com != null)
+            if (com != null && !modBusCheckBox.Checked)
             {
                 ChangeControlsEnable(true);
                 com.MessageOccured += Log.Append;
+            }
+            else if(modBusCheckBox.Checked)
+
+            {
+                Parity parity;
+                Enum.TryParse<Parity>(parityCombo.SelectedValue.ToString(), out parity);
+
+                StopBits stopbit;
+                Enum.TryParse<StopBits>(stopSignCombo.SelectedValue.ToString(), out stopbit);
+
+                Handshake hand;
+                Enum.TryParse<Handshake>(handShakeCombo.SelectedValue.ToString(), out hand);
+
+                NewLine line;
+                Enum.TryParse<NewLine>(newLineCombo.SelectedValue.ToString(), out line);
+                ModbusForm modbus=new ModbusForm(name, 
+                    (int)baudRateCombo.SelectedValue, 
+                    parity,
+                    (int)dataBitsCombo.SelectedValue, 
+                    stopbit,
+                    hand, 
+                    newLine[(int)line]);
+                modbus.ShowDialog();
+                
+
             }
         }
 
@@ -132,6 +160,36 @@ namespace IwSK_RS232
         {
             if (com != null)
                 com.Dispose();
+        }
+
+        private void modBusCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (modBusCheckBox.Checked == true)
+            {
+                dataBitsCombo.Enabled = false;
+                handShakeCombo.Enabled = false;
+                newLineCombo.Enabled = false;
+                parityCombo.Enabled = false;
+                stopSignCombo.Enabled = false;
+
+                dataBitsCombo.SelectedItem = 7;
+                handShakeCombo.SelectedItem = Handshake.None.ToString();
+                parityCombo.SelectedItem = Parity.None.ToString();
+                stopSignCombo.SelectedItem = StopBits.Two.ToString();
+                newLineCombo.SelectedItem = "CRLF";
+
+
+
+                
+            }
+            else
+            {
+                dataBitsCombo.Enabled = true;
+                handShakeCombo.Enabled = true;
+                newLineCombo.Enabled = true;
+                parityCombo.Enabled = true;
+                stopSignCombo.Enabled = true;
+            }
         }
     }
 }
