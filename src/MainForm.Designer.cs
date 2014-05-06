@@ -30,7 +30,6 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.PINGBtn = new System.Windows.Forms.Button();
             this.modBusCheckBox = new System.Windows.Forms.CheckBox();
             this.customlinetext = new System.Windows.Forms.TextBox();
@@ -67,6 +66,7 @@
             this.DSRRadio = new System.Windows.Forms.RadioButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.CTSRadio = new System.Windows.Forms.RadioButton();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
@@ -92,13 +92,13 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -146,43 +146,10 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(593, 381);
+            this.tabPage1.Size = new System.Drawing.Size(638, 407);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "RS232";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.label16);
-            this.tabPage2.Controls.Add(this.label15);
-            this.tabPage2.Controls.Add(this.textBox5);
-            this.tabPage2.Controls.Add(this.textBox4);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.label14);
-            this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.label13);
-            this.tabPage2.Controls.Add(this.textBox2);
-            this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.listBox4);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.listBox3);
-            this.tabPage2.Controls.Add(this.radioButton4);
-            this.tabPage2.Controls.Add(this.radioButton3);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.listBox2);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.listBox1);
-            this.tabPage2.Controls.Add(this.radioButton2);
-            this.tabPage2.Controls.Add(this.radioButton1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(638, 407);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "MODBUS";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // PINGBtn
             // 
@@ -192,6 +159,7 @@
             this.PINGBtn.TabIndex = 64;
             this.PINGBtn.Text = "PING";
             this.PINGBtn.UseVisualStyleBackColor = true;
+            this.PINGBtn.Click += new System.EventHandler(this.PINGBtn_Click);
             // 
             // modBusCheckBox
             // 
@@ -234,6 +202,7 @@
             this.sendbutton.TabIndex = 60;
             this.sendbutton.Text = "Send";
             this.sendbutton.UseVisualStyleBackColor = true;
+            this.sendbutton.Click += new System.EventHandler(this.sendbutton_Click_1);
             // 
             // newLineCombo
             // 
@@ -402,6 +371,7 @@
             this.ATBtn.TabIndex = 40;
             this.ATBtn.Text = "AT";
             this.ATBtn.UseVisualStyleBackColor = true;
+            this.ATBtn.Click += new System.EventHandler(this.ATBtn_Click);
             // 
             // userConsole
             // 
@@ -420,6 +390,7 @@
             this.refreshComListBtn.TabIndex = 38;
             this.refreshComListBtn.Text = "Refresh";
             this.refreshComListBtn.UseVisualStyleBackColor = true;
+            this.refreshComListBtn.Click += new System.EventHandler(this.refreshComListBtn_Click);
             // 
             // selectPortButton
             // 
@@ -429,6 +400,7 @@
             this.selectPortButton.TabIndex = 37;
             this.selectPortButton.Text = "Connect";
             this.selectPortButton.UseVisualStyleBackColor = true;
+            this.selectPortButton.Click += new System.EventHandler(this.selectPortButton_Click);
             // 
             // label1
             // 
@@ -505,6 +477,39 @@
             this.CTSRadio.TabStop = true;
             this.CTSRadio.Text = "CTS";
             this.CTSRadio.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label16);
+            this.tabPage2.Controls.Add(this.label15);
+            this.tabPage2.Controls.Add(this.textBox5);
+            this.tabPage2.Controls.Add(this.textBox4);
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.label14);
+            this.tabPage2.Controls.Add(this.textBox3);
+            this.tabPage2.Controls.Add(this.label13);
+            this.tabPage2.Controls.Add(this.textBox2);
+            this.tabPage2.Controls.Add(this.label12);
+            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.listBox4);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.listBox3);
+            this.tabPage2.Controls.Add(this.radioButton4);
+            this.tabPage2.Controls.Add(this.radioButton3);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.listBox2);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.listBox1);
+            this.tabPage2.Controls.Add(this.radioButton2);
+            this.tabPage2.Controls.Add(this.radioButton1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(638, 407);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "MODBUS";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // label16
             // 
@@ -729,8 +734,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -743,6 +746,8 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }

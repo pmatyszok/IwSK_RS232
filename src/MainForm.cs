@@ -172,7 +172,6 @@ namespace IwSK_RS232
         /// </summary>
         private void ChangeControlsEnable(bool state)
         {
-            
             userConsole.Enabled = state;
             ATBtn.Enabled = state;
             PINGBtn.Enabled = state;
