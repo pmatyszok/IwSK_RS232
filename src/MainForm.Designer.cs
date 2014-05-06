@@ -58,14 +58,11 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
-
             this.modBusCheckBox = new System.Windows.Forms.CheckBox();
-
             this.sendbutton = new System.Windows.Forms.Button();
             this.sendtext = new System.Windows.Forms.TextBox();
             this.customnewline = new System.Windows.Forms.CheckBox();
             this.customlinetext = new System.Windows.Forms.TextBox();
-
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -93,11 +90,7 @@
             // 
             // selectPortButton
             // 
-
-            this.selectPortButton.Location = new System.Drawing.Point(338, 224);
-
-            this.selectPortButton.Location = new System.Drawing.Point(393, 233);
-
+            this.selectPortButton.Location = new System.Drawing.Point(393, 244);
             this.selectPortButton.Name = "selectPortButton";
             this.selectPortButton.Size = new System.Drawing.Size(75, 23);
             this.selectPortButton.TabIndex = 2;
@@ -107,7 +100,7 @@
             // 
             // refreshComListBtn
             // 
-            this.refreshComListBtn.Location = new System.Drawing.Point(311, 233);
+            this.refreshComListBtn.Location = new System.Drawing.Point(311, 245);
             this.refreshComListBtn.Name = "refreshComListBtn";
             this.refreshComListBtn.Size = new System.Drawing.Size(75, 23);
             this.refreshComListBtn.TabIndex = 3;
@@ -352,18 +345,17 @@
             this.panel6.Size = new System.Drawing.Size(52, 25);
             this.panel6.TabIndex = 29;
             // 
-
             // modBusCheckBox
             // 
             this.modBusCheckBox.AutoSize = true;
-            this.modBusCheckBox.Location = new System.Drawing.Point(338, 196);
+            this.modBusCheckBox.Location = new System.Drawing.Point(326, 227);
             this.modBusCheckBox.Name = "modBusCheckBox";
             this.modBusCheckBox.Size = new System.Drawing.Size(64, 17);
             this.modBusCheckBox.TabIndex = 30;
             this.modBusCheckBox.Text = "Modbus";
             this.modBusCheckBox.UseVisualStyleBackColor = true;
             this.modBusCheckBox.CheckedChanged += new System.EventHandler(this.modBusCheckBox_CheckedChanged);
-
+            // 
             // sendbutton
             // 
             this.sendbutton.Location = new System.Drawing.Point(196, 267);
@@ -397,22 +389,17 @@
             this.customlinetext.Name = "customlinetext";
             this.customlinetext.Size = new System.Drawing.Size(121, 20);
             this.customlinetext.TabIndex = 33;
-
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-
-            this.ClientSize = new System.Drawing.Size(477, 262);
-            this.Controls.Add(this.modBusCheckBox);
-
             this.ClientSize = new System.Drawing.Size(483, 301);
+            this.Controls.Add(this.modBusCheckBox);
             this.Controls.Add(this.customlinetext);
             this.Controls.Add(this.customnewline);
             this.Controls.Add(this.sendtext);
             this.Controls.Add(this.sendbutton);
-
             this.Controls.Add(this.newLineCombo);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
