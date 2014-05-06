@@ -9,17 +9,16 @@ using System.IO.Ports;
 
 namespace IwSK_RS232
 {
-   
-
     public partial class MainForm : Form
     {
         #region fields
 
         private Communicator com = null;
-        private int[] BaundRate = { 75, 110, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200 };
+        private int[] BaundRate = { 75, 150, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200 };
         private int[] DataBit = { 5, 6, 7, 8, 9 };
-        enum NewLine {CR=0,CRLF=1,LF=2};
-        private string[] newLine = { "\r", "\r\n", "\n" };
+        enum NewLine { CR = 0, CRLF = 1, LF = 2, None = 3 };
+        private string[] newLine = { "\n", "\r\n", "\r", "" };
+        private bool customLine;
         #endregion //fields
 
         #region methods
@@ -37,6 +36,8 @@ namespace IwSK_RS232
             newLineCombo.DataSource = Enum.GetNames(typeof(NewLine));
             baudRateCombo.DataSource = BaundRate;
             dataBitsCombo.DataSource = DataBit;
+            customlinetext.MaxLength = 2;
+            customlinetext.Enabled = false;
             foreach (var panel in this.Controls.OfType<Panel>())
             {
                 foreach (var item in panel.Controls.OfType<RadioButton>())
@@ -44,15 +45,25 @@ namespace IwSK_RS232
                     item.Enabled = false;
                 }    
             }
-            
-            
-            
+
+            this.refreshPorts();
+        }
+
+        private void refreshPorts()
+        {
+            comPortsCombo.Items.Clear();
+            comPortsCombo.SelectedIndex = -1;
+            comPortsCombo.Items.AddRange(Communicator.GetPorts().ToArray());
+
+            if (comPortsCombo.Items.Count == 1)
+            {
+                comPortsCombo.SelectedIndex = comPortsCombo.FindString("COM"); // automatically selects the first item which contains "COM"
+            }
         }
 
         private void refreshComListBtn_Click(object sender, EventArgs e)
         {
-            comPortsCombo.Items.Clear();
-            comPortsCombo.Items.AddRange(Communicator.GetPorts().ToArray());
+            this.refreshPorts();
         }
 
         private void ATBtn_Click(object sender, EventArgs e)
@@ -84,18 +95,35 @@ namespace IwSK_RS232
                 
                 Handshake hand;
                 Enum.TryParse<Handshake>(handShakeCombo.SelectedValue.ToString(), out hand);
+<<<<<<< HEAD
                 
                 NewLine line;
                 Enum.TryParse<NewLine>(newLineCombo.SelectedValue.ToString(),out line);
                 if(!modBusCheckBox.Checked)
                     {
                     com = new Communicator(name, 
+=======
+
+                string terminator;
+                if (!customLine)
+                {
+                    NewLine line;
+                    Enum.TryParse<NewLine>(newLineCombo.SelectedValue.ToString(), out line);
+                    terminator = newLine[(int)line];
+                }
+                else
+                {
+                    terminator = customlinetext.Text;
+                }
+                
+                com = new Communicator(name, 
+>>>>>>> 2c05dfaf284c24ffefd6670853e8e965f4017661
                     (int)baudRateCombo.SelectedValue, 
                     parity,
                     (int)dataBitsCombo.SelectedValue, 
                     stopbit,
                     hand, 
-                    newLine[(int)line]);
+                    terminator);
 
                     com.RingIndicatorChanged += () => RIRadio.Checked = !RIRadio.Checked;
                     com.DSRLineChanged += b => DSRRadio.Checked = b;
@@ -152,6 +180,8 @@ namespace IwSK_RS232
             
             userConsole.Enabled = state;
             ATBtn.Enabled = state;
+            sendtext.Enabled = state;
+            sendbutton.Enabled = state;
         }
 
         #endregion //methods
@@ -160,6 +190,29 @@ namespace IwSK_RS232
         {
             if (com != null)
                 com.Dispose();
+        }       
+        
+        private void customnewline_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (!customLine)
+            {
+                newLineCombo.Enabled = false;
+                customlinetext.Enabled = true;
+            }
+            else
+            {
+                newLineCombo.Enabled = true;
+                customlinetext.Enabled = false;
+            }
+            customLine = !customLine;
+        }
+
+        private void sendbutton_Click_1(object sender, EventArgs e)
+        {
+            string toSend = sendtext.Text;
+            Log.Append(toSend);
+            com.SendString(toSend);
+            sendtext.Clear();
         }
 
         private void modBusCheckBox_CheckedChanged(object sender, EventArgs e)
