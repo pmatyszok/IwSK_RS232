@@ -67,29 +67,28 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.CTSRadio = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.listBox4 = new System.Windows.Forms.ListBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.listBox3 = new System.Windows.Forms.ListBox();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.label9 = new System.Windows.Forms.Label();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.sentLabel = new System.Windows.Forms.Label();
+            this.receivedLabel = new System.Windows.Forms.Label();
+            this.sendModbusButton = new System.Windows.Forms.Button();
+            this.messageLabel = new System.Windows.Forms.Label();
+            this.commandLabel = new System.Windows.Forms.Label();
+            this.receiverAddressLabel = new System.Windows.Forms.Label();
+            this.timeoutLabel = new System.Windows.Forms.Label();
+            this.timeSpacingLabel = new System.Windows.Forms.Label();
+            this.amountOfRetransLabel = new System.Windows.Forms.Label();
+            this.SlaveRadioButton = new System.Windows.Forms.RadioButton();
+            this.MasterRadioButton = new System.Windows.Forms.RadioButton();
+            this.MasterSlaveGroupBox = new System.Windows.Forms.GroupBox();
+            this.msLabel = new System.Windows.Forms.Label();
+            this.transactionTimeoutNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.adressNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.commandNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.IncomingRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.outcomingRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.frameTimeoutNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label17 = new System.Windows.Forms.Label();
+            this.MessageTextBox = new System.Windows.Forms.TextBox();
+            this.amountOfRetransmNumUpDown = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -99,6 +98,12 @@
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.MasterSlaveGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.transactionTimeoutNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.adressNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commandNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.frameTimeoutNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amountOfRetransmNumUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -170,6 +175,7 @@
             this.modBusCheckBox.TabIndex = 59;
             this.modBusCheckBox.Text = "Modbus";
             this.modBusCheckBox.UseVisualStyleBackColor = true;
+            this.modBusCheckBox.CheckedChanged += new System.EventHandler(this.modBusCheckBox_CheckedChanged);
             // 
             // customlinetext
             // 
@@ -480,29 +486,26 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.label16);
-            this.tabPage2.Controls.Add(this.label15);
-            this.tabPage2.Controls.Add(this.textBox5);
-            this.tabPage2.Controls.Add(this.textBox4);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.label14);
-            this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.label13);
-            this.tabPage2.Controls.Add(this.textBox2);
-            this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.listBox4);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.listBox3);
-            this.tabPage2.Controls.Add(this.radioButton4);
-            this.tabPage2.Controls.Add(this.radioButton3);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.listBox2);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.listBox1);
-            this.tabPage2.Controls.Add(this.radioButton2);
-            this.tabPage2.Controls.Add(this.radioButton1);
+            this.tabPage2.Controls.Add(this.amountOfRetransmNumUpDown);
+            this.tabPage2.Controls.Add(this.MessageTextBox);
+            this.tabPage2.Controls.Add(this.label17);
+            this.tabPage2.Controls.Add(this.frameTimeoutNumericUpDown);
+            this.tabPage2.Controls.Add(this.outcomingRichTextBox);
+            this.tabPage2.Controls.Add(this.IncomingRichTextBox);
+            this.tabPage2.Controls.Add(this.commandNumericUpDown);
+            this.tabPage2.Controls.Add(this.adressNumericUpDown);
+            this.tabPage2.Controls.Add(this.msLabel);
+            this.tabPage2.Controls.Add(this.MasterSlaveGroupBox);
+            this.tabPage2.Controls.Add(this.transactionTimeoutNumericUpDown);
+            this.tabPage2.Controls.Add(this.sentLabel);
+            this.tabPage2.Controls.Add(this.receivedLabel);
+            this.tabPage2.Controls.Add(this.sendModbusButton);
+            this.tabPage2.Controls.Add(this.messageLabel);
+            this.tabPage2.Controls.Add(this.commandLabel);
+            this.tabPage2.Controls.Add(this.receiverAddressLabel);
+            this.tabPage2.Controls.Add(this.timeoutLabel);
+            this.tabPage2.Controls.Add(this.timeSpacingLabel);
+            this.tabPage2.Controls.Add(this.amountOfRetransLabel);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -511,214 +514,266 @@
             this.tabPage2.Text = "MODBUS";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label16
+            // sentLabel
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(167, 46);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(32, 13);
-            this.label16.TabIndex = 45;
-            this.label16.Text = "Sent:";
+            this.sentLabel.AutoSize = true;
+            this.sentLabel.Location = new System.Drawing.Point(167, 46);
+            this.sentLabel.Name = "sentLabel";
+            this.sentLabel.Size = new System.Drawing.Size(32, 13);
+            this.sentLabel.TabIndex = 45;
+            this.sentLabel.Text = "Sent:";
             // 
-            // label15
+            // receivedLabel
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(167, 159);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(56, 13);
-            this.label15.TabIndex = 44;
-            this.label15.Text = "Received:";
+            this.receivedLabel.AutoSize = true;
+            this.receivedLabel.Location = new System.Drawing.Point(167, 159);
+            this.receivedLabel.Name = "receivedLabel";
+            this.receivedLabel.Size = new System.Drawing.Size(56, 13);
+            this.receivedLabel.TabIndex = 44;
+            this.receivedLabel.Text = "Received:";
             // 
-            // textBox5
+            // sendModbusButton
             // 
-            this.textBox5.Location = new System.Drawing.Point(170, 175);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(264, 80);
-            this.textBox5.TabIndex = 43;
+            this.sendModbusButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.sendModbusButton.Location = new System.Drawing.Point(488, 302);
+            this.sendModbusButton.Name = "sendModbusButton";
+            this.sendModbusButton.Size = new System.Drawing.Size(80, 55);
+            this.sendModbusButton.TabIndex = 41;
+            this.sendModbusButton.Text = "Send";
+            this.sendModbusButton.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // messageLabel
             // 
-            this.textBox4.Location = new System.Drawing.Point(170, 62);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(264, 93);
-            this.textBox4.TabIndex = 42;
+            this.messageLabel.AutoSize = true;
+            this.messageLabel.Location = new System.Drawing.Point(170, 291);
+            this.messageLabel.Name = "messageLabel";
+            this.messageLabel.Size = new System.Drawing.Size(53, 13);
+            this.messageLabel.TabIndex = 40;
+            this.messageLabel.Text = "Message:";
             // 
-            // button1
+            // commandLabel
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(488, 302);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 55);
-            this.button1.TabIndex = 41;
-            this.button1.Text = "Send";
-            this.button1.UseVisualStyleBackColor = true;
+            this.commandLabel.AutoSize = true;
+            this.commandLabel.Location = new System.Drawing.Point(22, 329);
+            this.commandLabel.Name = "commandLabel";
+            this.commandLabel.Size = new System.Drawing.Size(57, 13);
+            this.commandLabel.TabIndex = 38;
+            this.commandLabel.Text = "Command:";
             // 
-            // label14
+            // receiverAddressLabel
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(170, 291);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(53, 13);
-            this.label14.TabIndex = 40;
-            this.label14.Text = "Message:";
+            this.receiverAddressLabel.AutoSize = true;
+            this.receiverAddressLabel.Location = new System.Drawing.Point(18, 283);
+            this.receiverAddressLabel.Name = "receiverAddressLabel";
+            this.receiverAddressLabel.Size = new System.Drawing.Size(93, 13);
+            this.receiverAddressLabel.TabIndex = 36;
+            this.receiverAddressLabel.Text = "Receiver address:";
             // 
-            // textBox3
+            // timeoutLabel
             // 
-            this.textBox3.Location = new System.Drawing.Point(170, 312);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(264, 54);
-            this.textBox3.TabIndex = 39;
+            this.timeoutLabel.AutoSize = true;
+            this.timeoutLabel.Location = new System.Drawing.Point(19, 63);
+            this.timeoutLabel.Name = "timeoutLabel";
+            this.timeoutLabel.Size = new System.Drawing.Size(67, 13);
+            this.timeoutLabel.TabIndex = 32;
+            this.timeoutLabel.Text = "Timeout(ms):";
             // 
-            // label13
+            // timeSpacingLabel
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(22, 329);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(57, 13);
-            this.label13.TabIndex = 38;
-            this.label13.Text = "Command:";
+            this.timeSpacingLabel.AutoSize = true;
+            this.timeSpacingLabel.Location = new System.Drawing.Point(451, 156);
+            this.timeSpacingLabel.Name = "timeSpacingLabel";
+            this.timeSpacingLabel.Size = new System.Drawing.Size(181, 13);
+            this.timeSpacingLabel.TabIndex = 28;
+            this.timeSpacingLabel.Text = "Time spacing between characters[s]:";
             // 
-            // textBox2
+            // amountOfRetransLabel
             // 
-            this.textBox2.Location = new System.Drawing.Point(19, 346);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(119, 20);
-            this.textBox2.TabIndex = 37;
+            this.amountOfRetransLabel.AutoSize = true;
+            this.amountOfRetransLabel.Location = new System.Drawing.Point(448, 20);
+            this.amountOfRetransLabel.Name = "amountOfRetransLabel";
+            this.amountOfRetransLabel.Size = new System.Drawing.Size(132, 13);
+            this.amountOfRetransLabel.TabIndex = 26;
+            this.amountOfRetransLabel.Text = "Amount of retransmissions:";
             // 
-            // label12
+            // SlaveRadioButton
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(18, 283);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(93, 13);
-            this.label12.TabIndex = 36;
-            this.label12.Text = "Receiver address:";
+            this.SlaveRadioButton.AutoSize = true;
+            this.SlaveRadioButton.Location = new System.Drawing.Point(86, 19);
+            this.SlaveRadioButton.Name = "SlaveRadioButton";
+            this.SlaveRadioButton.Size = new System.Drawing.Size(52, 17);
+            this.SlaveRadioButton.TabIndex = 24;
+            this.SlaveRadioButton.TabStop = true;
+            this.SlaveRadioButton.Text = "Slave";
+            this.SlaveRadioButton.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // MasterRadioButton
             // 
-            this.textBox1.Location = new System.Drawing.Point(18, 302);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(120, 20);
-            this.textBox1.TabIndex = 35;
+            this.MasterRadioButton.AutoSize = true;
+            this.MasterRadioButton.Location = new System.Drawing.Point(6, 19);
+            this.MasterRadioButton.Name = "MasterRadioButton";
+            this.MasterRadioButton.Size = new System.Drawing.Size(57, 17);
+            this.MasterRadioButton.TabIndex = 23;
+            this.MasterRadioButton.TabStop = true;
+            this.MasterRadioButton.Text = "Master";
+            this.MasterRadioButton.UseVisualStyleBackColor = true;
+            this.MasterRadioButton.CheckedChanged += new System.EventHandler(this.MasterRadioButton_CheckedChanged);
             // 
-            // label11
+            // MasterSlaveGroupBox
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(16, 156);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(63, 13);
-            this.label11.TabIndex = 34;
-            this.label11.Text = "Speed[b/s]:";
+            this.MasterSlaveGroupBox.Controls.Add(this.SlaveRadioButton);
+            this.MasterSlaveGroupBox.Controls.Add(this.MasterRadioButton);
+            this.MasterSlaveGroupBox.Location = new System.Drawing.Point(18, 6);
+            this.MasterSlaveGroupBox.Name = "MasterSlaveGroupBox";
+            this.MasterSlaveGroupBox.Size = new System.Drawing.Size(138, 56);
+            this.MasterSlaveGroupBox.TabIndex = 46;
+            this.MasterSlaveGroupBox.TabStop = false;
             // 
-            // listBox4
+            // msLabel
             // 
-            this.listBox4.FormattingEnabled = true;
-            this.listBox4.Location = new System.Drawing.Point(16, 175);
-            this.listBox4.Name = "listBox4";
-            this.listBox4.ScrollAlwaysVisible = true;
-            this.listBox4.Size = new System.Drawing.Size(122, 95);
-            this.listBox4.TabIndex = 33;
+            this.msLabel.AutoSize = true;
+            this.msLabel.Location = new System.Drawing.Point(145, 94);
+            this.msLabel.Name = "msLabel";
+            this.msLabel.Size = new System.Drawing.Size(20, 13);
+            this.msLabel.TabIndex = 26;
+            this.msLabel.Text = "ms";
             // 
-            // label10
+            // transactionTimeoutNumericUpDown
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(19, 63);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(59, 13);
-            this.label10.TabIndex = 32;
-            this.label10.Text = "Timeout(s):";
+            this.transactionTimeoutNumericUpDown.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.transactionTimeoutNumericUpDown.Location = new System.Drawing.Point(18, 88);
+            this.transactionTimeoutNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.transactionTimeoutNumericUpDown.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.transactionTimeoutNumericUpDown.Name = "transactionTimeoutNumericUpDown";
+            this.transactionTimeoutNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.transactionTimeoutNumericUpDown.TabIndex = 25;
+            this.transactionTimeoutNumericUpDown.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             // 
-            // listBox3
+            // adressNumericUpDown
             // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.Location = new System.Drawing.Point(18, 78);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.ScrollAlwaysVisible = true;
-            this.listBox3.Size = new System.Drawing.Size(120, 56);
-            this.listBox3.TabIndex = 31;
+            this.adressNumericUpDown.Location = new System.Drawing.Point(18, 299);
+            this.adressNumericUpDown.Maximum = new decimal(new int[] {
+            247,
+            0,
+            0,
+            0});
+            this.adressNumericUpDown.Name = "adressNumericUpDown";
+            this.adressNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.adressNumericUpDown.TabIndex = 47;
             // 
-            // radioButton4
+            // commandNumericUpDown
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(82, 39);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(52, 17);
-            this.radioButton4.TabIndex = 30;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "ASCII";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.commandNumericUpDown.Location = new System.Drawing.Point(18, 346);
+            this.commandNumericUpDown.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.commandNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.commandNumericUpDown.Name = "commandNumericUpDown";
+            this.commandNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.commandNumericUpDown.TabIndex = 48;
+            this.commandNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // radioButton3
+            // IncomingRichTextBox
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(19, 39);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(48, 17);
-            this.radioButton3.TabIndex = 29;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "RTU";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.IncomingRichTextBox.Location = new System.Drawing.Point(166, 186);
+            this.IncomingRichTextBox.Name = "IncomingRichTextBox";
+            this.IncomingRichTextBox.Size = new System.Drawing.Size(268, 88);
+            this.IncomingRichTextBox.TabIndex = 49;
+            this.IncomingRichTextBox.Text = "";
             // 
-            // label9
+            // outcomingRichTextBox
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(451, 156);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(181, 13);
-            this.label9.TabIndex = 28;
-            this.label9.Text = "Time spacing between characters[s]:";
+            this.outcomingRichTextBox.Location = new System.Drawing.Point(166, 68);
+            this.outcomingRichTextBox.Name = "outcomingRichTextBox";
+            this.outcomingRichTextBox.Size = new System.Drawing.Size(268, 88);
+            this.outcomingRichTextBox.TabIndex = 50;
+            this.outcomingRichTextBox.Text = "";
             // 
-            // listBox2
+            // frameTimeoutNumericUpDown
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(451, 175);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.ScrollAlwaysVisible = true;
-            this.listBox2.Size = new System.Drawing.Size(120, 95);
-            this.listBox2.TabIndex = 27;
+            this.frameTimeoutNumericUpDown.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.frameTimeoutNumericUpDown.Location = new System.Drawing.Point(454, 186);
+            this.frameTimeoutNumericUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.frameTimeoutNumericUpDown.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.frameTimeoutNumericUpDown.Name = "frameTimeoutNumericUpDown";
+            this.frameTimeoutNumericUpDown.Size = new System.Drawing.Size(110, 20);
+            this.frameTimeoutNumericUpDown.TabIndex = 51;
+            this.frameTimeoutNumericUpDown.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
-            // label8
+            // label17
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(448, 20);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(132, 13);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "Amount of retransmissions:";
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(570, 193);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(20, 13);
+            this.label17.TabIndex = 52;
+            this.label17.Text = "ms";
             // 
-            // listBox1
+            // MessageTextBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(448, 39);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(120, 95);
-            this.listBox1.TabIndex = 25;
+            this.MessageTextBox.Location = new System.Drawing.Point(166, 321);
+            this.MessageTextBox.Name = "MessageTextBox";
+            this.MessageTextBox.Size = new System.Drawing.Size(268, 20);
+            this.MessageTextBox.TabIndex = 53;
             // 
-            // radioButton2
+            // amountOfRetransmNumUpDown
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(82, 14);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(52, 17);
-            this.radioButton2.TabIndex = 24;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Slave";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(19, 15);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(57, 17);
-            this.radioButton1.TabIndex = 23;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Master";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.amountOfRetransmNumUpDown.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.amountOfRetransmNumUpDown.Location = new System.Drawing.Point(451, 46);
+            this.amountOfRetransmNumUpDown.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.amountOfRetransmNumUpDown.Name = "amountOfRetransmNumUpDown";
+            this.amountOfRetransmNumUpDown.Size = new System.Drawing.Size(110, 20);
+            this.amountOfRetransmNumUpDown.TabIndex = 54;
             // 
             // MainForm
             // 
@@ -748,6 +803,13 @@
             this.panel4.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.MasterSlaveGroupBox.ResumeLayout(false);
+            this.MasterSlaveGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.transactionTimeoutNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.adressNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commandNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.frameTimeoutNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.amountOfRetransmNumUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -793,29 +855,28 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.RadioButton CTSRadio;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ListBox listBox4;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ListBox listBox3;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Label sentLabel;
+        private System.Windows.Forms.Label receivedLabel;
+        private System.Windows.Forms.Button sendModbusButton;
+        private System.Windows.Forms.Label messageLabel;
+        private System.Windows.Forms.Label commandLabel;
+        private System.Windows.Forms.Label receiverAddressLabel;
+        private System.Windows.Forms.Label timeoutLabel;
+        private System.Windows.Forms.Label timeSpacingLabel;
+        private System.Windows.Forms.Label amountOfRetransLabel;
+        private System.Windows.Forms.RadioButton SlaveRadioButton;
+        private System.Windows.Forms.RadioButton MasterRadioButton;
+        private System.Windows.Forms.GroupBox MasterSlaveGroupBox;
+        private System.Windows.Forms.Label msLabel;
+        private System.Windows.Forms.NumericUpDown transactionTimeoutNumericUpDown;
+        private System.Windows.Forms.NumericUpDown adressNumericUpDown;
+        private System.Windows.Forms.NumericUpDown commandNumericUpDown;
+        private System.Windows.Forms.RichTextBox outcomingRichTextBox;
+        private System.Windows.Forms.RichTextBox IncomingRichTextBox;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.NumericUpDown frameTimeoutNumericUpDown;
+        private System.Windows.Forms.NumericUpDown amountOfRetransmNumUpDown;
+        private System.Windows.Forms.TextBox MessageTextBox;
 
 
     }

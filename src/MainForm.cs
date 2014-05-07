@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using IwSK_RS232.PlainCommunication;
 using IwSK_RS232.Properties;
 using IwSK_RS232.Tools;
-using IwSK_RS232.Modbus;
 using System.IO.Ports;
 
 namespace IwSK_RS232
@@ -113,8 +112,8 @@ namespace IwSK_RS232
                 {
                     terminator = customlinetext.Text;
                 }
-                if (!modBusCheckBox.Checked)
-                {
+               
+                
                     com = new Communicator(name,
                     (int)baudRateCombo.SelectedValue,
                     parity,
@@ -129,7 +128,7 @@ namespace IwSK_RS232
                     com.CDCLineChanged += b => DCDRadio.Checked = b;
                     com.DTRLineChanged += b => DTRRadio.Checked = b;
                     com.RTSLineChanged += b => RTSRadio.Checked = b;
-                }
+                
                     
             }
             catch (Exception ex)
@@ -147,25 +146,10 @@ namespace IwSK_RS232
             else if(modBusCheckBox.Checked)
 
             {
-                Parity parity;
-                Enum.TryParse<Parity>(parityCombo.SelectedValue.ToString(), out parity);
-
-                StopBits stopbit;
-                Enum.TryParse<StopBits>(stopSignCombo.SelectedValue.ToString(), out stopbit);
-
-                Handshake hand;
-                Enum.TryParse<Handshake>(handShakeCombo.SelectedValue.ToString(), out hand);
-
-                NewLine line;
-                Enum.TryParse<NewLine>(newLineCombo.SelectedValue.ToString(), out line);
-                ModbusForm modbus=new ModbusForm(name, 
-                    (int)baudRateCombo.SelectedValue, 
-                    parity,
-                    (int)dataBitsCombo.SelectedValue, 
-                    stopbit,
-                    hand, 
-                    newLine[(int)line]);
-                modbus.ShowDialog();
+                ChangeControlsEnable(true);
+                //TODO przypisanie obsluia zdarzenia otrzymania wiadomosci dla modbusa
+                tabControl1.SelectTab(1);
+              
                 
 
             }
@@ -247,6 +231,37 @@ namespace IwSK_RS232
         private void PINGBtn_Click(object sender, EventArgs e)
         {
             com.SendPing();
+        }
+
+        private void MasterRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (MasterRadioButton.Checked)
+            {
+                timeoutLabel.Show();
+                transactionTimeoutNumericUpDown.Show();
+                commandLabel.Show();
+                commandNumericUpDown.Show();
+                amountOfRetransLabel.Show();
+                amountOfRetransmNumUpDown.Show();
+                MessageTextBox.Show();
+                sendModbusButton.Show();
+                msLabel.Show();
+            }
+            else
+                if (SlaveRadioButton.Checked)
+                {
+                    timeoutLabel.Hide();
+                    transactionTimeoutNumericUpDown.Hide();
+                    commandLabel.Hide();
+                    commandNumericUpDown.Hide();
+                    amountOfRetransLabel.Hide();
+                    amountOfRetransmNumUpDown.Hide();
+                    MessageTextBox.Hide();
+                    sendModbusButton.Hide();
+                    msLabel.Hide();
+
+
+                }
         }
     }
 }
