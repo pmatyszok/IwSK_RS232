@@ -220,8 +220,7 @@ namespace IwSK_RS232
                 parityCombo.SelectedItem = Parity.None.ToString();
                 stopSignCombo.SelectedItem = StopBits.Two.ToString();
                 newLineCombo.SelectedItem = "CRLF";
-                if (modbus != null)
-                    modbus.setMaster();
+                
 
 
                 
@@ -233,8 +232,7 @@ namespace IwSK_RS232
                 newLineCombo.Enabled = true;
                 parityCombo.Enabled = true;
                 stopSignCombo.Enabled = true;
-                if (modbus != null)
-                    modbus.setSlave();
+               
             }
         }
 
@@ -256,6 +254,10 @@ namespace IwSK_RS232
                 MessageTextBox.Show();
                 sendModbusButton.Show();
                 msLabel.Show();
+                receiverAddressLabel.Text = "Receiver address:";
+                adressNumericUpDown.Minimum = 0;
+                if (modbus != null)
+                    modbus.setMaster();
             }
             else
                 if (SlaveRadioButton.Checked)
@@ -269,9 +271,24 @@ namespace IwSK_RS232
                     MessageTextBox.Hide();
                     sendModbusButton.Hide();
                     msLabel.Hide();
+                    receiverAddressLabel.Text = "Station address:";
+                    adressNumericUpDown.Minimum = 1;
+                    if (modbus != null)
+                    {
+                        modbus.setSlave();
+                        modbus.setAddress((byte) adressNumericUpDown.Value);
+                    }
 
 
                 }
+        }
+
+        private void adressNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (modbus != null)
+            {
+                modbus.setAddress((byte)adressNumericUpDown.Value);
+            }
         }
     }
 }

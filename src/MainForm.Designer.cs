@@ -623,6 +623,7 @@
             this.adressNumericUpDown.Name = "adressNumericUpDown";
             this.adressNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.adressNumericUpDown.TabIndex = 47;
+            this.adressNumericUpDown.ValueChanged += new System.EventHandler(this.adressNumericUpDown_ValueChanged);
             // 
             // msLabel
             // 
