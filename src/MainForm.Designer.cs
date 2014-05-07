@@ -67,6 +67,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.CTSRadio = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+
             this.sentLabel = new System.Windows.Forms.Label();
             this.receivedLabel = new System.Windows.Forms.Label();
             this.sendModbusButton = new System.Windows.Forms.Button();
@@ -80,6 +81,7 @@
             this.MasterRadioButton = new System.Windows.Forms.RadioButton();
             this.MasterSlaveGroupBox = new System.Windows.Forms.GroupBox();
             this.msLabel = new System.Windows.Forms.Label();
+
             this.transactionTimeoutNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.adressNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.commandNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -494,6 +496,7 @@
             this.tabPage2.Controls.Add(this.IncomingRichTextBox);
             this.tabPage2.Controls.Add(this.commandNumericUpDown);
             this.tabPage2.Controls.Add(this.adressNumericUpDown);
+
             this.tabPage2.Controls.Add(this.msLabel);
             this.tabPage2.Controls.Add(this.MasterSlaveGroupBox);
             this.tabPage2.Controls.Add(this.transactionTimeoutNumericUpDown);
@@ -514,6 +517,7 @@
             this.tabPage2.Text = "MODBUS";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+
             // sentLabel
             // 
             this.sentLabel.AutoSize = true;
@@ -617,7 +621,9 @@
             this.MasterRadioButton.TabStop = true;
             this.MasterRadioButton.Text = "Master";
             this.MasterRadioButton.UseVisualStyleBackColor = true;
+
             this.MasterRadioButton.CheckedChanged += new System.EventHandler(this.MasterRadioButton_CheckedChanged);
+
             // 
             // MasterSlaveGroupBox
             // 
@@ -637,6 +643,7 @@
             this.msLabel.Size = new System.Drawing.Size(20, 13);
             this.msLabel.TabIndex = 26;
             this.msLabel.Text = "ms";
+
             // 
             // transactionTimeoutNumericUpDown
             // 
@@ -855,6 +862,7 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.RadioButton CTSRadio;
         private System.Windows.Forms.TabPage tabPage2;
+
         private System.Windows.Forms.Label sentLabel;
         private System.Windows.Forms.Label receivedLabel;
         private System.Windows.Forms.Button sendModbusButton;
@@ -868,6 +876,7 @@
         private System.Windows.Forms.RadioButton MasterRadioButton;
         private System.Windows.Forms.GroupBox MasterSlaveGroupBox;
         private System.Windows.Forms.Label msLabel;
+
         private System.Windows.Forms.NumericUpDown transactionTimeoutNumericUpDown;
         private System.Windows.Forms.NumericUpDown adressNumericUpDown;
         private System.Windows.Forms.NumericUpDown commandNumericUpDown;
