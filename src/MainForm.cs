@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using IwSK_RS232.Modbus;
 using IwSK_RS232.PlainCommunication;
 using IwSK_RS232.Properties;
 using IwSK_RS232.Tools;
+
 using System.IO.Ports;
 
 namespace IwSK_RS232
@@ -11,7 +13,7 @@ namespace IwSK_RS232
     public partial class MainForm : Form
     {
         #region fields
-
+        private ModbusClass modbus = null;
         private Communicator com = null;
         private readonly int[] BaundRate = { 75, 150, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200 };
         private readonly int[] DataBit = { 5, 6, 7, 8, 9 };
@@ -147,8 +149,13 @@ namespace IwSK_RS232
 
             {
                 ChangeControlsEnable(true);
-                //TODO przypisanie obsluia zdarzenia otrzymania wiadomosci dla modbusa
+                modbus = new ModbusClass();
+                com.MessageOccured += modbus.addFrame;
                 tabControl1.SelectTab(1);
+                if (MasterRadioButton.Checked)
+                    modbus.setMaster();
+                else
+                    modbus.setSlave();
               
                 
 
@@ -213,7 +220,8 @@ namespace IwSK_RS232
                 parityCombo.SelectedItem = Parity.None.ToString();
                 stopSignCombo.SelectedItem = StopBits.Two.ToString();
                 newLineCombo.SelectedItem = "CRLF";
-
+                if (modbus != null)
+                    modbus.setMaster();
 
 
                 
@@ -225,6 +233,8 @@ namespace IwSK_RS232
                 newLineCombo.Enabled = true;
                 parityCombo.Enabled = true;
                 stopSignCombo.Enabled = true;
+                if (modbus != null)
+                    modbus.setSlave();
             }
         }
 
