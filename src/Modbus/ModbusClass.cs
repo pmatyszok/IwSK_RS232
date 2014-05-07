@@ -69,29 +69,28 @@ namespace IwSK_RS232.Modbus
 
         private string byteToString(byte data)
         {
-            string result = " ";
-            char tmp;
+            string result;
+            char first, second;
             int temp = data & 0x0F;
             if (temp >= 10 && temp <= 15)
             {
-                tmp = Convert.ToChar(temp + 55);
+                first = Convert.ToChar(temp + 55);
             }
             if (temp >= 0 && temp <= 9)
             {
-                tmp = Convert.ToChar(temp + 48);
+                first = Convert.ToChar(temp + 48);
             }
-
-
             temp = data & 0xF0;
             temp = temp >> 4;
             if (temp >= 10 && temp <= 15)
             {
-                tmp = Convert.ToChar(temp + 55);
+                second = Convert.ToChar(temp + 55);
             }
             if (temp >= 0 && temp <= 9)
             {
-                tmp = Convert.ToChar(temp + 48);
+                second = Convert.ToChar(temp + 48);
             }
+            
 
             return result;
         }
