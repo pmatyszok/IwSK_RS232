@@ -8,16 +8,45 @@ namespace IwSK_RS232.Modbus
     
     class ModbusClass
     {
+        private string recievedText;
         private byte stationAddress;
         private string frameToSend;
         private ConcurrentQueue<string> receivedFrames = new ConcurrentQueue<string>();
         private bool isMaster;
-        public void addFrame(string frame)
+        public void recievedFrame(string frame)
         {
             receivedFrames.Enqueue(frame);
-            isMaster = true;
-            byte lrc=generateLRC(frame.Substring(1,frame.Length-5));
-            lrc=lrc;
+            if (this.checkLRC(frame))
+            {
+                if (!isMaster)
+                {
+                    byte recievedAdress=ASCIIcodeToByte(frame.Substring(1,2));
+                    byte command = ASCIIcodeToByte(frame.Substring(3, 2));
+                    if(stationAddress==recievedAdress)
+                    {
+                        
+                        switch (command)
+                        {
+                            case 0x01:{
+                                recievedText = ASCIIcodeStringToString(frame.Substring(5, frame.Length - 9));
+                                break;
+                            }
+                            case 0x02:
+                                {
+                                    //TODO
+                                    break;
+                                }
+
+                        }
+                    }else
+                        if (recievedAdress == 0 && command == 1)
+                        {
+                            recievedText = ASCIIcodeStringToString(frame.Substring(5, frame.Length - 9));
+                            
+                        }
+                }
+            }
+
         }
         public void setMaster()
         {
@@ -41,7 +70,7 @@ namespace IwSK_RS232.Modbus
             return (byte)(~sum+(byte)1);
         }
 
-        private byte stringToByte(string data)
+        private byte ASCIIcodeToByte(string data)
         {
             byte result = 0;
             int i, temp = 0;
@@ -67,22 +96,12 @@ namespace IwSK_RS232.Modbus
                 return result;
         }
 
-        private string byteToString(byte data)
+        private string byteToASCIIcode(byte data)
         {
-            string result = " ";
-            char tmp;
-            int temp = data & 0x0F;
-            if (temp >= 10 && temp <= 15)
-            {
-                tmp = Convert.ToChar(temp + 55);
-            }
-            if (temp >= 0 && temp <= 9)
-            {
-                tmp = Convert.ToChar(temp + 48);
-            }
+            string result = "";
+            char tmp=' ';
 
-
-            temp = data & 0xF0;
+            int temp = data & 0xF0;
             temp = temp >> 4;
             if (temp >= 10 && temp <= 15)
             {
@@ -92,10 +111,46 @@ namespace IwSK_RS232.Modbus
             {
                 tmp = Convert.ToChar(temp + 48);
             }
+            result += tmp.ToString();
+            
+            
+            temp = data & 0x0F;
+            if (temp >= 10 && temp <= 15)
+            {
+                tmp = Convert.ToChar(temp + 55);
+            }
+            if (temp >= 0 && temp <= 9)
+            {
+                tmp = Convert.ToChar(temp + 48);
+            }
+            result += tmp.ToString();
+
+
+            
 
             return result;
         }
-
+        private string ASCIIcodeStringToString(string data)
+        {
+            string tmp = "";
+            for(int i=0;i<data.Length-1;i=i+2)
+            {
+                tmp += (char)ASCIIcodeToByte(data.Substring(i, 2));
+            }
+            return tmp;
+        }
+        private bool checkLRC(string frame)
+        {
+            //TODO  funkcja sprawdzajaca poprawnosc przeslania ramki
+            if (frame==null || frame[0] != ':')
+                return false;
+            string srcForLRC = frame.Substring(1, frame.Length - 5);
+            byte receivedLRC=ASCIIcodeToByte(frame.Substring(frame.Length-4,2));
+            if(receivedLRC==generateLRC(srcForLRC))
+                return true;
+            else
+                return false;
+        }
  
 
     }

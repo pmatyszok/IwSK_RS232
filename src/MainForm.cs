@@ -150,7 +150,7 @@ namespace IwSK_RS232
             {
                 ChangeControlsEnable(true);
                 modbus = new ModbusClass();
-                com.MessageOccured += modbus.addFrame;
+                com.MessageOccured += modbus.recievedFrame;
                 tabControl1.SelectTab(1);
                 if (MasterRadioButton.Checked)
                     modbus.setMaster();
