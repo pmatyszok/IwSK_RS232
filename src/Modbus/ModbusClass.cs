@@ -98,11 +98,13 @@ namespace IwSK_RS232.Modbus
 
         private string byteToASCIIcode(byte data)
         {
+
             string result = "";
             char tmp=' ';
 
             int temp = data & 0xF0;
             temp = temp >> 4;
+
             if (temp >= 10 && temp <= 15)
             {
                 tmp = Convert.ToChar(temp + 55);
@@ -111,10 +113,12 @@ namespace IwSK_RS232.Modbus
             {
                 tmp = Convert.ToChar(temp + 48);
             }
+
             result += tmp.ToString();
             
             
             temp = data & 0x0F;
+
             if (temp >= 10 && temp <= 15)
             {
                 tmp = Convert.ToChar(temp + 55);
@@ -123,11 +127,8 @@ namespace IwSK_RS232.Modbus
             {
                 tmp = Convert.ToChar(temp + 48);
             }
+
             result += tmp.ToString();
-
-
-            
-
             return result;
         }
         private string ASCIIcodeStringToString(string data)
