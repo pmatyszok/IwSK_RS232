@@ -92,14 +92,14 @@ namespace IwSK_RS232.PlainCommunication
 
         public void SendPing()
         {
-            string ping = "ping";
+            const string ping = "ping";
             pingMilliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             port.WriteLine(ping);
         }
 
         public void SendPong()
         {
-            string pong = "pong";
+            const string pong = "pong";
             MessageOccured(pong);
             port.WriteLine(pong);
         }
@@ -144,7 +144,9 @@ namespace IwSK_RS232.PlainCommunication
 
         public static List<string> GetPorts()
         {
-            return SerialPort.GetPortNames().ToList();
+            var ports = SerialPort.GetPortNames().ToList();
+            ports.Sort();
+            return ports;
         }
     }
 }

@@ -46,12 +46,7 @@ namespace IwSK_RS232.Modbus
 
         private void masterSlaveComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            if ("Master" == masterSlaveComboBox.SelectedItem.ToString())
-            {
-                masterPanel.Visible = true;
-            }
-            else
-                masterPanel.Visible = false;
+            masterPanel.Visible = ("Master" == masterSlaveComboBox.SelectedItem.ToString());
         }
 
         private void masterSlaveComboBox_SelectedIndexChanged(object sender, EventArgs e)

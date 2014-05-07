@@ -14,10 +14,10 @@ namespace IwSK_RS232
         #region fields
 
         private Communicator com = null;
-        private int[] BaundRate = { 75, 150, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200 };
-        private int[] DataBit = { 5, 6, 7, 8, 9 };
+        private readonly int[] BaundRate = { 75, 150, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200 };
+        private readonly int[] DataBit = { 5, 6, 7, 8, 9 };
         enum NewLine { CR = 0, CRLF = 1, LF = 2, None = 3 };
-        private string[] newLine = { "\n", "\r\n", "\r", "" };
+        private readonly string[] newLine = { "\n", "\r\n", "\r", "" };
         private bool customLine;
         #endregion //fields
 
@@ -53,11 +53,15 @@ namespace IwSK_RS232
         {
             comPortsCombo.Items.Clear();
             comPortsCombo.SelectedIndex = -1;
-            comPortsCombo.Items.AddRange(Communicator.GetPorts().ToArray());
 
+            foreach (var port in Communicator.GetPorts().Where(port => port.StartsWith("COM")))
+            {
+                comPortsCombo.Items.Add(port);
+            }
+            
             if (comPortsCombo.Items.Count == 1)
             {
-                comPortsCombo.SelectedIndex = comPortsCombo.FindString("COM"); // automatically selects the first item which contains "COM"
+                comPortsCombo.SelectedIndex = 0;
             }
         }
 
@@ -68,7 +72,7 @@ namespace IwSK_RS232
 
         private void ATBtn_Click(object sender, EventArgs e)
         {
-            string at = "AT";
+            const string at = "AT";
             Log.Append(at);
             com.SendString(at);
         }
