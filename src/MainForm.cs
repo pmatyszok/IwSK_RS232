@@ -7,6 +7,7 @@ using IwSK_RS232.Properties;
 using IwSK_RS232.Tools;
 
 using System.IO.Ports;
+using System.IO;
 
 namespace IwSK_RS232
 {
@@ -40,6 +41,8 @@ namespace IwSK_RS232
             customlinetext.MaxLength = 2;
             customlinetext.Enabled = false;
             hextext.Enabled = false;
+            FileButton.Enabled = false;
+            SendFile.Enabled = false;
             foreach (var panel in this.Controls.OfType<Panel>())
             {
                 foreach (var item in panel.Controls.OfType<RadioButton>())
@@ -351,6 +354,8 @@ namespace IwSK_RS232
                 com.HexTrans = true;
                 ATBtn.Enabled = false;
                 PINGBtn.Enabled = false;
+                FileButton.Enabled = true;
+                SendFile.Enabled = true;
             }
             else
             {
@@ -361,6 +366,8 @@ namespace IwSK_RS232
                 com.HexTrans = false;
                 ATBtn.Enabled = true;
                 PINGBtn.Enabled = true;
+                FileButton.Enabled = false;
+                SendFile.Enabled = false;
             }
         }
 
@@ -378,5 +385,42 @@ namespace IwSK_RS232
                 hextext.SelectionStart = hextext.Text.Length;
             }
         }
+
+        private void FileButton_Click(object sender, EventArgs e)
+        {
+           DialogResult result= hexFile.ShowDialog();
+           if (result == DialogResult.OK) 
+           {
+               filebox.Text = hexFile.FileName;
+           }
+        }
+
+        private void SendFile_Click(object sender, EventArgs e)
+        {
+            if (!filebox.Text.Equals(""))
+            {
+                try
+                {
+                    byte[] toSend = File.ReadAllBytes(filebox.Text);               
+                    string send = Convert.ToBase64String(toSend);
+                    com.SendString(send);
+                    string toLog = "";
+                    foreach (byte b in toSend)
+                    {
+                        toLog += b.ToString("X");
+                    }
+                    Log.Append(toLog);
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK);                   
+                }
+            }
+            else
+            {
+                MessageBox.Show("Wybierz plik ciulu","Brak pliku", MessageBoxButtons.OK);
+            }
+        }
+       
     }
 }

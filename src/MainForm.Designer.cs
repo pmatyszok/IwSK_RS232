@@ -30,6 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.hextext = new System.Windows.Forms.TextBox();
+            this.hexSelect = new System.Windows.Forms.CheckBox();
             this.PINGBtn = new System.Windows.Forms.Button();
             this.modBusCheckBox = new System.Windows.Forms.CheckBox();
             this.customlinetext = new System.Windows.Forms.TextBox();
@@ -89,8 +91,10 @@
             this.timeoutLabel = new System.Windows.Forms.Label();
             this.timeSpacingLabel = new System.Windows.Forms.Label();
             this.amountOfRetransLabel = new System.Windows.Forms.Label();
-            this.hexSelect = new System.Windows.Forms.CheckBox();
-            this.hextext = new System.Windows.Forms.TextBox();
+            this.hexFile = new System.Windows.Forms.OpenFileDialog();
+            this.FileButton = new System.Windows.Forms.Button();
+            this.filebox = new System.Windows.Forms.TextBox();
+            this.SendFile = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -120,6 +124,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.SendFile);
+            this.tabPage1.Controls.Add(this.filebox);
+            this.tabPage1.Controls.Add(this.FileButton);
             this.tabPage1.Controls.Add(this.hextext);
             this.tabPage1.Controls.Add(this.hexSelect);
             this.tabPage1.Controls.Add(this.PINGBtn);
@@ -159,6 +166,25 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "RS232";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // hextext
+            // 
+            this.hextext.Location = new System.Drawing.Point(67, 337);
+            this.hextext.Name = "hextext";
+            this.hextext.Size = new System.Drawing.Size(175, 20);
+            this.hextext.TabIndex = 66;
+            this.hextext.TextChanged += new System.EventHandler(this.hextext_TextChanged);
+            // 
+            // hexSelect
+            // 
+            this.hexSelect.AutoSize = true;
+            this.hexSelect.Location = new System.Drawing.Point(18, 340);
+            this.hexSelect.Name = "hexSelect";
+            this.hexSelect.Size = new System.Drawing.Size(43, 17);
+            this.hexSelect.TabIndex = 65;
+            this.hexSelect.Text = "hex";
+            this.hexSelect.UseVisualStyleBackColor = true;
+            this.hexSelect.CheckedChanged += new System.EventHandler(this.hexSelect_CheckedChanged);
             // 
             // PINGBtn
             // 
@@ -780,24 +806,36 @@
             this.amountOfRetransLabel.TabIndex = 26;
             this.amountOfRetransLabel.Text = "Amount of retransmissions:";
             // 
-            // hexSelect
+            // hexFile
             // 
-            this.hexSelect.AutoSize = true;
-            this.hexSelect.Location = new System.Drawing.Point(18, 340);
-            this.hexSelect.Name = "hexSelect";
-            this.hexSelect.Size = new System.Drawing.Size(43, 17);
-            this.hexSelect.TabIndex = 65;
-            this.hexSelect.Text = "hex";
-            this.hexSelect.UseVisualStyleBackColor = true;
-            this.hexSelect.CheckedChanged += new System.EventHandler(this.hexSelect_CheckedChanged);
+            this.hexFile.FileName = "FileHex";
             // 
-            // hextext
+            // FileButton
             // 
-            this.hextext.Location = new System.Drawing.Point(67, 337);
-            this.hextext.Name = "hextext";
-            this.hextext.Size = new System.Drawing.Size(175, 20);
-            this.hextext.TabIndex = 66;
-            this.hextext.TextChanged += new System.EventHandler(this.hextext_TextChanged);
+            this.FileButton.Location = new System.Drawing.Point(248, 362);
+            this.FileButton.Name = "FileButton";
+            this.FileButton.Size = new System.Drawing.Size(75, 23);
+            this.FileButton.TabIndex = 67;
+            this.FileButton.Text = "Wybierz plik";
+            this.FileButton.UseVisualStyleBackColor = true;
+            this.FileButton.Click += new System.EventHandler(this.FileButton_Click);
+            // 
+            // filebox
+            // 
+            this.filebox.Location = new System.Drawing.Point(67, 364);
+            this.filebox.Name = "filebox";
+            this.filebox.Size = new System.Drawing.Size(175, 20);
+            this.filebox.TabIndex = 68;
+            // 
+            // SendFile
+            // 
+            this.SendFile.Location = new System.Drawing.Point(330, 362);
+            this.SendFile.Name = "SendFile";
+            this.SendFile.Size = new System.Drawing.Size(75, 23);
+            this.SendFile.TabIndex = 69;
+            this.SendFile.Text = "Send File";
+            this.SendFile.UseVisualStyleBackColor = true;
+            this.SendFile.Click += new System.EventHandler(this.SendFile_Click);
             // 
             // MainForm
             // 
@@ -905,6 +943,10 @@
         private System.Windows.Forms.TextBox MessageTextBox;
         private System.Windows.Forms.TextBox hextext;
         private System.Windows.Forms.CheckBox hexSelect;
+        private System.Windows.Forms.OpenFileDialog hexFile;
+        private System.Windows.Forms.Button FileButton;
+        private System.Windows.Forms.TextBox filebox;
+        private System.Windows.Forms.Button SendFile;
 
 
     }
