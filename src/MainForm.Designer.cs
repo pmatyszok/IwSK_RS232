@@ -89,6 +89,8 @@
             this.timeoutLabel = new System.Windows.Forms.Label();
             this.timeSpacingLabel = new System.Windows.Forms.Label();
             this.amountOfRetransLabel = new System.Windows.Forms.Label();
+            this.hexSelect = new System.Windows.Forms.CheckBox();
+            this.hextext = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -118,6 +120,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.hextext);
+            this.tabPage1.Controls.Add(this.hexSelect);
             this.tabPage1.Controls.Add(this.PINGBtn);
             this.tabPage1.Controls.Add(this.modBusCheckBox);
             this.tabPage1.Controls.Add(this.customlinetext);
@@ -776,6 +780,25 @@
             this.amountOfRetransLabel.TabIndex = 26;
             this.amountOfRetransLabel.Text = "Amount of retransmissions:";
             // 
+            // hexSelect
+            // 
+            this.hexSelect.AutoSize = true;
+            this.hexSelect.Location = new System.Drawing.Point(18, 340);
+            this.hexSelect.Name = "hexSelect";
+            this.hexSelect.Size = new System.Drawing.Size(43, 17);
+            this.hexSelect.TabIndex = 65;
+            this.hexSelect.Text = "hex";
+            this.hexSelect.UseVisualStyleBackColor = true;
+            this.hexSelect.CheckedChanged += new System.EventHandler(this.hexSelect_CheckedChanged);
+            // 
+            // hextext
+            // 
+            this.hextext.Location = new System.Drawing.Point(67, 337);
+            this.hextext.Name = "hextext";
+            this.hextext.Size = new System.Drawing.Size(175, 20);
+            this.hextext.TabIndex = 66;
+            this.hextext.TextChanged += new System.EventHandler(this.hextext_TextChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -880,6 +903,8 @@
         private System.Windows.Forms.NumericUpDown frameTimeoutNumericUpDown;
         private System.Windows.Forms.NumericUpDown amountOfRetransmNumUpDown;
         private System.Windows.Forms.TextBox MessageTextBox;
+        private System.Windows.Forms.TextBox hextext;
+        private System.Windows.Forms.CheckBox hexSelect;
 
 
     }

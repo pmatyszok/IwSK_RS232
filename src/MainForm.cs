@@ -17,9 +17,9 @@ namespace IwSK_RS232
         private Communicator com = null;
         private readonly int[] BaundRate = { 75, 150, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200 };
         private readonly int[] DataBit = { 5, 6, 7, 8, 9 };
-        enum NewLine { CR = 0, CRLF = 1, LF = 2, None = 3 };
-        private readonly string[] newLine = { "\n", "\r\n", "\r", "" };
-        private bool customLine;
+        enum NewLine { CR = 0, CRLF = 1, LF = 2};
+        private readonly string[] newLine = { "\n", "\r\n", "\r" };
+        private bool customLine,hexTransmission;
         #endregion //fields
 
         #region methods
@@ -39,6 +39,7 @@ namespace IwSK_RS232
             dataBitsCombo.DataSource = DataBit;
             customlinetext.MaxLength = 2;
             customlinetext.Enabled = false;
+            hextext.Enabled = false;
             foreach (var panel in this.Controls.OfType<Panel>())
             {
                 foreach (var item in panel.Controls.OfType<RadioButton>())
@@ -172,6 +173,7 @@ namespace IwSK_RS232
             PINGBtn.Enabled = state;
             sendtext.Enabled = state;
             sendbutton.Enabled = state;
+            hexSelect.Enabled = state;
         }
 
         #endregion //methods
@@ -199,10 +201,55 @@ namespace IwSK_RS232
 
         private void sendbutton_Click_1(object sender, EventArgs e)
         {
-            string toSend = sendtext.Text;
-            Log.Append(toSend);
-            com.SendString(toSend);
-            sendtext.Clear();
+            string toSend;
+            if (!hexTransmission)
+            {
+                toSend = sendtext.Text;
+                Log.Append(toSend);
+                com.SendString(toSend);
+                sendtext.Clear();
+            }
+            else
+            {
+                toSend = hextext.Text;
+                Log.Append(toSend);
+                byte[] b;
+                string tmp, tmp1;
+                char[] val = toSend.ToCharArray();
+                int value;
+                if (toSend.Length % 2 == 0)
+                {
+                    int l = toSend.Length;
+                    b = new byte[l / 2];
+                    for (int i = 0; i < toSend.Length; i += 2)
+                    {
+                        tmp1 = val[i + 1].ToString();
+                        tmp = val[i].ToString();
+                        tmp += tmp1;
+                        value = Convert.ToInt32(tmp, 16);
+                        b[i / 2] = (byte)value;
+                    }
+                }
+                else
+                {
+                    int l = toSend.Length;
+                    b = new byte[(l / 2) + 1];
+                    tmp = val[0].ToString();
+                    value = Convert.ToInt32(tmp, 16);
+                    b[0] = (byte)value;
+                    for (int i = 1; i < toSend.Length; i += 2)
+                    {
+                        tmp1 = val[i + 1].ToString();
+                        tmp = val[i].ToString();
+                        tmp += tmp1;
+                        value = Convert.ToInt32(tmp, 16);
+                        b[(i / 2) + 1] = (byte)value;
+                    }
+                }
+                string send = Convert.ToBase64String(b);
+                com.SendString(send);
+                hextext.Clear();
+            }
         }
 
         private void modBusCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -288,6 +335,47 @@ namespace IwSK_RS232
             if (modbus != null)
             {
                 modbus.setAddress((byte)adressNumericUpDown.Value);
+            }
+        }
+
+        private void hexSelect_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!hexTransmission)
+            {
+                sendtext.Enabled = false;
+                hextext.Enabled = true;
+                com.setSerialPortData(8);
+                dataBitsCombo.SelectedIndex = 3;
+                dataBitsCombo.Enabled = false;
+                hexTransmission = true;
+                com.HexTrans = true;
+                ATBtn.Enabled = false;
+                PINGBtn.Enabled = false;
+            }
+            else
+            {
+                sendtext.Enabled = true;
+                hextext.Enabled = false;
+                hexTransmission = false;
+                dataBitsCombo.Enabled = true;
+                com.HexTrans = false;
+                ATBtn.Enabled = true;
+                PINGBtn.Enabled = true;
+            }
+        }
+
+        private void hextext_TextChanged(object sender, EventArgs e)
+        {
+            string item = hextext.Text;
+            string toParse = "";
+            if (item.Length != 0)
+                toParse = item[item.Length - 1].ToString();
+            int n = 0;
+            if (!int.TryParse(toParse, System.Globalization.NumberStyles.HexNumber, System.Globalization.NumberFormatInfo.CurrentInfo, out n) &&
+              item != String.Empty)
+            {
+                hextext.Text = item.Remove(item.Length - 1, 1);
+                hextext.SelectionStart = hextext.Text.Length;
             }
         }
     }

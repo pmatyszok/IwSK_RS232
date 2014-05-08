@@ -20,6 +20,8 @@ namespace IwSK_RS232.PlainCommunication
             DTR =   0x20
         }
 
+        public bool HexTrans { get; set; }
+
         private bool RTSState;
         private bool DTRState;
 
@@ -124,7 +126,22 @@ namespace IwSK_RS232.PlainCommunication
                             MessageOccured("Ping OK time = " + pingMilliseconds + "ms");
                         }
                         else
-                            MessageOccured(cmd);
+                        {
+                            if (!HexTrans)
+                            {
+                                MessageOccured(cmd);
+                            }
+                            else
+                            {
+                                byte[] decByte3 = Convert.FromBase64String(cmd);
+                                string msg = "";
+                                foreach (byte b in decByte3)
+                                {
+                                    msg += b.ToString("X");
+                                }
+                                MessageOccured(msg);
+                            }
+                        }
                     }
                 }
             }
@@ -134,6 +151,11 @@ namespace IwSK_RS232.PlainCommunication
         {
             SerialPort sp = (SerialPort) sender;
             parser.Append(sp.ReadExisting());
+        }
+
+        public void setSerialPortData(int data)
+        {
+            port.DataBits = data;
         }
 
         public void Dispose()
