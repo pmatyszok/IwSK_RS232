@@ -154,7 +154,9 @@ namespace IwSK_RS232
             {
                 ChangeControlsEnable(true);
                 modbus = new ModbusClass();
+                modbus.FrameRecieved += this.addRecievedFrameToModbusLog;
                 com.MessageOccured += modbus.recievedFrame;
+                modbus.TextRecieved+= this.addRecievedTextToTextRecievedBox;
                 tabControl1.SelectTab(1);
                 if (MasterRadioButton.Checked)
                     modbus.setMaster();
@@ -301,7 +303,7 @@ namespace IwSK_RS232
                 commandNumericUpDown.Show();
                 amountOfRetransLabel.Show();
                 amountOfRetransmNumUpDown.Show();
-                MessageTextBox.Show();
+                messageModbusTextBox.Show();
                 sendModbusButton.Show();
                 msLabel.Show();
                 receiverAddressLabel.Text = "Receiver address:";
@@ -318,7 +320,7 @@ namespace IwSK_RS232
                     commandNumericUpDown.Hide();
                     amountOfRetransLabel.Hide();
                     amountOfRetransmNumUpDown.Hide();
-                    MessageTextBox.Hide();
+                    messageModbusTextBox.Hide();
                     sendModbusButton.Hide();
                     msLabel.Hide();
                     receiverAddressLabel.Text = "Station address:";
@@ -420,6 +422,33 @@ namespace IwSK_RS232
             {
                 MessageBox.Show("Wybierz plik ciulu","Brak pliku", MessageBoxButtons.OK);
             }
+        }
+
+        private void sendModbusButton_Click(object sender, EventArgs e)
+        {
+            if (modbus != null)
+            {
+                string toSend = modbus.makeFrameToSend((byte)adressNumericUpDown.Value, (byte) commandNumericUpDown.Value, messageModbusTextBox.Text);
+                com.SendString(toSend);
+                outcomingRichTextBox.AppendText("0x");
+                for (int i = 0; i < toSend.Length; i++)
+                    outcomingRichTextBox.AppendText(modbus.byteToASCIIcode((byte)toSend[i]));
+                outcomingRichTextBox.AppendText(modbus.byteToASCIIcode((byte)'\r'));
+                outcomingRichTextBox.AppendText(modbus.byteToASCIIcode((byte)'\n')+"\n");
+            }
+        }
+        private void addRecievedFrameToModbusLog(string frame)
+        {
+            IncomingRichTextBox.AppendText("0x");
+            for (int i = 0; i < frame.Length; i++)
+                IncomingRichTextBox.AppendText(modbus.byteToASCIIcode((byte)frame[i]));
+            IncomingRichTextBox.AppendText("\n");
+           
+
+        }
+        private void addRecievedTextToTextRecievedBox(string text)
+        {
+            ReceivedTextRichBox.Text += text + '\n';
         }
        
     }

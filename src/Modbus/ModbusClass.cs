@@ -16,6 +16,7 @@ namespace IwSK_RS232.Modbus
         public void recievedFrame(string frame)
         {
             receivedFrames.Enqueue(frame);
+            FrameRecieved(frame);
             if (this.checkLRC(frame))
             {
                 if (!isMaster)
@@ -29,6 +30,7 @@ namespace IwSK_RS232.Modbus
                         {
                             case 0x01:{
                                 recievedText = ASCIIcodeStringToString(frame.Substring(5, frame.Length - 9));
+                                TextRecieved(recievedText);
                                 break;
                             }
                             case 0x02:
@@ -42,6 +44,7 @@ namespace IwSK_RS232.Modbus
                         if (recievedAdress == 0 && command == 1)
                         {
                             recievedText = ASCIIcodeStringToString(frame.Substring(5, frame.Length - 9));
+                            TextRecieved(recievedText);
                             
                         }
                 }
@@ -96,7 +99,7 @@ namespace IwSK_RS232.Modbus
                 return result;
         }
 
-        private string byteToASCIIcode(byte data)
+        public string byteToASCIIcode(byte data)
         {
 
             string result = "";
@@ -152,7 +155,18 @@ namespace IwSK_RS232.Modbus
             else
                 return false;
         }
- 
+        public string makeFrameToSend(byte adres, byte command, string args)
+        {
+            string frame = ":";
+            frame+=byteToASCIIcode(adres)+byteToASCIIcode(command);
+            for (int i = 0; i < args.Length; i++)
+                frame += byteToASCIIcode((byte)args[i]);
+            byte lrcSum = generateLRC(frame.Substring(1));
+            frame += byteToASCIIcode(lrcSum);
+            return frame;
+        }
+        public Action<string> FrameRecieved;
+        public Action<string> TextRecieved;
 
     }
 }

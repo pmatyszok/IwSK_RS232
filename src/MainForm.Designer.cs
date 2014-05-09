@@ -30,6 +30,9 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.SendFile = new System.Windows.Forms.Button();
+            this.filebox = new System.Windows.Forms.TextBox();
+            this.FileButton = new System.Windows.Forms.Button();
             this.hextext = new System.Windows.Forms.TextBox();
             this.hexSelect = new System.Windows.Forms.CheckBox();
             this.PINGBtn = new System.Windows.Forms.Button();
@@ -70,7 +73,7 @@
             this.CTSRadio = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.amountOfRetransmNumUpDown = new System.Windows.Forms.NumericUpDown();
-            this.MessageTextBox = new System.Windows.Forms.TextBox();
+            this.messageModbusTextBox = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.frameTimeoutNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.outcomingRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -92,9 +95,8 @@
             this.timeSpacingLabel = new System.Windows.Forms.Label();
             this.amountOfRetransLabel = new System.Windows.Forms.Label();
             this.hexFile = new System.Windows.Forms.OpenFileDialog();
-            this.FileButton = new System.Windows.Forms.Button();
-            this.filebox = new System.Windows.Forms.TextBox();
-            this.SendFile = new System.Windows.Forms.Button();
+            this.ReceivedTextRichBox = new System.Windows.Forms.RichTextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -166,6 +168,33 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "RS232";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // SendFile
+            // 
+            this.SendFile.Location = new System.Drawing.Point(330, 362);
+            this.SendFile.Name = "SendFile";
+            this.SendFile.Size = new System.Drawing.Size(75, 23);
+            this.SendFile.TabIndex = 69;
+            this.SendFile.Text = "Send File";
+            this.SendFile.UseVisualStyleBackColor = true;
+            this.SendFile.Click += new System.EventHandler(this.SendFile_Click);
+            // 
+            // filebox
+            // 
+            this.filebox.Location = new System.Drawing.Point(67, 364);
+            this.filebox.Name = "filebox";
+            this.filebox.Size = new System.Drawing.Size(175, 20);
+            this.filebox.TabIndex = 68;
+            // 
+            // FileButton
+            // 
+            this.FileButton.Location = new System.Drawing.Point(248, 362);
+            this.FileButton.Name = "FileButton";
+            this.FileButton.Size = new System.Drawing.Size(75, 23);
+            this.FileButton.TabIndex = 67;
+            this.FileButton.Text = "Wybierz plik";
+            this.FileButton.UseVisualStyleBackColor = true;
+            this.FileButton.Click += new System.EventHandler(this.FileButton_Click);
             // 
             // hextext
             // 
@@ -516,8 +545,10 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.ReceivedTextRichBox);
             this.tabPage2.Controls.Add(this.amountOfRetransmNumUpDown);
-            this.tabPage2.Controls.Add(this.MessageTextBox);
+            this.tabPage2.Controls.Add(this.messageModbusTextBox);
             this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.frameTimeoutNumericUpDown);
             this.tabPage2.Controls.Add(this.outcomingRichTextBox);
@@ -561,12 +592,12 @@
             this.amountOfRetransmNumUpDown.Size = new System.Drawing.Size(110, 20);
             this.amountOfRetransmNumUpDown.TabIndex = 54;
             // 
-            // MessageTextBox
+            // messageModbusTextBox
             // 
-            this.MessageTextBox.Location = new System.Drawing.Point(166, 321);
-            this.MessageTextBox.Name = "MessageTextBox";
-            this.MessageTextBox.Size = new System.Drawing.Size(268, 20);
-            this.MessageTextBox.TabIndex = 53;
+            this.messageModbusTextBox.Location = new System.Drawing.Point(166, 321);
+            this.messageModbusTextBox.Name = "messageModbusTextBox";
+            this.messageModbusTextBox.Size = new System.Drawing.Size(268, 20);
+            this.messageModbusTextBox.TabIndex = 53;
             // 
             // label17
             // 
@@ -608,15 +639,15 @@
             // 
             this.outcomingRichTextBox.Location = new System.Drawing.Point(166, 68);
             this.outcomingRichTextBox.Name = "outcomingRichTextBox";
-            this.outcomingRichTextBox.Size = new System.Drawing.Size(268, 88);
+            this.outcomingRichTextBox.Size = new System.Drawing.Size(268, 59);
             this.outcomingRichTextBox.TabIndex = 50;
             this.outcomingRichTextBox.Text = "";
             // 
             // IncomingRichTextBox
             // 
-            this.IncomingRichTextBox.Location = new System.Drawing.Point(166, 186);
+            this.IncomingRichTextBox.Location = new System.Drawing.Point(166, 153);
             this.IncomingRichTextBox.Name = "IncomingRichTextBox";
-            this.IncomingRichTextBox.Size = new System.Drawing.Size(268, 88);
+            this.IncomingRichTextBox.Size = new System.Drawing.Size(268, 53);
             this.IncomingRichTextBox.TabIndex = 49;
             this.IncomingRichTextBox.Text = "";
             // 
@@ -736,7 +767,7 @@
             // receivedLabel
             // 
             this.receivedLabel.AutoSize = true;
-            this.receivedLabel.Location = new System.Drawing.Point(167, 159);
+            this.receivedLabel.Location = new System.Drawing.Point(167, 130);
             this.receivedLabel.Name = "receivedLabel";
             this.receivedLabel.Size = new System.Drawing.Size(56, 13);
             this.receivedLabel.TabIndex = 44;
@@ -751,6 +782,7 @@
             this.sendModbusButton.TabIndex = 41;
             this.sendModbusButton.Text = "Send";
             this.sendModbusButton.UseVisualStyleBackColor = true;
+            this.sendModbusButton.Click += new System.EventHandler(this.sendModbusButton_Click);
             // 
             // messageLabel
             // 
@@ -810,32 +842,22 @@
             // 
             this.hexFile.FileName = "FileHex";
             // 
-            // FileButton
+            // ReceivedTextRichBox
             // 
-            this.FileButton.Location = new System.Drawing.Point(248, 362);
-            this.FileButton.Name = "FileButton";
-            this.FileButton.Size = new System.Drawing.Size(75, 23);
-            this.FileButton.TabIndex = 67;
-            this.FileButton.Text = "Wybierz plik";
-            this.FileButton.UseVisualStyleBackColor = true;
-            this.FileButton.Click += new System.EventHandler(this.FileButton_Click);
+            this.ReceivedTextRichBox.Location = new System.Drawing.Point(166, 235);
+            this.ReceivedTextRichBox.Name = "ReceivedTextRichBox";
+            this.ReceivedTextRichBox.Size = new System.Drawing.Size(268, 53);
+            this.ReceivedTextRichBox.TabIndex = 55;
+            this.ReceivedTextRichBox.Text = "";
             // 
-            // filebox
+            // label8
             // 
-            this.filebox.Location = new System.Drawing.Point(67, 364);
-            this.filebox.Name = "filebox";
-            this.filebox.Size = new System.Drawing.Size(175, 20);
-            this.filebox.TabIndex = 68;
-            // 
-            // SendFile
-            // 
-            this.SendFile.Location = new System.Drawing.Point(330, 362);
-            this.SendFile.Name = "SendFile";
-            this.SendFile.Size = new System.Drawing.Size(75, 23);
-            this.SendFile.TabIndex = 69;
-            this.SendFile.Text = "Send File";
-            this.SendFile.UseVisualStyleBackColor = true;
-            this.SendFile.Click += new System.EventHandler(this.SendFile_Click);
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(170, 219);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(80, 13);
+            this.label8.TabIndex = 56;
+            this.label8.Text = "Received Text:";
             // 
             // MainForm
             // 
@@ -940,13 +962,15 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.NumericUpDown frameTimeoutNumericUpDown;
         private System.Windows.Forms.NumericUpDown amountOfRetransmNumUpDown;
-        private System.Windows.Forms.TextBox MessageTextBox;
+        private System.Windows.Forms.TextBox messageModbusTextBox;
         private System.Windows.Forms.TextBox hextext;
         private System.Windows.Forms.CheckBox hexSelect;
         private System.Windows.Forms.OpenFileDialog hexFile;
         private System.Windows.Forms.Button FileButton;
         private System.Windows.Forms.TextBox filebox;
         private System.Windows.Forms.Button SendFile;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.RichTextBox ReceivedTextRichBox;
 
 
     }
