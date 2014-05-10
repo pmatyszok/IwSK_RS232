@@ -72,15 +72,15 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.CTSRadio = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.ReceivedTextRichBox = new System.Windows.Forms.RichTextBox();
             this.amountOfRetransmNumUpDown = new System.Windows.Forms.NumericUpDown();
             this.messageModbusTextBox = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
             this.frameTimeoutNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.outcomingRichTextBox = new System.Windows.Forms.RichTextBox();
             this.IncomingRichTextBox = new System.Windows.Forms.RichTextBox();
             this.commandNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.adressNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.msLabel = new System.Windows.Forms.Label();
             this.MasterSlaveGroupBox = new System.Windows.Forms.GroupBox();
             this.SlaveRadioButton = new System.Windows.Forms.RadioButton();
             this.MasterRadioButton = new System.Windows.Forms.RadioButton();
@@ -95,8 +95,6 @@
             this.timeSpacingLabel = new System.Windows.Forms.Label();
             this.amountOfRetransLabel = new System.Windows.Forms.Label();
             this.hexFile = new System.Windows.Forms.OpenFileDialog();
-            this.ReceivedTextRichBox = new System.Windows.Forms.RichTextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -549,13 +547,11 @@
             this.tabPage2.Controls.Add(this.ReceivedTextRichBox);
             this.tabPage2.Controls.Add(this.amountOfRetransmNumUpDown);
             this.tabPage2.Controls.Add(this.messageModbusTextBox);
-            this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.frameTimeoutNumericUpDown);
             this.tabPage2.Controls.Add(this.outcomingRichTextBox);
             this.tabPage2.Controls.Add(this.IncomingRichTextBox);
             this.tabPage2.Controls.Add(this.commandNumericUpDown);
             this.tabPage2.Controls.Add(this.adressNumericUpDown);
-            this.tabPage2.Controls.Add(this.msLabel);
             this.tabPage2.Controls.Add(this.MasterSlaveGroupBox);
             this.tabPage2.Controls.Add(this.transactionTimeoutNumericUpDown);
             this.tabPage2.Controls.Add(this.sentLabel);
@@ -574,6 +570,23 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "MODBUS";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(170, 219);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(80, 13);
+            this.label8.TabIndex = 56;
+            this.label8.Text = "Received Text:";
+            // 
+            // ReceivedTextRichBox
+            // 
+            this.ReceivedTextRichBox.Location = new System.Drawing.Point(166, 235);
+            this.ReceivedTextRichBox.Name = "ReceivedTextRichBox";
+            this.ReceivedTextRichBox.Size = new System.Drawing.Size(268, 53);
+            this.ReceivedTextRichBox.TabIndex = 55;
+            this.ReceivedTextRichBox.Text = "";
             // 
             // amountOfRetransmNumUpDown
             // 
@@ -598,15 +611,6 @@
             this.messageModbusTextBox.Name = "messageModbusTextBox";
             this.messageModbusTextBox.Size = new System.Drawing.Size(268, 20);
             this.messageModbusTextBox.TabIndex = 53;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(570, 193);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(20, 13);
-            this.label17.TabIndex = 52;
-            this.label17.Text = "ms";
             // 
             // frameTimeoutNumericUpDown
             // 
@@ -685,15 +689,6 @@
             this.adressNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.adressNumericUpDown.TabIndex = 47;
             this.adressNumericUpDown.ValueChanged += new System.EventHandler(this.adressNumericUpDown_ValueChanged);
-            // 
-            // msLabel
-            // 
-            this.msLabel.AutoSize = true;
-            this.msLabel.Location = new System.Drawing.Point(145, 94);
-            this.msLabel.Name = "msLabel";
-            this.msLabel.Size = new System.Drawing.Size(20, 13);
-            this.msLabel.TabIndex = 26;
-            this.msLabel.Text = "ms";
             // 
             // MasterSlaveGroupBox
             // 
@@ -818,16 +813,16 @@
             this.timeoutLabel.Name = "timeoutLabel";
             this.timeoutLabel.Size = new System.Drawing.Size(67, 13);
             this.timeoutLabel.TabIndex = 32;
-            this.timeoutLabel.Text = "Timeout(ms):";
+            this.timeoutLabel.Text = "Timeout[ms]:";
             // 
             // timeSpacingLabel
             // 
             this.timeSpacingLabel.AutoSize = true;
             this.timeSpacingLabel.Location = new System.Drawing.Point(451, 156);
             this.timeSpacingLabel.Name = "timeSpacingLabel";
-            this.timeSpacingLabel.Size = new System.Drawing.Size(181, 13);
+            this.timeSpacingLabel.Size = new System.Drawing.Size(189, 13);
             this.timeSpacingLabel.TabIndex = 28;
-            this.timeSpacingLabel.Text = "Time spacing between characters[s]:";
+            this.timeSpacingLabel.Text = "Time spacing between characters[ms]:";
             // 
             // amountOfRetransLabel
             // 
@@ -841,23 +836,6 @@
             // hexFile
             // 
             this.hexFile.FileName = "FileHex";
-            // 
-            // ReceivedTextRichBox
-            // 
-            this.ReceivedTextRichBox.Location = new System.Drawing.Point(166, 235);
-            this.ReceivedTextRichBox.Name = "ReceivedTextRichBox";
-            this.ReceivedTextRichBox.Size = new System.Drawing.Size(268, 53);
-            this.ReceivedTextRichBox.TabIndex = 55;
-            this.ReceivedTextRichBox.Text = "";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(170, 219);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 13);
-            this.label8.TabIndex = 56;
-            this.label8.Text = "Received Text:";
             // 
             // MainForm
             // 
@@ -952,14 +930,12 @@
         private System.Windows.Forms.RadioButton SlaveRadioButton;
         private System.Windows.Forms.RadioButton MasterRadioButton;
         private System.Windows.Forms.GroupBox MasterSlaveGroupBox;
-        private System.Windows.Forms.Label msLabel;
 
         private System.Windows.Forms.NumericUpDown transactionTimeoutNumericUpDown;
         private System.Windows.Forms.NumericUpDown adressNumericUpDown;
         private System.Windows.Forms.NumericUpDown commandNumericUpDown;
         private System.Windows.Forms.RichTextBox outcomingRichTextBox;
         private System.Windows.Forms.RichTextBox IncomingRichTextBox;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.NumericUpDown frameTimeoutNumericUpDown;
         private System.Windows.Forms.NumericUpDown amountOfRetransmNumUpDown;
         private System.Windows.Forms.TextBox messageModbusTextBox;

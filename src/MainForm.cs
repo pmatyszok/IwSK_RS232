@@ -305,7 +305,6 @@ namespace IwSK_RS232
                 amountOfRetransmNumUpDown.Show();
                 messageModbusTextBox.Show();
                 sendModbusButton.Show();
-                msLabel.Show();
                 receiverAddressLabel.Text = "Receiver address:";
                 adressNumericUpDown.Minimum = 0;
                 if (modbus != null)
@@ -322,7 +321,6 @@ namespace IwSK_RS232
                     amountOfRetransmNumUpDown.Hide();
                     messageModbusTextBox.Hide();
                     sendModbusButton.Hide();
-                    msLabel.Hide();
                     receiverAddressLabel.Text = "Station address:";
                     adressNumericUpDown.Minimum = 1;
                     if (modbus != null)
