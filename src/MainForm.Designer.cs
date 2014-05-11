@@ -590,11 +590,6 @@
             // 
             // amountOfRetransmNumUpDown
             // 
-            this.amountOfRetransmNumUpDown.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
             this.amountOfRetransmNumUpDown.Location = new System.Drawing.Point(451, 46);
             this.amountOfRetransmNumUpDown.Maximum = new decimal(new int[] {
             5,
