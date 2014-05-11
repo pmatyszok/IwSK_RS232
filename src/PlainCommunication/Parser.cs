@@ -4,25 +4,26 @@ using System.Collections.Generic;
 
 namespace IwSK_RS232.PlainCommunication
 {
-    class Parser
+    internal class Parser
     {
-        public List<char> buffer = new List<char>();
-        private ConcurrentQueue<string> cmds = new ConcurrentQueue<string>();
-        private object locker = new object();
-        private string lineEnd;
-        private int length;
+        private readonly ConcurrentQueue<string> _cmds = new ConcurrentQueue<string>();
+        private readonly int _length;
+        private readonly string _lineEnd;
+        private readonly object _locker = new object();
+        public Action CommandRecognized;
+        public List<char> Buffer = new List<char>();
 
         public Parser(string lineEnd)
         {
-            this.lineEnd = lineEnd;
-            this.length = lineEnd.Length;
+            this._lineEnd = lineEnd;
+            _length = lineEnd.Length;
         }
 
         public void Append(char c)
         {
-            lock (locker)
+            lock (_locker)
             {
-                buffer.Add(c);
+                Buffer.Add(c);
                 if (EndOfFileFound() && CommandRecognized != null)
                     CommandRecognized();
             }
@@ -30,9 +31,9 @@ namespace IwSK_RS232.PlainCommunication
 
         public void Append(char[] c)
         {
-            lock (locker)
+            lock (_locker)
             {
-                buffer.AddRange(c);
+                Buffer.AddRange(c);
                 if (EndOfFileFound() && CommandRecognized != null)
                     CommandRecognized();
             }
@@ -40,14 +41,15 @@ namespace IwSK_RS232.PlainCommunication
 
         public void Append(string s)
         {
-            lock (locker)
+            lock (_locker)
             {
                 Append(s.ToCharArray());
             }
         }
+
         /// <summary>
-        /// Scans through bytes collection and searches for end-of-frame.
-        /// TODO: make this independant of one end frame (should support /r, /n and /r/n)
+        ///     Scans through bytes collection and searches for end-of-frame.
+        ///     TODO: make this independant of one end frame (should support /r, /n and /r/n)
         /// </summary>
         private bool EndOfFileFound()
         {
@@ -55,40 +57,39 @@ namespace IwSK_RS232.PlainCommunication
             int end;
             int beg = end = 0;
 
-            lock (locker)
-            {    
-                for (int i = 0; i < buffer.Count; i++)
+            lock (_locker)
+            {
+                for (int i = 0; i < Buffer.Count; i++)
                 {
-                    if (this.length == 2 && buffer[i] == this.lineEnd[0] && i != buffer.Count - 1 && i != 0 && buffer[i + 1] == this.lineEnd[1])
+                    if (_length == 2 && Buffer[i] == _lineEnd[0] && i != Buffer.Count - 1 && i != 0 &&
+                        Buffer[i + 1] == _lineEnd[1])
                     {
                         end = i + 1;
-                        cmds.Enqueue(new string(buffer.GetRange(beg, end - beg + 1).ToArray()));
+                        _cmds.Enqueue(new string(Buffer.GetRange(beg, end - beg + 1).ToArray()));
                         beg = end + 1;
                         ret = true;
                     }
-                    else if (this.length == 1 && buffer[i] == this.lineEnd[0])
+                    else if (_length == 1 && Buffer[i] == _lineEnd[0])
                     {
                         end = i;
-                        cmds.Enqueue(new string(buffer.GetRange(beg, end - beg).ToArray()));
+                        _cmds.Enqueue(new string(Buffer.GetRange(beg, end - beg).ToArray()));
                         beg = end;
                         ret = true;
                     }
                 }
-                buffer.Clear();
+                Buffer.Clear();
             }
             return ret;
         }
 
         public bool HasNextCommand()
         {
-            return !cmds.IsEmpty;
+            return !_cmds.IsEmpty;
         }
 
         public bool GetNextCommand(out string msg)
         {
-            return cmds.TryDequeue(out msg);
+            return _cmds.TryDequeue(out msg);
         }
-
-        public Action CommandRecognized;
     }
 }
