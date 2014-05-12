@@ -19,7 +19,7 @@ namespace IwSK_RS232
         private readonly int[] _dataBit = {5, 6, 7, 8, 9};
 
         private readonly string[] _newLine = {"\n", "\r\n", "\r"};
-        private Communicator _com;
+        private Communicator port;
         private bool _customLine;
         private bool _hexTransmission;
         private ModbusClass _modbus;
@@ -33,19 +33,17 @@ namespace IwSK_RS232
 
         #endregion //fields
 
-        #region methods
-
         public MainForm()
         {
             InitializeComponent();
             ChangeControlsEnable(false);
             Log.Console = userConsole;
 
-            parityCombo.DataSource = Enum.GetNames(typeof (Parity));
-            stopSignCombo.DataSource = Enum.GetNames(typeof (StopBits));
+            parityCombo.DataSource = Enum.GetNames(typeof(Parity));
+            stopSignCombo.DataSource = Enum.GetNames(typeof(StopBits));
             stopSignCombo.SelectedIndex = 1;
-            handShakeCombo.DataSource = Enum.GetNames(typeof (Handshake));
-            newLineCombo.DataSource = Enum.GetNames(typeof (NewLine));
+            handShakeCombo.DataSource = Enum.GetNames(typeof(Handshake));
+            newLineCombo.DataSource = Enum.GetNames(typeof(NewLine));
             baudRateCombo.DataSource = _baundRate;
             dataBitsCombo.DataSource = _dataBit;
             customlinetext.MaxLength = 2;
@@ -63,6 +61,10 @@ namespace IwSK_RS232
 
             RefreshPorts();
         }
+
+        #region methods
+
+       
 
         private void RefreshPorts()
         {
@@ -89,7 +91,7 @@ namespace IwSK_RS232
         {
             const string at = "AT";
             Log.Append(at);
-            _com.SendString(at);
+            port.SendString(at);
         }
 
         private void selectPortButton_Click(object sender, EventArgs e)
@@ -98,10 +100,10 @@ namespace IwSK_RS232
                 return;
 
             var name = (string) comPortsCombo.SelectedItem;
-            if (_com != null)
+            if (port != null)
             {
-                _com.Dispose();
-                _com = null;
+                port.Dispose();
+                port = null;
             }
 
             try
@@ -129,20 +131,13 @@ namespace IwSK_RS232
                 }
 
 
-                _com = new Communicator(name,
+                port = new Communicator(name,
                     (int) baudRateCombo.SelectedValue,
                     parity,
                     (int) dataBitsCombo.SelectedValue,
                     stopbit,
                     hand,
                     terminator);
-
-                _com.RingIndicatorChanged += () => RIRadio.Checked = !RIRadio.Checked;
-                _com.DSRLineChanged += b => DSRRadio.Checked = b;
-                _com.CTSLineChanged += b => CTSRadio.Checked = b;
-                _com.CDCLineChanged += b => DCDRadio.Checked = b;
-                _com.DTRLineChanged += b => DTRRadio.Checked = b;
-                _com.RTSLineChanged += b => RTSRadio.Checked = b;
             }
             catch (Exception ex)
             {
@@ -151,10 +146,10 @@ namespace IwSK_RS232
                 MessageBox.Show(Resources.errorDuringSerialPortCreation__ + Environment.NewLine + ex.Message);
             }
 
-            if (_com != null && !modBusCheckBox.Checked)
+            if (port != null && !modBusCheckBox.Checked)
             {
                 ChangeControlsEnable(true);
-                _com.MessageOccured += Log.Append;
+                port.MessageOccured += Log.Append;
             }
             else if (modBusCheckBox.Checked)
 
@@ -162,7 +157,7 @@ namespace IwSK_RS232
                 ChangeControlsEnable(true);
                 _modbus = new ModbusClass();
                 _modbus.FrameRecieved += AddRecievedFrameToModbusLog;
-                if (_com != null) _com.MessageOccured += _modbus.RecievedFrame;
+                if (port != null) port.MessageOccured += _modbus.RecievedFrame;
                 _modbus.TextRecieved += AddRecievedTextToTextRecievedBox;
                 tabControl1.SelectTab(1);
                 if (MasterRadioButton.Checked)
@@ -185,12 +180,10 @@ namespace IwSK_RS232
             hexSelect.Enabled = state;
         }
 
-        #endregion //methods
-
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_com != null)
-                _com.Dispose();
+            if (port != null)
+                port.Dispose();
         }
 
         private void customnewline_CheckedChanged_1(object sender, EventArgs e)
@@ -215,7 +208,7 @@ namespace IwSK_RS232
             {
                 toSend = sendtext.Text;
                 Log.Append(toSend);
-                _com.SendString(toSend);
+                port.SendString(toSend);
                 sendtext.Clear();
             }
             else
@@ -226,37 +219,37 @@ namespace IwSK_RS232
                 string tmp, tmp1;
                 char[] val = toSend.ToCharArray();
                 int value;
-                if (toSend.Length%2 == 0)
+                if (toSend.Length % 2 == 0)
                 {
                     int l = toSend.Length;
-                    b = new byte[l/2];
+                    b = new byte[l / 2];
                     for (int i = 0; i < toSend.Length; i += 2)
                     {
                         tmp1 = val[i + 1].ToString();
                         tmp = val[i].ToString();
                         tmp += tmp1;
                         value = Convert.ToInt32(tmp, 16);
-                        b[i/2] = (byte) value;
+                        b[i / 2] = (byte)value;
                     }
                 }
                 else
                 {
                     int l = toSend.Length;
-                    b = new byte[(l/2) + 1];
+                    b = new byte[(l / 2) + 1];
                     tmp = val[0].ToString();
                     value = Convert.ToInt32(tmp, 16);
-                    b[0] = (byte) value;
+                    b[0] = (byte)value;
                     for (int i = 1; i < toSend.Length; i += 2)
                     {
                         tmp1 = val[i + 1].ToString();
                         tmp = val[i].ToString();
                         tmp += tmp1;
                         value = Convert.ToInt32(tmp, 16);
-                        b[(i/2) + 1] = (byte) value;
+                        b[(i / 2) + 1] = (byte)value;
                     }
                 }
                 string send = Convert.ToBase64String(b);
-                _com.SendString(send);
+                port.SendString(send);
                 hextext.Clear();
             }
         }
@@ -289,7 +282,7 @@ namespace IwSK_RS232
 
         private void PINGBtn_Click(object sender, EventArgs e)
         {
-            _com.SendPing();
+            port.SendPing();
         }
 
         private void MasterRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -324,7 +317,7 @@ namespace IwSK_RS232
                 if (_modbus != null)
                 {
                     _modbus.SetSlave();
-                    _modbus.SetAddress((byte) adressNumericUpDown.Value);
+                    _modbus.SetAddress((byte)adressNumericUpDown.Value);
                 }
             }
         }
@@ -333,7 +326,7 @@ namespace IwSK_RS232
         {
             if (_modbus != null)
             {
-                _modbus.SetAddress((byte) adressNumericUpDown.Value);
+                _modbus.SetAddress((byte)adressNumericUpDown.Value);
             }
         }
 
@@ -343,11 +336,11 @@ namespace IwSK_RS232
             {
                 sendtext.Enabled = false;
                 hextext.Enabled = true;
-                _com.SetSerialPortData(8);
+                port.SetSerialPortData(8);
                 dataBitsCombo.SelectedIndex = 3;
                 dataBitsCombo.Enabled = false;
                 _hexTransmission = true;
-                _com.HexTrans = true;
+                port.HexTrans = true;
                 ATBtn.Enabled = false;
                 PINGBtn.Enabled = false;
                 FileButton.Enabled = true;
@@ -359,7 +352,7 @@ namespace IwSK_RS232
                 hextext.Enabled = false;
                 _hexTransmission = false;
                 dataBitsCombo.Enabled = true;
-                _com.HexTrans = false;
+                port.HexTrans = false;
                 ATBtn.Enabled = true;
                 PINGBtn.Enabled = true;
                 FileButton.Enabled = false;
@@ -399,7 +392,7 @@ namespace IwSK_RS232
                 {
                     byte[] toSend = File.ReadAllBytes(filebox.Text);
                     string send = Convert.ToBase64String(toSend);
-                    _com.SendString(send);
+                    port.SendString(send);
                     string toLog = "";
                     foreach (byte b in toSend)
                     {
@@ -414,7 +407,7 @@ namespace IwSK_RS232
             }
             else
             {
-                MessageBox.Show("Wybierz plik ciulu", "Brak pliku", MessageBoxButtons.OK);
+                MessageBox.Show("Wybierz plik ", "Brak pliku", MessageBoxButtons.OK);
             }
         }
 
@@ -422,14 +415,14 @@ namespace IwSK_RS232
         {
             if (_modbus != null)
             {
-                string toSend = _modbus.MakeFrameToSend((byte) adressNumericUpDown.Value,
-                    (byte) commandNumericUpDown.Value, messageModbusTextBox.Text);
-                _com.SendString(toSend);
+                string toSend = _modbus.MakeFrameToSend((byte)adressNumericUpDown.Value,
+                    (byte)commandNumericUpDown.Value, messageModbusTextBox.Text);
+                port.SendString(toSend);
                 outcomingRichTextBox.AppendText("0x");
                 for (int i = 0; i < toSend.Length; i++)
-                    outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte) toSend[i]));
-                outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte) '\r'));
-                outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte) '\n') + "\n");
+                    outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)toSend[i]));
+                outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)'\r'));
+                outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)'\n') + "\n");
             }
         }
 
@@ -437,7 +430,7 @@ namespace IwSK_RS232
         {
             IncomingRichTextBox.AppendText("0x");
             for (int i = 0; i < frame.Length; i++)
-                IncomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte) frame[i]));
+                IncomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)frame[i]));
             IncomingRichTextBox.AppendText("\n");
         }
 
@@ -445,5 +438,8 @@ namespace IwSK_RS232
         {
             ReceivedTextRichBox.Text += text + '\n';
         }
+
+        #endregion //methods
+       
     }
 }

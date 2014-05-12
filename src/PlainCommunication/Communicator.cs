@@ -18,104 +18,73 @@ namespace IwSK_RS232.PlainCommunication
             DTR = 0x20
         }
 
-        private readonly Parser _parser;
-        private readonly SerialPort _port;
-
-        //just a convienient hack to avoid multiple checking of action presence
-        public Action<bool> CDCLineChanged = obj => { };
-        public Action<bool> CTSLineChanged = obj => { };
-        public Action<bool> DSRLineChanged = obj => { };
-        public Action<bool> DTRLineChanged = obj => { };
-        public Action<bool> RTSLineChanged = obj => { };
-
-        private bool DTRState;
-        private bool RTSState;
+        private readonly Parser parser;
+        private readonly SerialPort port;
 
         public Action<string> MessageOccured;
-        public Action RingIndicatorChanged = () => { };
-        private long _pingMilliseconds;
+        private long pingMilliseconds;
 
         public Communicator(string which, int baudRate, Parity parity, int dataBits, StopBits stopBits, Handshake hand,
             string newline)
         {
-            _port = new SerialPort(which, baudRate, parity, dataBits, stopBits) {Handshake = hand, NewLine = newline};
-            _port.Open();
-            _port.DataReceived += port_DataReceived;
-            _port.PinChanged += port_PinChanged;
+            port = new SerialPort(which, baudRate, parity, dataBits, stopBits) {Handshake = hand, NewLine = newline};
+            port.Open();
+            port.DataReceived += port_DataReceived;
 
-            _parser = new Parser(newline);
 
-            _parser.CommandRecognized += CommandRecognized;
+            parser = new Parser(newline);
+
+            parser.CommandRecognized += CommandRecognized;
         }
 
         public bool HexTrans { get; set; }
 
         public void Dispose()
         {
-            if (_port.IsOpen)
-                _port.Dispose();
+            if (port.IsOpen)
+                port.Dispose();
         }
 
 
-        private void port_PinChanged(object sender, SerialPinChangedEventArgs e)
-        {
-            switch (e.EventType)
-            {
-                case SerialPinChange.Break:
-                    //dunno what to do
-                    break;
-                case SerialPinChange.CDChanged:
-                    CDCLineChanged(_port.CDHolding);
-                    break;
-                case SerialPinChange.CtsChanged:
-                    CTSLineChanged(_port.CtsHolding);
-                    break;
-                case SerialPinChange.DsrChanged:
-                    DSRLineChanged(_port.DsrHolding);
-                    break;
-                case SerialPinChange.Ring:
-                    RingIndicatorChanged();
-                    break;
-            }
-
-            if (RTSState != _port.RtsEnable)
-            {
-                RTSLineChanged(_port.RtsEnable);
-                RTSState = _port.RtsEnable;
-            }
-
-            if (DTRState != _port.DtrEnable)
-            {
-                DTRLineChanged(_port.DtrEnable);
-                DTRState = _port.DtrEnable;
-            }
-        }
+     
 
         public void SendString(string msg)
         {
-            _port.WriteLine(msg);
+            try
+            {
+                port.WriteLine(msg);
+            }
+            catch (Exception)
+            {
+            }
         }
+
 
         public void SendPing()
         {
-            const string ping = "ping";
-            _pingMilliseconds = DateTime.Now.Ticks/TimeSpan.TicksPerMillisecond;
-            _port.WriteLine(ping);
+            try
+            {
+                const string ping = "ping";
+                pingMilliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+                port.WriteLine(ping);
+            }
+            catch (Exception)
+            { }
         }
 
         public void SendPong()
         {
             const string pong = "pong";
             MessageOccured(pong);
-            _port.WriteLine(pong);
+            port.WriteLine(pong);
         }
 
         private void CommandRecognized()
         {
-            while (_parser.HasNextCommand())
+            while (parser.HasNextCommand())
             {
                 string cmd;
-                _parser.GetNextCommand(out cmd);
+                parser.GetNextCommand(out cmd);
                 if (!string.IsNullOrEmpty(cmd))
                 {
                     if (MessageOccured != null)
@@ -126,8 +95,8 @@ namespace IwSK_RS232.PlainCommunication
                         }
                         else if (cmd.Equals("pong"))
                         {
-                            _pingMilliseconds = DateTime.Now.Ticks/TimeSpan.TicksPerMillisecond - _pingMilliseconds;
-                            MessageOccured("Ping OK time = " + _pingMilliseconds + "ms");
+                            pingMilliseconds = DateTime.Now.Ticks/TimeSpan.TicksPerMillisecond - pingMilliseconds;
+                            MessageOccured("Ping OK time = " + pingMilliseconds + "ms");
                         }
                         else
                         {
@@ -154,12 +123,12 @@ namespace IwSK_RS232.PlainCommunication
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             var sp = (SerialPort) sender;
-            _parser.Append(sp.ReadExisting());
+            parser.Append(sp.ReadExisting());
         }
 
         public void SetSerialPortData(int data)
         {
-            _port.DataBits = data;
+            port.DataBits = data;
         }
 
         public static List<string> GetPorts()

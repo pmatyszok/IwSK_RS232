@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
             this.SendFile = new System.Windows.Forms.Button();
             this.filebox = new System.Windows.Forms.TextBox();
             this.FileButton = new System.Windows.Forms.Button();
@@ -42,12 +43,6 @@
             this.sendtext = new System.Windows.Forms.TextBox();
             this.sendbutton = new System.Windows.Forms.Button();
             this.newLineCombo = new System.Windows.Forms.ComboBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.DTRRadio = new System.Windows.Forms.RadioButton();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.RTSRadio = new System.Windows.Forms.RadioButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.DCDRadio = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
             this.handShakeCombo = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -65,12 +60,6 @@
             this.selectPortButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comPortsCombo = new System.Windows.Forms.ComboBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.RIRadio = new System.Windows.Forms.RadioButton();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.DSRRadio = new System.Windows.Forms.RadioButton();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.CTSRadio = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.ReceivedTextRichBox = new System.Windows.Forms.RichTextBox();
@@ -97,12 +86,6 @@
             this.hexFile = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.amountOfRetransmNumUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameTimeoutNumericUpDown)).BeginInit();
@@ -124,6 +107,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.SendFile);
             this.tabPage1.Controls.Add(this.filebox);
             this.tabPage1.Controls.Add(this.FileButton);
@@ -136,9 +120,6 @@
             this.tabPage1.Controls.Add(this.sendtext);
             this.tabPage1.Controls.Add(this.sendbutton);
             this.tabPage1.Controls.Add(this.newLineCombo);
-            this.tabPage1.Controls.Add(this.panel6);
-            this.tabPage1.Controls.Add(this.panel5);
-            this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.handShakeCombo);
             this.tabPage1.Controls.Add(this.label6);
@@ -156,9 +137,6 @@
             this.tabPage1.Controls.Add(this.selectPortButton);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.comPortsCombo);
-            this.tabPage1.Controls.Add(this.panel2);
-            this.tabPage1.Controls.Add(this.panel3);
-            this.tabPage1.Controls.Add(this.panel4);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -167,9 +145,18 @@
             this.tabPage1.Text = "RS232";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(423, 204);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(87, 13);
+            this.label9.TabIndex = 70;
+            this.label9.Text = "Custom NewLine";
+            // 
             // SendFile
             // 
-            this.SendFile.Location = new System.Drawing.Point(330, 362);
+            this.SendFile.Location = new System.Drawing.Point(194, 272);
             this.SendFile.Name = "SendFile";
             this.SendFile.Size = new System.Drawing.Size(75, 23);
             this.SendFile.TabIndex = 69;
@@ -179,24 +166,24 @@
             // 
             // filebox
             // 
-            this.filebox.Location = new System.Drawing.Point(67, 364);
+            this.filebox.Location = new System.Drawing.Point(18, 275);
             this.filebox.Name = "filebox";
             this.filebox.Size = new System.Drawing.Size(175, 20);
             this.filebox.TabIndex = 68;
             // 
             // FileButton
             // 
-            this.FileButton.Location = new System.Drawing.Point(248, 362);
+            this.FileButton.Location = new System.Drawing.Point(18, 301);
             this.FileButton.Name = "FileButton";
-            this.FileButton.Size = new System.Drawing.Size(75, 23);
+            this.FileButton.Size = new System.Drawing.Size(89, 23);
             this.FileButton.TabIndex = 67;
-            this.FileButton.Text = "Wybierz plik";
+            this.FileButton.Text = "Wybierz plik...";
             this.FileButton.UseVisualStyleBackColor = true;
             this.FileButton.Click += new System.EventHandler(this.FileButton_Click);
             // 
             // hextext
             // 
-            this.hextext.Location = new System.Drawing.Point(67, 337);
+            this.hextext.Location = new System.Drawing.Point(18, 248);
             this.hextext.Name = "hextext";
             this.hextext.Size = new System.Drawing.Size(175, 20);
             this.hextext.TabIndex = 66;
@@ -205,7 +192,7 @@
             // hexSelect
             // 
             this.hexSelect.AutoSize = true;
-            this.hexSelect.Location = new System.Drawing.Point(18, 340);
+            this.hexSelect.Location = new System.Drawing.Point(196, 251);
             this.hexSelect.Name = "hexSelect";
             this.hexSelect.Size = new System.Drawing.Size(43, 17);
             this.hexSelect.TabIndex = 65;
@@ -215,7 +202,7 @@
             // 
             // PINGBtn
             // 
-            this.PINGBtn.Location = new System.Drawing.Point(203, 50);
+            this.PINGBtn.Location = new System.Drawing.Point(18, 190);
             this.PINGBtn.Name = "PINGBtn";
             this.PINGBtn.Size = new System.Drawing.Size(60, 23);
             this.PINGBtn.TabIndex = 64;
@@ -226,7 +213,7 @@
             // modBusCheckBox
             // 
             this.modBusCheckBox.AutoSize = true;
-            this.modBusCheckBox.Location = new System.Drawing.Point(384, 267);
+            this.modBusCheckBox.Location = new System.Drawing.Point(480, 227);
             this.modBusCheckBox.Name = "modBusCheckBox";
             this.modBusCheckBox.Size = new System.Drawing.Size(64, 17);
             this.modBusCheckBox.TabIndex = 59;
@@ -236,15 +223,15 @@
             // 
             // customlinetext
             // 
-            this.customlinetext.Location = new System.Drawing.Point(405, 241);
+            this.customlinetext.Location = new System.Drawing.Point(547, 201);
             this.customlinetext.Name = "customlinetext";
-            this.customlinetext.Size = new System.Drawing.Size(121, 20);
+            this.customlinetext.Size = new System.Drawing.Size(75, 20);
             this.customlinetext.TabIndex = 63;
             // 
             // customnewline
             // 
             this.customnewline.AutoSize = true;
-            this.customnewline.Location = new System.Drawing.Point(384, 248);
+            this.customnewline.Location = new System.Drawing.Point(525, 204);
             this.customnewline.Name = "customnewline";
             this.customnewline.Size = new System.Drawing.Size(15, 14);
             this.customnewline.TabIndex = 62;
@@ -252,14 +239,14 @@
             // 
             // sendtext
             // 
-            this.sendtext.Location = new System.Drawing.Point(67, 310);
+            this.sendtext.Location = new System.Drawing.Point(18, 221);
             this.sendtext.Name = "sendtext";
             this.sendtext.Size = new System.Drawing.Size(175, 20);
             this.sendtext.TabIndex = 61;
             // 
             // sendbutton
             // 
-            this.sendbutton.Location = new System.Drawing.Point(254, 307);
+            this.sendbutton.Location = new System.Drawing.Point(194, 219);
             this.sendbutton.Name = "sendbutton";
             this.sendbutton.Size = new System.Drawing.Size(75, 23);
             this.sendbutton.TabIndex = 60;
@@ -270,72 +257,15 @@
             // newLineCombo
             // 
             this.newLineCombo.FormattingEnabled = true;
-            this.newLineCombo.Location = new System.Drawing.Point(405, 214);
+            this.newLineCombo.Location = new System.Drawing.Point(501, 174);
             this.newLineCombo.Name = "newLineCombo";
             this.newLineCombo.Size = new System.Drawing.Size(121, 21);
             this.newLineCombo.TabIndex = 52;
             // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.DTRRadio);
-            this.panel6.Location = new System.Drawing.Point(131, 270);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(52, 25);
-            this.panel6.TabIndex = 58;
-            // 
-            // DTRRadio
-            // 
-            this.DTRRadio.AutoSize = true;
-            this.DTRRadio.Location = new System.Drawing.Point(3, 3);
-            this.DTRRadio.Name = "DTRRadio";
-            this.DTRRadio.Size = new System.Drawing.Size(48, 17);
-            this.DTRRadio.TabIndex = 23;
-            this.DTRRadio.TabStop = true;
-            this.DTRRadio.Text = "DTR";
-            this.DTRRadio.UseVisualStyleBackColor = true;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.RTSRadio);
-            this.panel5.Location = new System.Drawing.Point(67, 270);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(61, 25);
-            this.panel5.TabIndex = 57;
-            // 
-            // RTSRadio
-            // 
-            this.RTSRadio.AutoSize = true;
-            this.RTSRadio.Location = new System.Drawing.Point(10, 3);
-            this.RTSRadio.Name = "RTSRadio";
-            this.RTSRadio.Size = new System.Drawing.Size(47, 17);
-            this.RTSRadio.TabIndex = 22;
-            this.RTSRadio.TabStop = true;
-            this.RTSRadio.Text = "RTS";
-            this.RTSRadio.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.DCDRadio);
-            this.panel1.Location = new System.Drawing.Point(67, 243);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(61, 28);
-            this.panel1.TabIndex = 53;
-            // 
-            // DCDRadio
-            // 
-            this.DCDRadio.AutoSize = true;
-            this.DCDRadio.Location = new System.Drawing.Point(10, 4);
-            this.DCDRadio.Name = "DCDRadio";
-            this.DCDRadio.Size = new System.Drawing.Size(48, 17);
-            this.DCDRadio.TabIndex = 18;
-            this.DCDRadio.TabStop = true;
-            this.DCDRadio.Text = "DCD";
-            this.DCDRadio.UseVisualStyleBackColor = true;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(350, 217);
+            this.label7.Location = new System.Drawing.Point(446, 177);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 13);
             this.label7.TabIndex = 51;
@@ -344,7 +274,7 @@
             // handShakeCombo
             // 
             this.handShakeCombo.FormattingEnabled = true;
-            this.handShakeCombo.Location = new System.Drawing.Point(405, 187);
+            this.handShakeCombo.Location = new System.Drawing.Point(501, 147);
             this.handShakeCombo.Name = "handShakeCombo";
             this.handShakeCombo.Size = new System.Drawing.Size(121, 21);
             this.handShakeCombo.TabIndex = 50;
@@ -352,7 +282,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(366, 190);
+            this.label6.Location = new System.Drawing.Point(462, 150);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(33, 13);
             this.label6.TabIndex = 49;
@@ -361,7 +291,7 @@
             // dataBitsCombo
             // 
             this.dataBitsCombo.FormattingEnabled = true;
-            this.dataBitsCombo.Location = new System.Drawing.Point(405, 106);
+            this.dataBitsCombo.Location = new System.Drawing.Point(501, 66);
             this.dataBitsCombo.Name = "dataBitsCombo";
             this.dataBitsCombo.Size = new System.Drawing.Size(121, 21);
             this.dataBitsCombo.TabIndex = 48;
@@ -369,7 +299,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(366, 109);
+            this.label5.Location = new System.Drawing.Point(462, 69);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 13);
             this.label5.TabIndex = 47;
@@ -378,7 +308,7 @@
             // stopSignCombo
             // 
             this.stopSignCombo.FormattingEnabled = true;
-            this.stopSignCombo.Location = new System.Drawing.Point(405, 160);
+            this.stopSignCombo.Location = new System.Drawing.Point(501, 120);
             this.stopSignCombo.Name = "stopSignCombo";
             this.stopSignCombo.Size = new System.Drawing.Size(121, 21);
             this.stopSignCombo.TabIndex = 46;
@@ -386,7 +316,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(366, 163);
+            this.label4.Location = new System.Drawing.Point(462, 123);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 45;
@@ -395,7 +325,7 @@
             // baudRateCombo
             // 
             this.baudRateCombo.FormattingEnabled = true;
-            this.baudRateCombo.Location = new System.Drawing.Point(405, 79);
+            this.baudRateCombo.Location = new System.Drawing.Point(501, 39);
             this.baudRateCombo.Name = "baudRateCombo";
             this.baudRateCombo.Size = new System.Drawing.Size(121, 21);
             this.baudRateCombo.TabIndex = 44;
@@ -403,7 +333,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(343, 82);
+            this.label3.Location = new System.Drawing.Point(439, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 43;
@@ -412,7 +342,7 @@
             // parityCombo
             // 
             this.parityCombo.FormattingEnabled = true;
-            this.parityCombo.Location = new System.Drawing.Point(405, 133);
+            this.parityCombo.Location = new System.Drawing.Point(501, 93);
             this.parityCombo.Name = "parityCombo";
             this.parityCombo.Size = new System.Drawing.Size(121, 21);
             this.parityCombo.TabIndex = 42;
@@ -420,7 +350,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(366, 136);
+            this.label2.Location = new System.Drawing.Point(462, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(33, 13);
             this.label2.TabIndex = 41;
@@ -428,7 +358,7 @@
             // 
             // ATBtn
             // 
-            this.ATBtn.Location = new System.Drawing.Point(269, 50);
+            this.ATBtn.Location = new System.Drawing.Point(84, 190);
             this.ATBtn.Name = "ATBtn";
             this.ATBtn.Size = new System.Drawing.Size(60, 23);
             this.ATBtn.TabIndex = 40;
@@ -439,15 +369,15 @@
             // userConsole
             // 
             this.userConsole.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.userConsole.Location = new System.Drawing.Point(70, 79);
+            this.userConsole.Location = new System.Drawing.Point(18, 19);
             this.userConsole.Name = "userConsole";
-            this.userConsole.Size = new System.Drawing.Size(257, 162);
+            this.userConsole.Size = new System.Drawing.Size(415, 162);
             this.userConsole.TabIndex = 39;
             this.userConsole.Text = "";
             // 
             // refreshComListBtn
             // 
-            this.refreshComListBtn.Location = new System.Drawing.Point(369, 285);
+            this.refreshComListBtn.Location = new System.Drawing.Point(465, 245);
             this.refreshComListBtn.Name = "refreshComListBtn";
             this.refreshComListBtn.Size = new System.Drawing.Size(75, 23);
             this.refreshComListBtn.TabIndex = 38;
@@ -457,7 +387,7 @@
             // 
             // selectPortButton
             // 
-            this.selectPortButton.Location = new System.Drawing.Point(451, 284);
+            this.selectPortButton.Location = new System.Drawing.Point(547, 244);
             this.selectPortButton.Name = "selectPortButton";
             this.selectPortButton.Size = new System.Drawing.Size(75, 23);
             this.selectPortButton.TabIndex = 37;
@@ -468,7 +398,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(373, 55);
+            this.label1.Location = new System.Drawing.Point(469, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 36;
@@ -477,69 +407,10 @@
             // comPortsCombo
             // 
             this.comPortsCombo.FormattingEnabled = true;
-            this.comPortsCombo.Location = new System.Drawing.Point(405, 52);
+            this.comPortsCombo.Location = new System.Drawing.Point(501, 12);
             this.comPortsCombo.Name = "comPortsCombo";
             this.comPortsCombo.Size = new System.Drawing.Size(121, 21);
             this.comPortsCombo.TabIndex = 35;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.RIRadio);
-            this.panel2.Location = new System.Drawing.Point(131, 244);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(52, 26);
-            this.panel2.TabIndex = 54;
-            // 
-            // RIRadio
-            // 
-            this.RIRadio.AutoSize = true;
-            this.RIRadio.CheckAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.RIRadio.Location = new System.Drawing.Point(3, 3);
-            this.RIRadio.Name = "RIRadio";
-            this.RIRadio.Size = new System.Drawing.Size(36, 17);
-            this.RIRadio.TabIndex = 19;
-            this.RIRadio.TabStop = true;
-            this.RIRadio.Text = "RI";
-            this.RIRadio.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.DSRRadio);
-            this.panel3.Location = new System.Drawing.Point(186, 243);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(56, 28);
-            this.panel3.TabIndex = 55;
-            // 
-            // DSRRadio
-            // 
-            this.DSRRadio.AutoSize = true;
-            this.DSRRadio.Cursor = System.Windows.Forms.Cursors.Default;
-            this.DSRRadio.Location = new System.Drawing.Point(3, 4);
-            this.DSRRadio.Name = "DSRRadio";
-            this.DSRRadio.Size = new System.Drawing.Size(48, 17);
-            this.DSRRadio.TabIndex = 20;
-            this.DSRRadio.TabStop = true;
-            this.DSRRadio.Text = "DSR";
-            this.DSRRadio.UseVisualStyleBackColor = true;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.CTSRadio);
-            this.panel4.Location = new System.Drawing.Point(243, 243);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(58, 28);
-            this.panel4.TabIndex = 56;
-            // 
-            // CTSRadio
-            // 
-            this.CTSRadio.AutoSize = true;
-            this.CTSRadio.Location = new System.Drawing.Point(9, 4);
-            this.CTSRadio.Name = "CTSRadio";
-            this.CTSRadio.Size = new System.Drawing.Size(46, 17);
-            this.CTSRadio.TabIndex = 21;
-            this.CTSRadio.TabStop = true;
-            this.CTSRadio.Text = "CTS";
-            this.CTSRadio.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -846,18 +717,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.amountOfRetransmNumUpDown)).EndInit();
@@ -882,12 +741,6 @@
         private System.Windows.Forms.TextBox sendtext;
         private System.Windows.Forms.Button sendbutton;
         private System.Windows.Forms.ComboBox newLineCombo;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.RadioButton DTRRadio;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.RadioButton RTSRadio;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton DCDRadio;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox handShakeCombo;
         private System.Windows.Forms.Label label6;
@@ -905,12 +758,6 @@
         private System.Windows.Forms.Button selectPortButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comPortsCombo;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.RadioButton RIRadio;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.RadioButton DSRRadio;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.RadioButton CTSRadio;
         private System.Windows.Forms.TabPage tabPage2;
 
         private System.Windows.Forms.Label sentLabel;
@@ -942,6 +789,7 @@
         private System.Windows.Forms.Button SendFile;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.RichTextBox ReceivedTextRichBox;
+        private System.Windows.Forms.Label label9;
 
 
     }
