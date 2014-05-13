@@ -37,7 +37,8 @@ namespace IwSK_RS232.Modbus
                             }
                             case 0x02:
                             {
-                                //TODO
+                                _recievedText = ASCIIcodeStringToString(frame.Substring(5, frame.Length - 9));
+                                TextRecieved(_recievedText);
                                 break;
                             }
                         }

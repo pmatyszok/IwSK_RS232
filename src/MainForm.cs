@@ -415,28 +415,51 @@ namespace IwSK_RS232
         {
             if (_modbus != null)
             {
-                string toSend = _modbus.MakeFrameToSend((byte)adressNumericUpDown.Value,
-                    (byte)commandNumericUpDown.Value, messageModbusTextBox.Text);
-                port.SendString(toSend);
-                outcomingRichTextBox.AppendText("0x");
-                for (int i = 0; i < toSend.Length; i++)
-                    outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)toSend[i]));
-                outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)'\r'));
-                outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)'\n') + "\n");
+                switch((byte)commandNumericUpDown.Value)
+                {
+                    case 0x01:
+                        {
+                            string toSend = _modbus.MakeFrameToSend((byte)adressNumericUpDown.Value,
+                                (byte)commandNumericUpDown.Value, messageModbusTextBox.Text);
+                            port.SendString(toSend);
+                            outcomingRichTextBox.AppendText("0x");
+                            for (int i = 0; i < toSend.Length; i++)
+                                outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)toSend[i]));
+                            outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)'\r'));
+                            outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)'\n') + "\n");
+                            break;
+                        }
+                    case 0x02:
+                        {
+                            for (int j = 0; j < amountOfRetransmNumUpDown.Value; j++)
+                            {
+                                //TODO
+                            }
+                            break;
+                        }
             }
+            }
+        }
+
+        private void AppendNowOrLater(RichTextBox box, string text)
+        {
+            if (box.InvokeRequired)
+                box.Invoke(new Action(() => box.AppendText(text)));
+            else
+                box.AppendText(text);
         }
 
         private void AddRecievedFrameToModbusLog(string frame)
         {
-            IncomingRichTextBox.AppendText("0x");
+            AppendNowOrLater(IncomingRichTextBox,"0x");
             for (int i = 0; i < frame.Length; i++)
-                IncomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)frame[i]));
-            IncomingRichTextBox.AppendText("\n");
+                AppendNowOrLater(IncomingRichTextBox, _modbus.ByteToASCIIcode((byte)frame[i]));
+            AppendNowOrLater(IncomingRichTextBox,"\n");
         }
 
         private void AddRecievedTextToTextRecievedBox(string text)
         {
-            ReceivedTextRichBox.Text += text + '\n';
+            AppendNowOrLater(ReceivedTextRichBox, text + '\n');
         }
 
         #endregion //methods
