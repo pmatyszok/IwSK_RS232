@@ -11,9 +11,11 @@ namespace IwSK_RS232.Modbus
         private readonly ConcurrentQueue<string> _receivedFrames = new ConcurrentQueue<string>();
         public Action<string> FrameRecieved;
         public Action<string> TextRecieved;
+        public Action<string> SendFrame;
         private bool _isMaster;
         private string _recievedText;
         private byte _stationAddress;
+        private byte _lastFrameDestinationAddress;
 
         public void RecievedFrame(string frame)
         {
@@ -30,17 +32,17 @@ namespace IwSK_RS232.Modbus
                         switch (command)
                         {
                             case 0x01:
-                            {
-                                _recievedText = ASCIIcodeStringToString(frame.Substring(5, frame.Length - 9));
-                                TextRecieved(_recievedText);
-                                break;
-                            }
+                                {
+                                    _recievedText = ASCIIcodeStringToString(frame.Substring(5, frame.Length - 9));
+                                    TextRecieved(_recievedText);
+                                    break;
+                                }
                             case 0x02:
-                            {
-                                _recievedText = ASCIIcodeStringToString(frame.Substring(5, frame.Length - 9));
-                                TextRecieved(_recievedText);
-                                break;
-                            }
+                                {
+                                    string frameToSend = this.MakeFrameToSend(recievedAdress, command, _recievedText);
+                                    SendFrame(frameToSend);
+                                    break;
+                                }
                         }
                     }
                     else if (recievedAdress == 0 && command == 1)
@@ -48,6 +50,17 @@ namespace IwSK_RS232.Modbus
                         _recievedText = ASCIIcodeStringToString(frame.Substring(5, frame.Length - 9));
                         TextRecieved(_recievedText);
                     }
+                }
+                else
+                {
+                    byte recievedAdress = ASCIIcodeToByte(frame.Substring(1, 2));
+                    byte command = ASCIIcodeToByte(frame.Substring(3, 2));
+                    if (recievedAdress == _lastFrameDestinationAddress && command == 0x02 && CheckLRC(frame))
+                    {
+                        string recieText = ASCIIcodeStringToString(frame.Substring(5, frame.Length - 9));
+                        TextRecieved(recieText);
+                    }
+
                 }
             }
         }
@@ -162,10 +175,13 @@ namespace IwSK_RS232.Modbus
 
         public string MakeFrameToSend(byte adres, byte command, string args)
         {
+            if (command == 0x02 && args == null)
+                _lastFrameDestinationAddress = adres;
             string frame = ":";
             frame += ByteToASCIIcode(adres) + ByteToASCIIcode(command);
-            for (int i = 0; i < args.Length; i++)
-                frame += ByteToASCIIcode((byte) args[i]);
+            if(args!=null)
+                for (int i = 0; i < args.Length; i++)
+                    frame += ByteToASCIIcode((byte) args[i]);
             byte lrcSum = generateLRC(frame.Substring(1));
             frame += ByteToASCIIcode(lrcSum);
             return frame;

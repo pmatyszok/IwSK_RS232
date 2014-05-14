@@ -159,6 +159,7 @@ namespace IwSK_RS232
                 _modbus.FrameRecieved += AddRecievedFrameToModbusLog;
                 if (port != null) port.MessageOccured += _modbus.RecievedFrame;
                 _modbus.TextRecieved += AddRecievedTextToTextRecievedBox;
+                _modbus.SendFrame += SendModbusFrame;
                 tabControl1.SelectTab(1);
                 if (MasterRadioButton.Checked)
                     _modbus.SetMaster();
@@ -419,22 +420,18 @@ namespace IwSK_RS232
                 {
                     case 0x01:
                         {
-                            string toSend = _modbus.MakeFrameToSend((byte)adressNumericUpDown.Value,
+                                string toSend = _modbus.MakeFrameToSend((byte)adressNumericUpDown.Value,
                                 (byte)commandNumericUpDown.Value, messageModbusTextBox.Text);
-                            port.SendString(toSend);
-                            outcomingRichTextBox.AppendText("0x");
-                            for (int i = 0; i < toSend.Length; i++)
-                                outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)toSend[i]));
-                            outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)'\r'));
-                            outcomingRichTextBox.AppendText(_modbus.ByteToASCIIcode((byte)'\n') + "\n");
-                            break;
+                                SendModbusFrame(toSend);
+                                break;
+                            
+                            
                         }
                     case 0x02:
                         {
-                            for (int j = 0; j < amountOfRetransmNumUpDown.Value; j++)
-                            {
-                                //TODO
-                            }
+                            string toSend = _modbus.MakeFrameToSend((byte)adressNumericUpDown.Value,
+                                (byte)commandNumericUpDown.Value,null);
+                            SendModbusFrame(toSend);
                             break;
                         }
             }
@@ -461,7 +458,15 @@ namespace IwSK_RS232
         {
             AppendNowOrLater(ReceivedTextRichBox, text + '\n');
         }
-
+        private void SendModbusFrame(string toSend)
+        {
+            port.SendString(toSend);
+            AppendNowOrLater(outcomingRichTextBox,"0x");
+            for (int i = 0; i < toSend.Length; i++)
+                AppendNowOrLater(outcomingRichTextBox,_modbus.ByteToASCIIcode((byte)toSend[i]));
+            AppendNowOrLater(outcomingRichTextBox,_modbus.ByteToASCIIcode((byte)'\r'));
+            AppendNowOrLater(outcomingRichTextBox,_modbus.ByteToASCIIcode((byte)'\n') + "\n");
+        }
         #endregion //methods
        
     }
