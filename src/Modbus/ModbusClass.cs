@@ -51,6 +51,7 @@ namespace IwSK_RS232.Modbus
             if (!frameValid)
             {
                 frameValid = true;
+                _charSpaceTimer.Stop();
                 FrameRecieved(frame);
                 return;
             }
