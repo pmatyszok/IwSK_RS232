@@ -157,7 +157,11 @@ namespace IwSK_RS232
                 ChangeControlsEnable(true);
                 _modbus = new ModbusClass();
                 _modbus.FrameRecieved += AddRecievedFrameToModbusLog;
-                if (port != null) port.MessageOccured += _modbus.RecievedFrame;
+                if (port != null)
+                {
+                    port.MessageOccured += _modbus.RecievedFrame;
+                    port.DataReceived += _modbus.CheckInterval;
+                }
                 _modbus.TextRecieved += AddRecievedTextToTextRecievedBox;
                 _modbus.SendFrame += SendModbusFrame;
                 _modbus.SetAddress((byte)adressNumericUpDown.Value);
@@ -491,6 +495,11 @@ namespace IwSK_RS232
         {
             if(_modbus!=null)
                 _modbus.SetAmountOfRetransmissions((int)amountOfRetransmNumUpDown.Value);
+        }
+
+        private void frameTimeoutNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            _modbus.Interval = (int)frameTimeoutNumericUpDown.Value;
         }
        
     }

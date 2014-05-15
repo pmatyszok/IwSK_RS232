@@ -21,10 +21,25 @@ namespace IwSK_RS232.Modbus
         private int _timeOutTime;
         private int _amountOfRetransmissions;
         private int _retransmisionsMade;
-        
+
+        public int Interval { get; set; }
+
+        private DateTime lastData;
+        private bool frameValid = true;
+
+        public void CheckInterval()
+        {
+            frameValid = ((DateTime.Now - lastData).Milliseconds <= Interval) && frameValid;
+            lastData = DateTime.Now;
+        }
 
         public void RecievedFrame(string frame)
         {
+            if (!frameValid)
+            {
+                frameValid = true;
+                return;
+            }
             _receivedFrames.Enqueue(frame);
             FrameRecieved(frame);
             if (CheckLRC(frame))

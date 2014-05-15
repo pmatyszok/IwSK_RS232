@@ -22,6 +22,8 @@ namespace IwSK_RS232.PlainCommunication
         private readonly SerialPort port;
 
         public Action<string> MessageOccured;
+        public Action DataReceived;
+
         private long pingMilliseconds;
 
         public Communicator(string which, int baudRate, Parity parity, int dataBits, StopBits stopBits, Handshake hand,
@@ -123,6 +125,7 @@ namespace IwSK_RS232.PlainCommunication
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             var sp = (SerialPort) sender;
+            DataReceived();
             parser.Append(sp.ReadExisting());
         }
 

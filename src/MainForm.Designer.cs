@@ -505,6 +505,7 @@
             0,
             0,
             0});
+            this.frameTimeoutNumericUpDown.ValueChanged += new System.EventHandler(this.frameTimeoutNumericUpDown_ValueChanged);
             // 
             // outcomingRichTextBox
             // 
