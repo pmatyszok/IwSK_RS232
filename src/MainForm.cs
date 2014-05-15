@@ -167,6 +167,7 @@ namespace IwSK_RS232
                 _modbus.SetAddress((byte)adressNumericUpDown.Value);
                 _modbus.SetTimeoutTime((int)transactionTimeoutNumericUpDown.Value);
                 _modbus.SetAmountOfRetransmissions((int)amountOfRetransmNumUpDown.Value);
+                _modbus.Interval = (int)frameTimeoutNumericUpDown.Value;
                 tabControl1.SelectTab(1);
                 if (MasterRadioButton.Checked)
                     _modbus.SetMaster();

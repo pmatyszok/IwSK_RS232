@@ -19,6 +19,7 @@ namespace IwSK_RS232.Modbus
         private string _lastFrame;
         private System.Timers.Timer _timeoutTimer;
         private int _timeOutTime;
+        private System.Timers.Timer _charSpaceTimer;
         private int _amountOfRetransmissions;
         private int _retransmisionsMade;
 
@@ -29,17 +30,31 @@ namespace IwSK_RS232.Modbus
 
         public void CheckInterval()
         {
-            frameValid = ((DateTime.Now - lastData).Milliseconds <= Interval) && frameValid;
-            lastData = DateTime.Now;
+            if(_charSpaceTimer==null)
+                _charSpaceTimer = new System.Timers.Timer(Interval);
+            _charSpaceTimer.Elapsed += _charSpaceTimer_Elapsed;
+            _charSpaceTimer.Stop();
+            _charSpaceTimer.Start();
+            
+            
+        }
+
+        void _charSpaceTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            frameValid = false;
+            _charSpaceTimer.Stop();
         }
 
         public void RecievedFrame(string frame)
         {
+            CheckInterval();
             if (!frameValid)
             {
                 frameValid = true;
+                FrameRecieved(frame);
                 return;
             }
+            _charSpaceTimer.Stop();
             _receivedFrames.Enqueue(frame);
             FrameRecieved(frame);
             if (CheckLRC(frame))
@@ -239,7 +254,7 @@ namespace IwSK_RS232.Modbus
                 {
                     SendFrame(_lastFrame);
                 }
-                if (++_retransmisionsMade == _amountOfRetransmissions)
+                if (++_retransmisionsMade > _amountOfRetransmissions)
                     _timeoutTimer.Stop();
             }
         }
