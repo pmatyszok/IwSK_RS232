@@ -16,6 +16,12 @@ namespace IwSK_RS232.Modbus
         private string _recievedText;
         private byte _stationAddress;
         private byte _lastFrameDestinationAddress;
+        private string _lastFrame;
+        private System.Timers.Timer _timeoutTimer;
+        private int _timeOutTime;
+        private int _amountOfRetransmissions;
+        private int _retransmisionsMade;
+        
 
         public void RecievedFrame(string frame)
         {
@@ -35,6 +41,8 @@ namespace IwSK_RS232.Modbus
                                 {
                                     _recievedText = ASCIIcodeStringToString(frame.Substring(5, frame.Length - 9));
                                     TextRecieved(_recievedText);
+                                    string confirmFrame = this.MakeFrameToSend(recievedAdress, command, null);
+                                    SendFrame(confirmFrame);
                                     break;
                                 }
                             case 0x02:
@@ -59,6 +67,11 @@ namespace IwSK_RS232.Modbus
                     {
                         string recieText = ASCIIcodeStringToString(frame.Substring(5, frame.Length - 9));
                         TextRecieved(recieText);
+                        stopTimeOutCounting();
+                    }
+                    if (recievedAdress == _lastFrameDestinationAddress && command == 0x01 && CheckLRC(frame))
+                    {
+                        stopTimeOutCounting();
                     }
 
                 }
@@ -79,6 +92,14 @@ namespace IwSK_RS232.Modbus
         {
             if (!_isMaster)
                 _stationAddress = address;
+        }
+        public void SetTimeoutTime(int timeIn_ms)
+        {
+            _timeOutTime = timeIn_ms;
+        }
+        public void SetAmountOfRetransmissions(int amount)
+        {
+            _amountOfRetransmissions = amount;
         }
 
         private byte generateLRC(string data)
@@ -175,8 +196,7 @@ namespace IwSK_RS232.Modbus
 
         public string MakeFrameToSend(byte adres, byte command, string args)
         {
-            if (command == 0x02 && args == null)
-                _lastFrameDestinationAddress = adres;
+             _lastFrameDestinationAddress = adres;
             string frame = ":";
             frame += ByteToASCIIcode(adres) + ByteToASCIIcode(command);
             if(args!=null)
@@ -184,7 +204,38 @@ namespace IwSK_RS232.Modbus
                     frame += ByteToASCIIcode((byte) args[i]);
             byte lrcSum = generateLRC(frame.Substring(1));
             frame += ByteToASCIIcode(lrcSum);
+            _lastFrame = frame;
             return frame;
         }
+
+        public void startTimeOutCounting()
+        {
+            _retransmisionsMade = 0;
+            _timeoutTimer = new System.Timers.Timer(_timeOutTime);
+            _timeoutTimer.Elapsed += retransmitLastFrame;
+            _timeoutTimer.Start();
+        }
+
+        private void retransmitLastFrame(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (_amountOfRetransmissions != 0)
+            {
+                if (_lastFrame != null)
+                {
+                    SendFrame(_lastFrame);
+                }
+                if (++_retransmisionsMade == _amountOfRetransmissions)
+                    _timeoutTimer.Stop();
+            }
+        }
+        public void stopTimeOutCounting()
+        {
+            if (_timeoutTimer != null)
+            {
+                _timeoutTimer.Stop();
+            }
+        }
+        
+        
     }
 }

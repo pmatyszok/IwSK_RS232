@@ -160,6 +160,9 @@ namespace IwSK_RS232
                 if (port != null) port.MessageOccured += _modbus.RecievedFrame;
                 _modbus.TextRecieved += AddRecievedTextToTextRecievedBox;
                 _modbus.SendFrame += SendModbusFrame;
+                _modbus.SetAddress((byte)adressNumericUpDown.Value);
+                _modbus.SetTimeoutTime((int)transactionTimeoutNumericUpDown.Value);
+                _modbus.SetAmountOfRetransmissions((int)amountOfRetransmNumUpDown.Value);
                 tabControl1.SelectTab(1);
                 if (MasterRadioButton.Checked)
                     _modbus.SetMaster();
@@ -423,15 +426,22 @@ namespace IwSK_RS232
                                 string toSend = _modbus.MakeFrameToSend((byte)adressNumericUpDown.Value,
                                 (byte)commandNumericUpDown.Value, messageModbusTextBox.Text);
                                 SendModbusFrame(toSend);
+                                if ((byte)adressNumericUpDown.Value != 0x00)
+                                    _modbus.startTimeOutCounting();
                                 break;
                             
                             
                         }
                     case 0x02:
                         {
-                            string toSend = _modbus.MakeFrameToSend((byte)adressNumericUpDown.Value,
-                                (byte)commandNumericUpDown.Value,null);
-                            SendModbusFrame(toSend);
+                            if ((byte)adressNumericUpDown.Value != 0x00)
+                            {
+                                string toSend = _modbus.MakeFrameToSend((byte)adressNumericUpDown.Value,
+                                    (byte)commandNumericUpDown.Value, null);
+                                SendModbusFrame(toSend);
+                                _modbus.startTimeOutCounting();
+                            }
+
                             break;
                         }
             }
@@ -468,6 +478,20 @@ namespace IwSK_RS232
             AppendNowOrLater(outcomingRichTextBox,_modbus.ByteToASCIIcode((byte)'\n') + "\n");
         }
         #endregion //methods
+
+        private void transactionTimeoutNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (_modbus != null)
+            {
+                _modbus.SetTimeoutTime((int)transactionTimeoutNumericUpDown.Value);
+            }
+        }
+
+        private void amountOfRetransmNumUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if(_modbus!=null)
+                _modbus.SetAmountOfRetransmissions((int)amountOfRetransmNumUpDown.Value);
+        }
        
     }
 }

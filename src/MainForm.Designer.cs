@@ -470,6 +470,7 @@
             this.amountOfRetransmNumUpDown.Name = "amountOfRetransmNumUpDown";
             this.amountOfRetransmNumUpDown.Size = new System.Drawing.Size(110, 20);
             this.amountOfRetransmNumUpDown.TabIndex = 54;
+            this.amountOfRetransmNumUpDown.ValueChanged += new System.EventHandler(this.amountOfRetransmNumUpDown_ValueChanged);
             // 
             // messageModbusTextBox
             // 
@@ -615,6 +616,7 @@
             0,
             0,
             0});
+            this.transactionTimeoutNumericUpDown.ValueChanged += new System.EventHandler(this.transactionTimeoutNumericUpDown_ValueChanged);
             // 
             // sentLabel
             // 
