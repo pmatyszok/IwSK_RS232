@@ -55,6 +55,7 @@ namespace IwSK_RS232.PlainCommunication
             try
             {
                 port.WriteLine(msg);
+                
             }
             catch (Exception)
             {

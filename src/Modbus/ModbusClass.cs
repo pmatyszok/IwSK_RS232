@@ -27,15 +27,18 @@ namespace IwSK_RS232.Modbus
 
         private DateTime lastData;
         private bool frameValid = true;
+        
+       
 
         public void CheckInterval()
         {
             if(_charSpaceTimer==null)
                 _charSpaceTimer = new System.Timers.Timer(Interval);
+             _charSpaceTimer.InitializeLifetimeService();
             _charSpaceTimer.Elapsed += _charSpaceTimer_Elapsed;
             _charSpaceTimer.Stop();
             _charSpaceTimer.Start();
-            
+           
             
         }
 
@@ -47,7 +50,9 @@ namespace IwSK_RS232.Modbus
 
         public void RecievedFrame(string frame)
         {
+            
             CheckInterval();
+
             if (!frameValid)
             {
                 frameValid = true;
