@@ -126,7 +126,8 @@ namespace IwSK_RS232.PlainCommunication
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             var sp = (SerialPort) sender;
-            DataReceived();
+            if (DataReceived != null) 
+                DataReceived();
             parser.Append(sp.ReadExisting());
         }
 
