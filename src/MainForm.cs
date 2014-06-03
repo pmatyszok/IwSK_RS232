@@ -8,6 +8,7 @@ using IwSK_RS232.Modbus;
 using IwSK_RS232.PlainCommunication;
 using IwSK_RS232.Properties;
 using IwSK_RS232.Tools;
+using System.Runtime.InteropServices;
 
 namespace IwSK_RS232
 {
@@ -62,9 +63,33 @@ namespace IwSK_RS232
             RefreshPorts();
         }
 
-        #region methods
+        #region API Stuff
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern int GetScrollPos(IntPtr hWnd, int nBar);
 
-       
+        [DllImport("user32.dll")]
+        private static extern bool GetScrollRange(IntPtr hWnd, int nBar, out int lpMinPos, out int lpMaxPos);
+
+        private const int SB_HORZ = 0x0;
+        private const int SB_VERT = 0x1;
+
+        public int HorizontalPosition(RichTextBox box)
+        {
+            return GetScrollPos((IntPtr)box.Handle, SB_VERT);
+        }
+
+        public bool IsAtMaxScroll(RichTextBox box)
+        {
+            int minScroll, maxScroll;
+
+            GetScrollRange(box.Handle, SB_VERT, out minScroll, out maxScroll);
+
+            return (HorizontalPosition(box) + box.ClientSize.Height >= maxScroll);
+        }
+        #endregion
+
+
+        #region methods
 
         private void RefreshPorts()
         {
@@ -305,7 +330,8 @@ namespace IwSK_RS232
                 amountOfRetransLabel.Show();
                 amountOfRetransmNumUpDown.Show();
                 messageModbusTextBox.Show();
-                sendModbusButton.Show();
+                messageModbusTextBox.Visible = ((byte)commandNumericUpDown.Value) != 0x02;
+                messageLabel.Visible = messageModbusTextBox.Visible;
                 receiverAddressLabel.Text = "Receiver address:";
                 adressNumericUpDown.Minimum = 0;
                 if (_modbus != null)
@@ -321,6 +347,7 @@ namespace IwSK_RS232
                 amountOfRetransmNumUpDown.Hide();
                 messageModbusTextBox.Hide();
                 sendModbusButton.Hide();
+                messageLabel.Hide();
                 receiverAddressLabel.Text = "Station address:";
                 adressNumericUpDown.Minimum = 1;
                 if (_modbus != null)
@@ -446,7 +473,6 @@ namespace IwSK_RS232
                                 SendModbusFrame(toSend);
                                 _modbus.startTimeOutCounting();
                             }
-
                             break;
                         }
             }
@@ -461,18 +487,37 @@ namespace IwSK_RS232
                 box.AppendText(text);
         }
 
+        private void ScrollIfNeeded(RichTextBox box)
+        {
+            if (box.InvokeRequired)
+            {
+                box.Invoke(new Action(() => ScrollIfNeeded(box)));
+            }
+            else
+            {
+                if (!IsAtMaxScroll(box))
+                {
+                    box.SelectionStart = box.Text.Length;
+                    box.ScrollToCaret();
+                }
+            }
+        }
+
         private void AddRecievedFrameToModbusLog(string frame)
         {
             AppendNowOrLater(IncomingRichTextBox,"0x");
             for (int i = 0; i < frame.Length; i++)
                 AppendNowOrLater(IncomingRichTextBox, _modbus.ByteToASCIIcode((byte)frame[i]));
             AppendNowOrLater(IncomingRichTextBox,"\n");
+            ScrollIfNeeded(IncomingRichTextBox);
         }
 
         private void AddRecievedTextToTextRecievedBox(string text)
         {
             AppendNowOrLater(ReceivedTextRichBox, text + '\n');
+            ScrollIfNeeded(ReceivedTextRichBox);
         }
+
         private void SendModbusFrame(string toSend)
         {
             port.SendString(toSend);
@@ -481,6 +526,7 @@ namespace IwSK_RS232
                 AppendNowOrLater(outcomingRichTextBox,_modbus.ByteToASCIIcode((byte)toSend[i]));
             AppendNowOrLater(outcomingRichTextBox,_modbus.ByteToASCIIcode((byte)'\r'));
             AppendNowOrLater(outcomingRichTextBox,_modbus.ByteToASCIIcode((byte)'\n') + "\n");
+            ScrollIfNeeded(outcomingRichTextBox);
         }
         #endregion //methods
 
@@ -501,6 +547,12 @@ namespace IwSK_RS232
         private void frameTimeoutNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             _modbus.Interval = (int)frameTimeoutNumericUpDown.Value;
+        }
+
+        private void commandNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            messageModbusTextBox.Visible = ((byte)commandNumericUpDown.Value) != 0x02;
+            messageLabel.Visible = messageModbusTextBox.Visible;
         }
        
     }

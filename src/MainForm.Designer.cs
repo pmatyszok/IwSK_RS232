@@ -102,7 +102,7 @@
             this.tabControl1.Location = new System.Drawing.Point(1, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(646, 433);
+            this.tabControl1.Size = new System.Drawing.Size(654, 433);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -437,7 +437,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(638, 407);
+            this.tabPage2.Size = new System.Drawing.Size(646, 407);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "MODBUS";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -445,7 +445,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(170, 219);
+            this.label8.Location = new System.Drawing.Point(167, 235);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(80, 13);
             this.label8.TabIndex = 56;
@@ -453,9 +453,10 @@
             // 
             // ReceivedTextRichBox
             // 
-            this.ReceivedTextRichBox.Location = new System.Drawing.Point(166, 235);
+            this.ReceivedTextRichBox.Location = new System.Drawing.Point(166, 251);
             this.ReceivedTextRichBox.Name = "ReceivedTextRichBox";
-            this.ReceivedTextRichBox.Size = new System.Drawing.Size(268, 53);
+            this.ReceivedTextRichBox.ReadOnly = true;
+            this.ReceivedTextRichBox.Size = new System.Drawing.Size(268, 87);
             this.ReceivedTextRichBox.TabIndex = 55;
             this.ReceivedTextRichBox.Text = "";
             // 
@@ -474,7 +475,7 @@
             // 
             // messageModbusTextBox
             // 
-            this.messageModbusTextBox.Location = new System.Drawing.Point(166, 321);
+            this.messageModbusTextBox.Location = new System.Drawing.Point(166, 358);
             this.messageModbusTextBox.Name = "messageModbusTextBox";
             this.messageModbusTextBox.Size = new System.Drawing.Size(268, 20);
             this.messageModbusTextBox.TabIndex = 53;
@@ -509,23 +510,25 @@
             // 
             // outcomingRichTextBox
             // 
-            this.outcomingRichTextBox.Location = new System.Drawing.Point(166, 68);
+            this.outcomingRichTextBox.Location = new System.Drawing.Point(166, 29);
             this.outcomingRichTextBox.Name = "outcomingRichTextBox";
-            this.outcomingRichTextBox.Size = new System.Drawing.Size(268, 59);
+            this.outcomingRichTextBox.ReadOnly = true;
+            this.outcomingRichTextBox.Size = new System.Drawing.Size(268, 101);
             this.outcomingRichTextBox.TabIndex = 50;
             this.outcomingRichTextBox.Text = "";
             // 
             // IncomingRichTextBox
             // 
-            this.IncomingRichTextBox.Location = new System.Drawing.Point(166, 153);
+            this.IncomingRichTextBox.Location = new System.Drawing.Point(166, 149);
             this.IncomingRichTextBox.Name = "IncomingRichTextBox";
-            this.IncomingRichTextBox.Size = new System.Drawing.Size(268, 53);
+            this.IncomingRichTextBox.ReadOnly = true;
+            this.IncomingRichTextBox.Size = new System.Drawing.Size(268, 83);
             this.IncomingRichTextBox.TabIndex = 49;
             this.IncomingRichTextBox.Text = "";
             // 
             // commandNumericUpDown
             // 
-            this.commandNumericUpDown.Location = new System.Drawing.Point(18, 346);
+            this.commandNumericUpDown.Location = new System.Drawing.Point(18, 358);
             this.commandNumericUpDown.Maximum = new decimal(new int[] {
             255,
             0,
@@ -544,10 +547,11 @@
             0,
             0,
             0});
+            this.commandNumericUpDown.ValueChanged += new System.EventHandler(this.commandNumericUpDown_ValueChanged);
             // 
             // adressNumericUpDown
             // 
-            this.adressNumericUpDown.Location = new System.Drawing.Point(18, 299);
+            this.adressNumericUpDown.Location = new System.Drawing.Point(18, 311);
             this.adressNumericUpDown.Maximum = new decimal(new int[] {
             247,
             0,
@@ -622,7 +626,7 @@
             // sentLabel
             // 
             this.sentLabel.AutoSize = true;
-            this.sentLabel.Location = new System.Drawing.Point(167, 46);
+            this.sentLabel.Location = new System.Drawing.Point(167, 13);
             this.sentLabel.Name = "sentLabel";
             this.sentLabel.Size = new System.Drawing.Size(32, 13);
             this.sentLabel.TabIndex = 45;
@@ -631,7 +635,7 @@
             // receivedLabel
             // 
             this.receivedLabel.AutoSize = true;
-            this.receivedLabel.Location = new System.Drawing.Point(167, 130);
+            this.receivedLabel.Location = new System.Drawing.Point(167, 133);
             this.receivedLabel.Name = "receivedLabel";
             this.receivedLabel.Size = new System.Drawing.Size(56, 13);
             this.receivedLabel.TabIndex = 44;
@@ -640,7 +644,7 @@
             // sendModbusButton
             // 
             this.sendModbusButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.sendModbusButton.Location = new System.Drawing.Point(488, 302);
+            this.sendModbusButton.Location = new System.Drawing.Point(547, 323);
             this.sendModbusButton.Name = "sendModbusButton";
             this.sendModbusButton.Size = new System.Drawing.Size(80, 55);
             this.sendModbusButton.TabIndex = 41;
@@ -651,7 +655,7 @@
             // messageLabel
             // 
             this.messageLabel.AutoSize = true;
-            this.messageLabel.Location = new System.Drawing.Point(170, 291);
+            this.messageLabel.Location = new System.Drawing.Point(167, 341);
             this.messageLabel.Name = "messageLabel";
             this.messageLabel.Size = new System.Drawing.Size(53, 13);
             this.messageLabel.TabIndex = 40;
@@ -660,7 +664,7 @@
             // commandLabel
             // 
             this.commandLabel.AutoSize = true;
-            this.commandLabel.Location = new System.Drawing.Point(22, 329);
+            this.commandLabel.Location = new System.Drawing.Point(22, 341);
             this.commandLabel.Name = "commandLabel";
             this.commandLabel.Size = new System.Drawing.Size(57, 13);
             this.commandLabel.TabIndex = 38;
@@ -669,7 +673,7 @@
             // receiverAddressLabel
             // 
             this.receiverAddressLabel.AutoSize = true;
-            this.receiverAddressLabel.Location = new System.Drawing.Point(18, 283);
+            this.receiverAddressLabel.Location = new System.Drawing.Point(18, 295);
             this.receiverAddressLabel.Name = "receiverAddressLabel";
             this.receiverAddressLabel.Size = new System.Drawing.Size(93, 13);
             this.receiverAddressLabel.TabIndex = 36;
@@ -710,7 +714,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 431);
+            this.ClientSize = new System.Drawing.Size(651, 431);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
