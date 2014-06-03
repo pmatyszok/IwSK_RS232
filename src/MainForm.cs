@@ -83,8 +83,8 @@ namespace IwSK_RS232
             int minScroll, maxScroll;
 
             GetScrollRange(box.Handle, SB_VERT, out minScroll, out maxScroll);
-
-            return (HorizontalPosition(box) + box.ClientSize.Height >= maxScroll);
+            int i = HorizontalPosition(box) + box.ClientSize.Height;
+            return (HorizontalPosition(box) + box.ClientSize.Height >= (maxScroll - 15));
         }
         #endregion
 
@@ -495,7 +495,7 @@ namespace IwSK_RS232
             }
             else
             {
-                if (!IsAtMaxScroll(box))
+                if (IsAtMaxScroll(box))
                 {
                     box.SelectionStart = box.Text.Length;
                     box.ScrollToCaret();
