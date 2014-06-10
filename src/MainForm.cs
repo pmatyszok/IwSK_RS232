@@ -369,7 +369,7 @@ namespace IwSK_RS232
         private void hexSelect_CheckedChanged(object sender, EventArgs e)
         {
             if (!_hexTransmission)
-            {
+            {                
                 sendtext.Enabled = false;
                 hextext.Enabled = true;
                 port.SetSerialPortData(8);

@@ -140,7 +140,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(638, 407);
+            this.tabPage1.Size = new System.Drawing.Size(646, 407);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "RS232";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -236,6 +236,7 @@
             this.customnewline.Size = new System.Drawing.Size(15, 14);
             this.customnewline.TabIndex = 62;
             this.customnewline.UseVisualStyleBackColor = true;
+            this.customnewline.CheckedChanged += new System.EventHandler(this.customnewline_CheckedChanged_1);
             // 
             // sendtext
             // 

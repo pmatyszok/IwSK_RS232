@@ -109,13 +109,20 @@ namespace IwSK_RS232.PlainCommunication
                             }
                             else
                             {
-                                byte[] decByte3 = Convert.FromBase64String(cmd);
-                                string msg = "";
-                                foreach (byte b in decByte3)
+                                try
                                 {
-                                    msg += b.ToString("X");
+                                    byte[] decByte3 = Convert.FromBase64String(cmd);
+                                    string msg = "";
+                                    foreach (byte b in decByte3)
+                                    {
+                                        msg += b.ToString("X");
+                                    }
+                                    MessageOccured(msg);
                                 }
-                                MessageOccured(msg);
+                                catch (SystemException ex)
+                                {
+                                    MessageOccured(ex.Message);
+                                }
                             }
                         }
                     }
