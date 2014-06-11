@@ -27,14 +27,23 @@ namespace IwSK_RS232.PlainCommunication
         private long pingMilliseconds;
 
         public Communicator(string which, int baudRate, Parity parity, int dataBits, StopBits stopBits, Handshake hand,
-            string newline)
+            string newline,bool custom)
         {
-            port = new SerialPort(which, baudRate, parity, dataBits, stopBits) {Handshake = hand, NewLine = newline};
+           
+            port = new SerialPort(which, baudRate, parity, dataBits, stopBits) { Handshake = hand, NewLine = newline };
             port.Open();
             port.DataReceived += port_DataReceived;
-
-
-            parser = new Parser(newline);
+            if (!newline.Equals("None") && !newline.Equals("No Auto"))
+            {
+                parser = new Parser(newline,custom);
+            }
+            else
+            {
+                if (newline.Equals("None"))
+                    parser = new Parser("",false);
+                if (newline.Equals("No Auto"))
+                    parser = new Parser(new string(new char[]{'\\','r'}),true);  
+            }
 
             parser.CommandRecognized += CommandRecognized;
         }
@@ -54,7 +63,10 @@ namespace IwSK_RS232.PlainCommunication
         {
             try
             {
-                port.WriteLine(msg);
+                if (this.port.NewLine.Equals("None") || this.port.NewLine.Equals("No Auto"))
+                    port.Write(msg);
+                else
+                    port.WriteLine(msg);
                 
             }
             catch (Exception)

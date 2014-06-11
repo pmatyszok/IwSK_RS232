@@ -19,17 +19,19 @@ namespace IwSK_RS232
         private readonly int[] _baundRate = {75, 150, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200};
         private readonly int[] _dataBit = {5, 6, 7, 8, 9};
 
-        private readonly string[] _newLine = {"\n", "\r\n", "\r"};
+        private readonly string[] _newLine = {"\n", "\r\n", "\r", "None","No Auto"};
         private Communicator port;
         private bool _customLine;
-        private bool _hexTransmission;
+        private bool _hexTransmission;        
         private ModbusClass _modbus;
 
         private enum NewLine
         {
             CR = 0,
             CRLF = 1,
-            LF = 2
+            LF = 2,
+            None = 3,
+            LF_NoAuto =4
         };
 
         #endregion //fields
@@ -162,7 +164,8 @@ namespace IwSK_RS232
                     (int) dataBitsCombo.SelectedValue,
                     stopbit,
                     hand,
-                    terminator);
+                    terminator
+                    ,_customLine);
             }
             catch (Exception ex)
             {

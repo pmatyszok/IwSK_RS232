@@ -9,14 +9,16 @@ namespace IwSK_RS232.PlainCommunication
         private readonly ConcurrentQueue<string> _cmds = new ConcurrentQueue<string>();
         private readonly int _length;
         private readonly string _lineEnd;
+        private readonly bool _lineEndCustom;
         private readonly object _locker = new object();
         public Action CommandRecognized;
         public List<char> Buffer = new List<char>();
 
-        public Parser(string lineEnd)
+        public Parser(string lineEnd, bool lineEndCustom)
         {
             this._lineEnd = lineEnd;
             _length = lineEnd.Length;
+            _lineEndCustom = lineEndCustom;
         }
 
         public void Append(char c)
@@ -59,25 +61,61 @@ namespace IwSK_RS232.PlainCommunication
 
             lock (_locker)
             {
-                for (int i = 0; i < Buffer.Count; i++)
+                if (!_lineEnd.Equals(string.Empty) && !_lineEndCustom)
                 {
-                    if (_length == 2 && Buffer[i] == _lineEnd[0] && i != Buffer.Count - 1 && i != 0 &&
-                        Buffer[i + 1] == _lineEnd[1])
+                    for (int i = 0; i < Buffer.Count; i++)
                     {
-                        end = i + 1;
-                        _cmds.Enqueue(new string(Buffer.GetRange(beg, end - beg + 1).ToArray()));
-                        beg = end + 1;
-                        ret = true;
-                    }
-                    else if (_length == 1 && Buffer[i] == _lineEnd[0])
-                    {
-                        end = i;
-                        _cmds.Enqueue(new string(Buffer.GetRange(beg, end - beg).ToArray()));
-                        beg = end;
-                        ret = true;
+                        if (_length == 2 && Buffer[i] == _lineEnd[0] && i != Buffer.Count - 1 && i != 0 &&
+                            Buffer[i + 1] == _lineEnd[1])
+                        {
+                            end = i + 1;
+                            _cmds.Enqueue(new string(Buffer.GetRange(beg, end - beg + 1).ToArray()));
+                            beg = end + 1;
+                            ret = true;
+                            Buffer.Clear();
+                        }
+                        else if (_length == 1 && Buffer[i] == _lineEnd[0])
+                        {
+                            end = i;
+                            _cmds.Enqueue(new string(Buffer.GetRange(beg, end - beg).ToArray()));
+                            beg = end;
+                            ret = true;
+                            Buffer.Clear();
+                        }
                     }
                 }
-                Buffer.Clear();
+                else 
+                {
+                    if (_lineEnd.Equals(string.Empty))
+                    {
+                    _cmds.Enqueue(new string(Buffer.ToArray()));
+                    Buffer.Clear();
+                    ret = true;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < Buffer.Count; i++)
+                        {
+                            if (_length == 2 && Buffer[i] == _lineEnd[0] && i != Buffer.Count - 1 && i != 0 &&
+                                Buffer[i + 1] == _lineEnd[1])
+                            {
+                                end = i + 1;
+                                _cmds.Enqueue(new string(Buffer.GetRange(beg, end - beg - 1).ToArray()));
+                                beg = end + 1;
+                                ret = true;
+                                Buffer.Clear();
+                            }
+                            else if (_length == 1 && Buffer[i] == _lineEnd[0])
+                            {
+                                end = i;
+                                _cmds.Enqueue(new string(Buffer.GetRange(beg, end - beg - 1).ToArray()));
+                                beg = end;
+                                ret = true;
+                                Buffer.Clear();
+                            }
+                        }
+                    }
+                }
             }
             return ret;
         }
