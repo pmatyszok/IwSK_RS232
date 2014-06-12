@@ -326,6 +326,7 @@ namespace IwSK_RS232
         {
             if (MasterRadioButton.Checked)
             {
+                sendModbusButton.Show();
                 timeoutLabel.Show();
                 transactionTimeoutNumericUpDown.Show();
                 commandLabel.Show();

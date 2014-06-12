@@ -260,7 +260,7 @@ namespace IwSK_RS232.Modbus
                 {
                     SendFrame(_lastFrame);
                 }
-                if (++_retransmisionsMade > _amountOfRetransmissions)
+                if (++_retransmisionsMade >= _amountOfRetransmissions)
                     _timeoutTimer.Stop();
             }
         }
