@@ -462,7 +462,7 @@ namespace IwSK_RS232
                                 string toSend = _modbus.MakeFrameToSend((byte)adressNumericUpDown.Value,
                                 (byte)commandNumericUpDown.Value, messageModbusTextBox.Text);
                                 SendModbusFrame(toSend);
-                                if ((byte)adressNumericUpDown.Value != 0x00)
+                                if ((byte)adressNumericUpDown.Value != 0x00 && amountOfRetransmNumUpDown.Value != 0x00)
                                     _modbus.startTimeOutCounting();
                                 break;
                             
@@ -475,9 +475,23 @@ namespace IwSK_RS232
                                 string toSend = _modbus.MakeFrameToSend((byte)adressNumericUpDown.Value,
                                     (byte)commandNumericUpDown.Value, null);
                                 SendModbusFrame(toSend);
-                                _modbus.startTimeOutCounting();
+                                if(amountOfRetransmNumUpDown.Value != 0x00)
+                                    _modbus.startTimeOutCounting();
                             }
                             break;
+                        }
+                    default:
+                        {
+                            
+                                string toSend = _modbus.MakeFrameToSend((byte)adressNumericUpDown.Value,
+                                (byte)commandNumericUpDown.Value, messageModbusTextBox.Text);
+                                SendModbusFrame(toSend);
+                                if ((byte)adressNumericUpDown.Value != 0x00 && amountOfRetransmNumUpDown.Value != 0x00)
+                                    _modbus.startTimeOutCounting();
+                                break;
+
+
+                            
                         }
             }
             }

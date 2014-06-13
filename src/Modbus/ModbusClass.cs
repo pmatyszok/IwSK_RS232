@@ -87,6 +87,13 @@ namespace IwSK_RS232.Modbus
                                     SendFrame(frameToSend);
                                     break;
                                 }
+                            default:
+                                {
+                                   
+                                    string confirmFrame = this.MakeFrameToSend(recievedAdress, command, null);
+                                    SendFrame(confirmFrame);
+                                    break;
+                                }
                         }
                     }
                     else if (recievedAdress == 0 && command == 1)
@@ -104,11 +111,13 @@ namespace IwSK_RS232.Modbus
                         string recieText = ASCIIcodeStringToString(frame.Substring(5, frame.Length - 9));
                         TextRecieved(recieText);
                         stopTimeOutCounting();
-                    }
-                    if (recievedAdress == _lastFrameDestinationAddress && command == 0x01 && CheckLRC(frame))
+                    }else
+                    if (recievedAdress == _lastFrameDestinationAddress && CheckLRC(frame))
                     {
                         stopTimeOutCounting();
                     }
+                       
+                        
 
                 }
             }
