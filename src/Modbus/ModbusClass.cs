@@ -280,6 +280,10 @@ namespace IwSK_RS232.Modbus
                 _timeoutTimer.Stop();
             }
         }
+        public void set_recievedText(string text)
+        {
+            _recievedText = text;
+        }
         
         
     }

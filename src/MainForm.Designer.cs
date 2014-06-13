@@ -480,6 +480,7 @@
             this.messageModbusTextBox.Name = "messageModbusTextBox";
             this.messageModbusTextBox.Size = new System.Drawing.Size(268, 20);
             this.messageModbusTextBox.TabIndex = 53;
+            this.messageModbusTextBox.TextChanged += new System.EventHandler(this.messageModbusTextBox_TextChanged);
             // 
             // frameTimeoutNumericUpDown
             // 
@@ -582,6 +583,7 @@
             this.SlaveRadioButton.TabIndex = 24;
             this.SlaveRadioButton.Text = "Slave";
             this.SlaveRadioButton.UseVisualStyleBackColor = true;
+            this.SlaveRadioButton.CheckedChanged += new System.EventHandler(this.SlaveRadioButton_CheckedChanged);
             // 
             // MasterRadioButton
             // 

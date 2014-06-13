@@ -349,9 +349,7 @@ namespace IwSK_RS232
                 commandNumericUpDown.Hide();
                 amountOfRetransLabel.Hide();
                 amountOfRetransmNumUpDown.Hide();
-                messageModbusTextBox.Hide();
                 sendModbusButton.Hide();
-                messageLabel.Hide();
                 receiverAddressLabel.Text = "Station address:";
                 adressNumericUpDown.Minimum = 1;
                 if (_modbus != null)
@@ -571,6 +569,19 @@ namespace IwSK_RS232
         {
             messageModbusTextBox.Visible = ((byte)commandNumericUpDown.Value) != 0x02;
             messageLabel.Visible = messageModbusTextBox.Visible;
+        }
+
+        private void SlaveRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void messageModbusTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (_modbus != null)
+            {
+                _modbus.set_recievedText(messageModbusTextBox.Text);
+            }
         }
        
     }
