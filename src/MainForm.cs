@@ -371,8 +371,7 @@ namespace IwSK_RS232
         private void hexSelect_CheckedChanged(object sender, EventArgs e)
         {
             if (!_hexTransmission)
-            {                
-                sendtext.Enabled = false;
+            {  
                 hextext.Enabled = true;
                 port.SetSerialPortData(8);
                 dataBitsCombo.SelectedIndex = 3;
@@ -383,6 +382,14 @@ namespace IwSK_RS232
                 PINGBtn.Enabled = false;
                 FileButton.Enabled = true;
                 SendFile.Enabled = true;
+                customlinetext.Clear();
+                customnewline.Checked = false;
+                customnewline.Enabled = false;
+                selectPortButton.Enabled = false;
+                sendtext.Enabled = false;
+                NewLine line;
+                Enum.TryParse(newLineCombo.SelectedValue.ToString(), out line);
+                port.setNewLine(_newLine[(int)line]);
             }
             else
             {
@@ -395,6 +402,8 @@ namespace IwSK_RS232
                 PINGBtn.Enabled = true;
                 FileButton.Enabled = false;
                 SendFile.Enabled = false;
+                customnewline.Enabled = true;
+                selectPortButton.Enabled = true;
             }
         }
 
@@ -582,6 +591,11 @@ namespace IwSK_RS232
             {
                 _modbus.set_recievedText(messageModbusTextBox.Text);
             }
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            userConsole.Clear();
         }
        
     }

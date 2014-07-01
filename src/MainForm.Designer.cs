@@ -84,6 +84,7 @@
             this.timeSpacingLabel = new System.Windows.Forms.Label();
             this.amountOfRetransLabel = new System.Windows.Forms.Label();
             this.hexFile = new System.Windows.Forms.OpenFileDialog();
+            this.clearButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -107,6 +108,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.clearButton);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.SendFile);
             this.tabPage1.Controls.Add(this.filebox);
@@ -257,6 +259,7 @@
             // 
             // newLineCombo
             // 
+            this.newLineCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.newLineCombo.FormattingEnabled = true;
             this.newLineCombo.Location = new System.Drawing.Point(501, 174);
             this.newLineCombo.Name = "newLineCombo";
@@ -274,6 +277,7 @@
             // 
             // handShakeCombo
             // 
+            this.handShakeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.handShakeCombo.FormattingEnabled = true;
             this.handShakeCombo.Location = new System.Drawing.Point(501, 147);
             this.handShakeCombo.Name = "handShakeCombo";
@@ -291,6 +295,7 @@
             // 
             // dataBitsCombo
             // 
+            this.dataBitsCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dataBitsCombo.FormattingEnabled = true;
             this.dataBitsCombo.Location = new System.Drawing.Point(501, 66);
             this.dataBitsCombo.Name = "dataBitsCombo";
@@ -308,6 +313,7 @@
             // 
             // stopSignCombo
             // 
+            this.stopSignCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.stopSignCombo.FormattingEnabled = true;
             this.stopSignCombo.Location = new System.Drawing.Point(501, 120);
             this.stopSignCombo.Name = "stopSignCombo";
@@ -325,6 +331,7 @@
             // 
             // baudRateCombo
             // 
+            this.baudRateCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.baudRateCombo.FormattingEnabled = true;
             this.baudRateCombo.Location = new System.Drawing.Point(501, 39);
             this.baudRateCombo.Name = "baudRateCombo";
@@ -342,6 +349,7 @@
             // 
             // parityCombo
             // 
+            this.parityCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parityCombo.FormattingEnabled = true;
             this.parityCombo.Location = new System.Drawing.Point(501, 93);
             this.parityCombo.Name = "parityCombo";
@@ -369,9 +377,11 @@
             // 
             // userConsole
             // 
+            this.userConsole.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.userConsole.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.userConsole.Location = new System.Drawing.Point(18, 19);
             this.userConsole.Name = "userConsole";
+            this.userConsole.ReadOnly = true;
             this.userConsole.Size = new System.Drawing.Size(415, 162);
             this.userConsole.TabIndex = 39;
             this.userConsole.Text = "";
@@ -407,6 +417,7 @@
             // 
             // comPortsCombo
             // 
+            this.comPortsCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comPortsCombo.FormattingEnabled = true;
             this.comPortsCombo.Location = new System.Drawing.Point(501, 12);
             this.comPortsCombo.Name = "comPortsCombo";
@@ -713,6 +724,16 @@
             // 
             this.hexFile.FileName = "FileHex";
             // 
+            // clearButton
+            // 
+            this.clearButton.Location = new System.Drawing.Point(342, 187);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(75, 23);
+            this.clearButton.TabIndex = 71;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -800,6 +821,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.RichTextBox ReceivedTextRichBox;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button clearButton;
 
 
     }

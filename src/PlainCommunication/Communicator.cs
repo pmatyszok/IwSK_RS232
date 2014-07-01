@@ -31,6 +31,8 @@ namespace IwSK_RS232.PlainCommunication
         {
            
             port = new SerialPort(which, baudRate, parity, dataBits, stopBits) { Handshake = hand, NewLine = newline };
+            port.ReadTimeout = 500;
+            port.WriteTimeout = 500;
             port.Open();
             port.DataReceived += port_DataReceived;
             if (!newline.Equals("None") && !newline.Equals("No Auto"))
@@ -55,9 +57,6 @@ namespace IwSK_RS232.PlainCommunication
             if (port.IsOpen)
                 port.Dispose();
         }
-
-
-     
 
         public void SendString(string msg)
         {
@@ -153,6 +152,11 @@ namespace IwSK_RS232.PlainCommunication
         public void SetSerialPortData(int data)
         {
             port.DataBits = data;
+        }
+
+        public void setNewLine(string line)
+        {
+            port.NewLine = line;
         }
 
         public static List<string> GetPorts()
