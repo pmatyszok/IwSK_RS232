@@ -244,14 +244,14 @@ namespace IwSK_RS232
             if (!_hexTransmission)
             {
                 toSend = sendtext.Text;
-                Log.Append(toSend);
+                Log.AppendSend(toSend);
                 port.SendString(toSend);
                 sendtext.Clear();
             }
             else
             {
                 toSend = hextext.Text;
-                Log.Append(toSend);
+                Log.AppendSend(toSend);
                 byte[] b;
                 string tmp, tmp1;
                 char[] val = toSend.ToCharArray();
@@ -445,7 +445,7 @@ namespace IwSK_RS232
                     {
                         toLog += b.ToString("X");
                     }
-                    Log.Append(toLog);
+                    Log.AppendSend(toLog);
                 }
                 catch (IOException ex)
                 {
